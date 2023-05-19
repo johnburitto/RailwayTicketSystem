@@ -39,6 +39,8 @@ The system also provides the possibility of user registration. Viewing purchased
 ## Class diagram
 Not final, but conceptually close to the release class diagram.
 
+**UPDATE:** Train have aggregation on Route, not Ticket.
+
 ![image](https://github.com/johnburitto/RailwayTicketSystem/assets/79087305/4fb7e2e4-afba-47a1-909e-d39f2f38e5f8)
 
 Also create(has all data witout Audit metadata and id) and read(has all data witout Audit metadata) Dtos.
