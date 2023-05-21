@@ -1,11 +1,9 @@
-﻿namespace Core.Entities
+﻿namespace Core.Dtos.Update
 {
-    public class Ticket : Audit
+    public class TicketUpdateDto
     {
         public int Id { get; set; }
         public DateTime BookDate { get; set; }
-
         public int PlaceId { get; set; }
-        public Place Place { get; set; }
     }
 }
