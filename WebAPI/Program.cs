@@ -2,8 +2,16 @@ using Infrastructure.Data;
 using Infrastructure.Services.Impls;
 using Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+  .ReadFrom.Configuration(builder.Configuration)
+  .CreateBootstrapLogger();
+
+// Add Serilog
+builder.Host.UseSerilog();
 
 // Add services to the container.
 
@@ -16,11 +24,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQLConnection"));
-
-    options.UseLoggerFactory(LoggerFactory.Create(builder =>
-    {
-        builder.AddConsole();
-    }));
 });
 
 // Dependencies
