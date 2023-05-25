@@ -1,0 +1,22 @@
+﻿﻿@{
+    ViewData["Title"] = "Створити місце";
+}
+@model PlaceCreateDto
+
+<form method="post" asp-controller="Place" asp-action="CreateAction">
+    <div>
+        <label asp-for="Price">Ціна</label>
+        <input asp-for="Price"/>
+    </div>
+    <div>
+        <label asp-for="PlaceType"> Тип</label>
+        <input asp-for="PlaceType" />
+    </div><div>
+        <label asp-for="IsAvaliable">Доступність</label>
+        <input asp-for="IsAvaliable" />
+    </div><div>
+        <label asp-for="TrainCarId">Id вагона</label>
+        <input asp-for="TrainCarId" />
+    </div>
+    <input type="submit" value="Створити" />
+</form>

@@ -3,7 +3,6 @@ using Infrastructure.Services.Impls;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Logging;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -59,14 +58,12 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("openid");
         options.Scope.Add("profile");
         options.Scope.Add("role");
-        options.Scope.Add(builder.Configuration["Scope"] ?? "");
+        options.Scope.Add(builder.Configuration["Scope"] ?? throw new ArgumentNullException(nameof(builder.Configuration)));
 
         options.GetClaimsFromUserInfoEndpoint = true;
         options.ClaimActions.MapJsonKey("role", "role", "role");
         options.TokenValidationParameters.NameClaimType = "name";
         options.TokenValidationParameters.RoleClaimType = "role";
-
-
 
         options.ResponseType = "code";
         options.UsePkce = true;

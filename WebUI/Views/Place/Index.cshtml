@@ -1,0 +1,52 @@
+﻿﻿@{
+    ViewData["Title"] = "Місця";
+}
+@model RawDataModel<Place>
+
+<div>
+    <button class="btn btn-success btn-lg btn-block" onclick="@("window.location.href='" + Url.Action("Create", "Place") + "'")">Створити</button>
+
+    <table class="table" style="align-content: center; text-align: center; vertical-align: middle;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ціна</th>
+                <th>Тип</th>
+                <th>Доступність</th>
+                <th>Id вагона</th>
+                <th>Змінено</th>
+                <th>Створно</th>
+                <th>Редаговано</th>
+                <th>Редагувати</th>
+                <th>Видалити</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Model.Data)
+            {
+                <tr>
+                    <td>@el.Id</td>
+                    <td>@el.Price</td>
+                    <td>@el.PlaceType.ToString()</td>
+                    <td>@(el.IsAvaliable == true ? "Доступний" : "Недоступний")</td>
+                    <td>@el.TrainCarId</td>
+                    <td>@el.ActionUser</td>
+                    <td>@el.CreatedAt</td>
+                    <td>@el.UpdatedAt</td>
+                    <td>
+                        <button class="btn btn-warning"
+                                onclick="@("window.location.href='" + Url.Action("Update", "Place") + $"/{el.Id}'")">
+                            Редагувати
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger"
+                                onclick="@("window.location.href='" + Url.Action("Delete", "Place") + $"/{el.Id}'")">
+                            Видалити
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

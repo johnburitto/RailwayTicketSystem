@@ -1,0 +1,20 @@
+﻿﻿@{
+    ViewData["Title"] = "Редагувати вагон";
+}
+@model TrainCarUpdateDto
+
+<form method="post" asp-controller="TrainCar" asp-action="UpdateAction">
+    <div>
+        <label asp-for="Id">Id</label>
+        <input asp-for="Id" value="@Model.Id" readonly />
+    </div>
+    <div>
+        <label asp-for="Number">Номер</label>
+        <input asp-for="Number" value="@Model.Number" />
+    </div>
+    <div>
+        <label asp-for="TrainId">Id потягу</label>
+        <input asp-for="TrainId" value="@Model.TrainId" />
+    </div>
+    <input type="submit" value="Редагувати" />
+</form>

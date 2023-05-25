@@ -43,6 +43,11 @@ namespace Infrastructure.Services.Impls
                 .ThenInclude(trainCar => trainCar.Places).ToListAsync();
         }
 
+        public async Task<List<Train>> GetAllRawAsync()
+        {
+            return await _context.Trains.ToListAsync();
+        }
+
         public async Task<Train?> GetByIdAsync(int id)
         {
             return await _context.Trains

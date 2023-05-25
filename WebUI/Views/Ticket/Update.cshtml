@@ -1,0 +1,20 @@
+﻿﻿@{
+    ViewData["Title"] = "Редагувати квиток";
+}
+@model TicketUpdateDto
+
+<form method="post" asp-controller="Ticket" asp-action="UpdateAction">
+    <div>
+        <label asp-for="Id">Id</label>
+        <input asp-for="Id" value="@Model.Id" readonly/>
+    </div>
+    <div>
+        <label asp-for="BookDate">Час бронювання</label>
+        <input type="datetime-local" asp-for="BookDate" value="@Model.BookDate" />
+    </div>
+    <div>
+        <label asp-for="PlaceId">Id місця</label>
+        <input asp-for="PlaceId" value="@Model.PlaceId" />
+    </div>
+    <input type="submit" value="Редагувати" />
+</form>

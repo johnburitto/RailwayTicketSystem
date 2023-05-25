@@ -1,0 +1,26 @@
+﻿﻿@{
+    ViewData["Title"] = "Редагувати місце";
+}
+@model PlaceUpdateDto
+
+<form method="post" asp-controller="Place" asp-action="UpdateAction">
+    <div>
+        <label asp-for="Id">Id</label>
+        <input asp-for="Id" readonly/>
+    </div>
+    <div>
+        <label asp-for="Price">Ціна</label>
+        <input asp-for="Price" />
+    </div>
+    <div>
+        <label asp-for="PlaceType"> Тип</label>
+        <input asp-for="PlaceType" />
+    </div><div>
+        <label asp-for="IsAvaliable">Доступність</label>
+        <input asp-for="IsAvaliable" />
+    </div><div>
+        <label asp-for="TrainCarId">Id вагона</label>
+        <input asp-for="TrainCarId" />
+    </div>
+    <input type="submit" value="Редагувати" />
+</form>

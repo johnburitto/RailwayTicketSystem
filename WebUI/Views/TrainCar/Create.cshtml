@@ -1,0 +1,16 @@
+﻿﻿@{
+    ViewData["Title"] = "Створити вагон";
+}
+@model TrainCarCreateDto
+
+<form method="post" asp-controller="TrainCar" asp-action="CreateAction">
+    <div>
+        <label asp-for="Number">Номер</label>
+        <input asp-for="Number" />
+    </div>
+    <div>
+        <label asp-for="TrainId">Id потягу</label>
+        <input asp-for="TrainId" />
+    </div>
+    <input type="submit" value="Створити" />
+</form>

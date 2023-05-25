@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("user")]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User, Admin")]
         public string TestUserAuth()
         {
             return "Hello, you are authorized User.";

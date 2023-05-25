@@ -54,7 +54,7 @@ namespace Security.Configurations
 
                 AllowedGrantTypes = GrantTypes.Code,
                 ClientSecrets = {new Secret("SuperSecretPassword".Sha256())},
-                RedirectUris = {"https://localhost:7250/signin-oidc"},
+                RedirectUris = { "https://localhost:7250/signin-oidc", "https://localhost:7299/signin-oidc" },
 
                 AllowOfflineAccess = true,
                 AllowedScopes = {

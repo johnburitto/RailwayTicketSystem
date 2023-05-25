@@ -44,6 +44,11 @@ namespace Infrastructure.Services.Impls
                 .Include(place => place.Tickets).ToListAsync();
         }
 
+        public async Task<List<Place>> GetAllRawAsync()
+        {
+            return await _context.Places.ToListAsync();
+        }
+
         public async Task<Place?> GetByIdAsync(int id)
         {
             return await _context.Places

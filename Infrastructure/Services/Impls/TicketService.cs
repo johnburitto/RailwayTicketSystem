@@ -44,6 +44,11 @@ namespace Infrastructure.Services.Impls
                 .ThenInclude(train => train.Route).ToListAsync();
         }
 
+        public async Task<List<Ticket>> GetAllRawAsync()
+        {
+            return await _context.Tickets.ToListAsync();
+        }
+
         public async Task<Ticket?> GetByIdAsync(int id)
         {
             return await _context.Tickets

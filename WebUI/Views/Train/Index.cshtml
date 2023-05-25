@@ -1,0 +1,48 @@
+﻿﻿@{
+    ViewData["Title"] = "Потяги";
+}
+@model RawDataModel<Train>
+
+<div>
+    <button class="btn btn-success btn-lg btn-block" onclick="@("window.location.href='" + Url.Action("Create", "Train") + "'")">Створити</button>
+
+    <table class="table" style="align-content: center; text-align: center; vertical-align: middle;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Номер</th>
+                <th>Id маршруту</th>
+                <th>Змінено</th>
+                <th>Створно</th>
+                <th>Редаговано</th>
+                <th>Редагувати</th>
+                <th>Видалити</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Model.Data)
+            {
+                <tr>
+                    <td>@el.Id</td>
+                    <td>@el.Number</td>
+                    <td>@el.RouteId</td>
+                    <td>@el.ActionUser</td>
+                    <td>@el.ActionUser</td>
+                    <td>@el.UpdatedAt</td>
+                    <td>
+                        <button class="btn btn-warning"
+                                onclick="@("window.location.href='" + Url.Action("Update", "Train") + $"/{el.Id}'")">
+                            Редагувати
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger"
+                                onclick="@("window.location.href='" + Url.Action("Delete", "Train") + $"/{el.Id}'")">
+                            Видалити
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

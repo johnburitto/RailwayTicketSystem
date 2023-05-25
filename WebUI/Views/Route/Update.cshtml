@@ -1,0 +1,29 @@
+﻿﻿@{
+    ViewData["Title"] = "Редагувати маршрут";
+}
+@model RouteUpdateDto
+
+<form method="post" asp-controller="Route" asp-action="UpdateAction">
+    <div>
+        <label asp-for="Id">Id</label>
+        <input asp-for="Id" value="@Model.Id" readonly>
+    </div>
+    <div>
+        <label asp-for="DepartureTime">Час відправлення</label>
+        <input type="datetime-local" asp-for="DepartureTime" value="@Model.DepartureTime">
+    </div>
+    <div>
+        <label asp-for="ArrivalTime">Час прибуття</label>
+        <input type="datetime-local" asp-for="ArrivalTime" Value="@Model.ArrivalTime">
+    </div>
+    <div>
+        <label asp-for="FromCity">З міста</label>
+        <input asp-for="FromCity" value="@Model.FromCity">
+    </div>
+    <div>
+        <label asp-for="ToCity">До міста</label>
+        <input asp-for="ToCity" value="@Model.ToCity">
+    </div>
+
+    <input type="submit" value="Редаугвати">
+</form>

@@ -1,0 +1,25 @@
+﻿﻿@{
+    ViewData["Title"] = "Створити маршрут";
+}
+@model RouteCreateDto
+
+<form method="post" asp-controller="Route" asp-action="CreateAction">
+    <div>
+        <label asp-for="DepartureTime">Час відправлення</label>
+        <input type="datetime-local" asp-for="DepartureTime">
+    </div>
+    <div>
+        <label asp-for="ArrivalTime">Час прибуття</label>
+        <input type="datetime-local" asp-for="ArrivalTime">
+    </div>
+    <div>
+        <label asp-for="FromCity">З міста</label>
+        <input asp-for="FromCity">
+    </div>
+    <div>
+        <label asp-for="ToCity">До міста</label>
+        <input asp-for="ToCity">
+    </div>
+
+    <input type="submit" value="Створити">
+</form>
