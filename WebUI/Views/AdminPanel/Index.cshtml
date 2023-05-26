@@ -3,11 +3,25 @@
 }
 
 <div>
-    <ul style="list-style-type:none">
-        <li><button class="btn btn-dark" onclick="@("window.location.href='" + Url.Action("Index", "Route") + "'")">Маршрути</button></li>
-        <li><button class="btn btn-dark" onclick="@("window.location.href='" + Url.Action("Index", "Train") + "'")">Потяги</button></li>
-        <li><button class="btn btn-dark" onclick="@("window.location.href='" + Url.Action("Index", "TrainCar") + "'")">Вагони</button></li>
-        <li><button class="btn btn-dark" onclick="@("window.location.href='" + Url.Action("Index", "Place") + "'")">Місця</button></li>
-        <li><button class="btn btn-dark" onclick="@("window.location.href='" + Url.Action("Index", "Ticket") + "'")">Квитки</button></li>
-    </ul>
+    <div id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a asp-controller="Route" asp-action="Index">Маршрути</a>
+        <a asp-controller="Train" asp-action="Index">Потяги</a>
+        <a asp-controller="TrainCar" asp-action="Index">Вагони</a>
+        <a asp-controller="Place" asp-action="Index">Місця</a>
+        <a asp-controller="Ticket" asp-action="Index">Квитки</a>
+        <a asp-controller="AdminPanel" asp-action="Index">Адмін панель</a>
+    </div>
+
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 </div>
+
+<script>
+    function openNav() {
+        document.getElementById("sidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("sidenav").style.width = "0";
+    }
+</script>

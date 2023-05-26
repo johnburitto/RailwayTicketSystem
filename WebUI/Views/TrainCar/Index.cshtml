@@ -4,7 +4,22 @@
 @model RawDataModel<TrainCar>
 
 <div>
-    <button class="btn btn-success btn-lg btn-block" onclick="@("window.location.href='" + Url.Action("Create", "TrainCar") + "'")">Створити</button>
+    <div class="tableheader">
+        <div id="sidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a asp-controller="Route" asp-action="Index">Маршрути</a>
+            <a asp-controller="Train" asp-action="Index">Потяги</a>
+            <a asp-controller="TrainCar" asp-action="Index">Вагони</a>
+            <a asp-controller="Place" asp-action="Index">Місця</a>
+            <a asp-controller="Ticket" asp-action="Index">Квитки</a>
+            <a asp-controller="AdminPanel" asp-action="Index">Адмін панель</a>
+        </div>
+
+        <span id="open" class="openbtn" onclick="openNav()">&#9776;</span>
+
+        <button style="margin-right: 10px" 
+                class="btn btn-success btn-lg btn-block" onclick="@("window.location.href='" + Url.Action("Create", "TrainCar") + "'")">Створити</button>
+    </div>
 
     <table class ="table" style="align-content: center; text-align: center; vertical-align: middle;">
         <thead>
@@ -46,3 +61,19 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function openNav() {
+        document.getElementById("sidenav").style.width = "250px";
+        document.getElementById("sidenav").style.top = "0";
+        document.getElementById("sidenav").style.left = "0";
+        document.getElementById("main").style.marginLeft = "250px";
+        document.getElementById("open").style.opacity = "0";
+    }
+
+    function closeNav() {
+        document.getElementById("sidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        document.getElementById("open").style.opacity = "1";
+    }
+</script>
