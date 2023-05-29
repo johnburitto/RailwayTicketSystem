@@ -3,18 +3,24 @@
 }
 @model TrainUpdateDto
 
-<form method="post" asp-controller="Train" asp-action="UpdateAction">
-    <div>
-        <label asp-for="Id">Id</label>
-        <input asp-for="Id" value="@Model.Id" readonly/>
+<div class="formhandler">
+    <div class="formheader">
+        <span>Форма редагування потяга з Id @Model.Id</span>
     </div>
-    <div>
-        <label asp-for="Number">Номер</label>
-        <input asp-for="Number" value="@Model.Number" />
-    </div>
-    <div>
-        <label asp-for="RouteId">Id маршруту</label>
-        <input asp-for="RouteId" value="@Model.RouteId" />
-    </div>
-    <input type="submit" value="Редагувати" />
-</form>
+
+    <form class="form" method="post" asp-controller="Train" asp-action="UpdateAction">
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Id">Id</label>
+            <input class="forminput" asp-for="Id" value="@Model.Id" readonly />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Number">Номер</label>
+            <input class="forminput" asp-for="Number" value="@Model.Number" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="RouteId">Id маршруту</label>
+            <input class="forminput" asp-for="RouteId" value="@Model.RouteId" />
+        </div>
+        <input class="btn btn-warning forminputbutton" type="submit" value="Редагувати" />
+    </form>
+</div>

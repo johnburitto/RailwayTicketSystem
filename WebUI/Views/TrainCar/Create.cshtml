@@ -3,14 +3,20 @@
 }
 @model TrainCarCreateDto
 
-<form method="post" asp-controller="TrainCar" asp-action="CreateAction">
-    <div>
-        <label asp-for="Number">Номер</label>
-        <input asp-for="Number" />
+<div class="formhandler">
+    <div class="formheader">
+        <span>Форма створення вагона</span>
     </div>
-    <div>
-        <label asp-for="TrainId">Id потягу</label>
-        <input asp-for="TrainId" />
-    </div>
-    <input type="submit" value="Створити" />
-</form>
+
+    <form class="form" class="form" method="post" asp-controller="TrainCar" asp-action="CreateAction">
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Number">Номер</label>
+            <input class="forminput" asp-for="Number" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="TrainId">Id потягу</label>
+            <input class="forminput" asp-for="TrainId" />
+        </div>
+        <input class="btn btn-success forminputbutton" type="submit" value="Створити" />
+    </form>
+</div>

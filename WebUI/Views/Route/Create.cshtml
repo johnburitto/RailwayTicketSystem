@@ -3,23 +3,29 @@
 }
 @model RouteCreateDto
 
-<form method="post" asp-controller="Route" asp-action="CreateAction">
-    <div>
-        <label asp-for="DepartureTime">Час відправлення</label>
-        <input type="datetime-local" asp-for="DepartureTime">
-    </div>
-    <div>
-        <label asp-for="ArrivalTime">Час прибуття</label>
-        <input type="datetime-local" asp-for="ArrivalTime">
-    </div>
-    <div>
-        <label asp-for="FromCity">З міста</label>
-        <input asp-for="FromCity">
-    </div>
-    <div>
-        <label asp-for="ToCity">До міста</label>
-        <input asp-for="ToCity">
+<div class="formhandler">
+    <div class="formheader">
+        <span>Форма створення маршруту</span>
     </div>
 
-    <input type="submit" value="Створити">
-</form>
+    <form class="form" method="post" asp-controller="Route" asp-action="CreateAction">
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="DepartureTime">Час відправлення</label>
+            <input class="forminput" type="datetime-local" asp-for="DepartureTime">
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="ArrivalTime">Час прибуття</label>
+            <input class="forminput" type="datetime-local" asp-for="ArrivalTime">
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="FromCity">З міста</label>
+            <input class="forminput" asp-for="FromCity">
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="ToCity">До міста</label>
+            <input class="forminput" asp-for="ToCity">
+        </div>
+
+        <input class="btn btn-success forminputbutton" type="submit" value="Створити">
+    </form>
+</div>

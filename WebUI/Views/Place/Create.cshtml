@@ -3,20 +3,28 @@
 }
 @model PlaceCreateDto
 
-<form method="post" asp-controller="Place" asp-action="CreateAction">
-    <div>
-        <label asp-for="Price">Ціна</label>
-        <input asp-for="Price"/>
+<div class="formhandler">
+    <div class="formheader">
+        <span>Форма створення місця</span>
     </div>
-    <div>
-        <label asp-for="PlaceType"> Тип</label>
-        <input asp-for="PlaceType" />
-    </div><div>
-        <label asp-for="IsAvaliable">Доступність</label>
-        <input asp-for="IsAvaliable" />
-    </div><div>
-        <label asp-for="TrainCarId">Id вагона</label>
-        <input asp-for="TrainCarId" />
-    </div>
-    <input type="submit" value="Створити" />
-</form>
+
+    <form class="form" method="post" asp-controller="Place" asp-action="CreateAction">
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Price">Ціна</label>
+            <input class="forminput" asp-for="Price" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="PlaceType"> Тип</label>
+            <input class="forminput" asp-for="PlaceType" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" style="border-right: 2px solid black;" asp-for="IsAvaliable">Доступність</label>
+            <input class="forminput" asp-for="IsAvaliable" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="TrainCarId">Id вагона</label>
+            <input class="forminput" asp-for="TrainCarId" />
+        </div>
+        <input class="btn btn-success forminputbutton" type="submit" value="Створити" />
+    </form>
+</div>

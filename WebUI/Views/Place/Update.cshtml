@@ -3,24 +3,32 @@
 }
 @model PlaceUpdateDto
 
-<form method="post" asp-controller="Place" asp-action="UpdateAction">
-    <div>
-        <label asp-for="Id">Id</label>
-        <input asp-for="Id" readonly/>
+<div class="formhandler">
+    <div class="formheader">
+        <span>Форма редагування місця з Id @Model.Id</span>
     </div>
-    <div>
-        <label asp-for="Price">Ціна</label>
-        <input asp-for="Price" />
-    </div>
-    <div>
-        <label asp-for="PlaceType"> Тип</label>
-        <input asp-for="PlaceType" />
-    </div><div>
-        <label asp-for="IsAvaliable">Доступність</label>
-        <input asp-for="IsAvaliable" />
-    </div><div>
-        <label asp-for="TrainCarId">Id вагона</label>
-        <input asp-for="TrainCarId" />
-    </div>
-    <input type="submit" value="Редагувати" />
-</form>
+
+    <form class="form" method="post" asp-controller="Place" asp-action="UpdateAction">
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Id">Id</label>
+            <input class="forminput" asp-for="Id" readonly />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Price">Ціна</label>
+            <input class="forminput" asp-for="Price" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="PlaceType"> Тип</label>
+            <input class="forminput" asp-for="PlaceType" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" style="border-right: 2px solid black;" asp-for="IsAvaliable">Доступність</label>
+            <input class="forminput" asp-for="IsAvaliable" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="TrainCarId">Id вагона</label>
+            <input class="forminput" asp-for="TrainCarId" />
+        </div>
+        <input class="btn btn-warning forminputbutton" type="submit" value="Редагувати" />
+    </form>
+</div>

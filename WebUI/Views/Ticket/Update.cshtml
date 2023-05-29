@@ -3,18 +3,24 @@
 }
 @model TicketUpdateDto
 
-<form method="post" asp-controller="Ticket" asp-action="UpdateAction">
-    <div>
-        <label asp-for="Id">Id</label>
-        <input asp-for="Id" value="@Model.Id" readonly/>
+<div class="formhandler">
+    <div class="formheader">
+        <span>Форма редагування квитка з Id @Model.Id</span>
     </div>
-    <div>
-        <label asp-for="BookDate">Час бронювання</label>
-        <input type="datetime-local" asp-for="BookDate" value="@Model.BookDate" />
-    </div>
-    <div>
-        <label asp-for="PlaceId">Id місця</label>
-        <input asp-for="PlaceId" value="@Model.PlaceId" />
-    </div>
-    <input type="submit" value="Редагувати" />
-</form>
+
+    <form class="form" method="post" asp-controller="Ticket" asp-action="UpdateAction">
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Id">Id</label>
+            <input class="forminput" asp-for="Id" value="@Model.Id" readonly />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="BookDate">Час бронювання</label>
+            <input class="forminput" type="datetime-local" asp-for="BookDate" value="@Model.BookDate" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="PlaceId">Id місця</label>
+            <input class="forminput" asp-for="PlaceId" value="@Model.PlaceId" />
+        </div>
+        <input class="btn btn-warning forminputbutton" type="submit" value="Редагувати" />
+    </form>
+</div>
