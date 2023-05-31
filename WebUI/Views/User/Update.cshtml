@@ -1,0 +1,57 @@
+﻿﻿@{
+    ViewData["Title"] = "Редагувати місце";
+}
+@model UserUpdateDto
+@inject IConfiguration _conf
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/userservice.js"></script>
+
+<div class="formhandler">
+    <div class="formheader">
+        <span>Форма редаугвання користувача з Id @Model.Id</span>
+    </div>
+
+    <form class="form" method="post" action="@(_conf["SecurityAPIUrl"] + "/api/User/update")">
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Id">Id</label>
+            <input class="forminput" asp-for="Id" readonly/>
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="FirstName">Ім'я</label>
+            <input class="forminput" asp-for="FirstName" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="MiddleName">По батькові</label>
+            <input class="forminput" asp-for="MiddleName" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="LastName">Прізвище</label>
+            <input class="forminput" asp-for="LastName" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="UserName">Логін</label>
+            <input class="forminput" asp-for="UserName" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Password">Пароль</label>
+            <input class="forminput" asp-for="Password" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Email">Пошта</label>
+            <input class="forminput" asp-for="Email" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="PhoneNumber">Телефон</label>
+            <input class="forminput" asp-for="PhoneNumber" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Role">Роль</label>
+            <select class="forminput" asp-for="Role" asp-items="@Html.GetEnumSelectList<Authorization.Role>()"></select>
+        </div>
+        <input class="btn btn-warning forminputbutton" type="submit" value="Редагувати" />
+    </form>
+
+    <script>fillUpdateForm('@Model.Id');</script>
+</div>

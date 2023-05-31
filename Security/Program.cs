@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Security.Configurations;
 using Security.Data;
 using Security.Entities;
-using Security.Seeders;
 using Security.Services.Impls;
 using Security.Services.Interfaces;
 using Serilog;
@@ -20,6 +20,17 @@ builder.Host.UseSerilog();
 
 // Connect to DB
 builder.Services.AddDbContext<SecurityDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQLConnection")));
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "CORSPolicy", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 // Add ASP Identity
 builder.Services.AddIdentity<User, IdentityRole>()
@@ -63,6 +74,8 @@ builder.Services.AddIdentityServer(options =>
 
 var app = builder.Build();
 
+app.UseCors();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -74,6 +87,8 @@ app.UseIdentityServer();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors();
 
 app.UseAuthorization();
 

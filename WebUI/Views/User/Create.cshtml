@@ -1,0 +1,47 @@
+﻿﻿@{
+    ViewData["Title"] = "Створити користувача";
+}
+@model UserCreateDto
+@inject IConfiguration _conf
+
+<div class="formhandler">
+    <div class="formheader">
+        <span>Форма створення користувача</span>
+    </div>
+
+    <form class="form" method="post" action="@(_conf["SecurityAPIUrl"] + "/api/User/create")">
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="FirstName">Ім'я</label>
+            <input class="forminput" asp-for="FirstName" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="MiddleName">По батькові</label>
+            <input class="forminput" asp-for="MiddleName" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="LastName">Прізвище</label>
+            <input class="forminput" asp-for="LastName" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="UserName">Логін</label>
+            <input class="forminput" asp-for="UserName" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Password">Пароль</label>
+            <input class="forminput" asp-for="Password" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Email">Пошта</label>
+            <input class="forminput" asp-for="Email" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="PhoneNumber">Телефон</label>
+            <input class="forminput" asp-for="PhoneNumber" />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Role">Роль</label>
+            <select class="forminput" asp-for="Role" asp-items="@Html.GetEnumSelectList<Authorization.Role>()"></select>
+        </div>
+        <input class="btn btn-success forminputbutton" type="submit" value="Створити" />
+    </form>
+</div>

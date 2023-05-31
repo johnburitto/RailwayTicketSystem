@@ -19,7 +19,7 @@
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="PlaceType"> Тип</label>
-            <input class="forminput" asp-for="PlaceType" />
+            <select class="forminput" asp-for="@Model.PlaceType" asp-items="Html.GetEnumSelectList<PlaceType>()"></select>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" style="border-right: 2px solid black;" asp-for="IsAvaliable">Доступність</label>

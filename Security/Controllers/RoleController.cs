@@ -24,7 +24,6 @@ namespace Security.Controllers
             return Ok(await _service.GetAllAsync());
         }
 
-
         [HttpPost("add")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
