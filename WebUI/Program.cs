@@ -1,14 +1,22 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Infrastructure.Data;
 using Infrastructure.Services.Impls;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add FluentValidations
+builder.Services.AddFluentValidationAutoValidation()
+    .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
+    .AddFluentValidationClientsideAdapters();
 
 // Serilog configuration
 Log.Logger = new LoggerConfiguration()

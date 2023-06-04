@@ -12,20 +12,30 @@
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="DepartureTime">Час відправлення</label>
             <input class="forminput" type="datetime-local" asp-for="DepartureTime">
+            <span class="frominputerrorhandler" asp-validation-for="DepartureTime"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="ArrivalTime">Час прибуття</label>
             <input class="forminput" type="datetime-local" asp-for="ArrivalTime">
+            <span class="frominputerrorhandler" asp-validation-for="ArrivalTime"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="FromCity">З міста</label>
             <input class="forminput" asp-for="FromCity">
+            <span class="frominputerrorhandler" asp-validation-for="FromCity"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="ToCity">До міста</label>
             <input class="forminput" asp-for="ToCity">
+            <span class="frominputerrorhandler" asp-validation-for="ToCity"></span>
         </div>
 
         <input class="btn btn-success forminputbutton" type="submit" value="Створити">
     </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

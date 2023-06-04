@@ -12,11 +12,19 @@
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="BookDate">Час бронювання</label>
             <input class="forminput" type="datetime-local" asp-for="BookDate" />
+            <span class="frominputerrorhandler" asp-validation-for="BookDate"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="PlaceId">Id місця</label>
             <input class="forminput" asp-for="PlaceId" />
+            <span class="frominputerrorhandler" asp-validation-for="PlaceId"></span>
         </div>
         <input class="btn btn-success forminputbutton" type="submit" value="Створити" />
     </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

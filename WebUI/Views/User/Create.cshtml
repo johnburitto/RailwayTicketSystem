@@ -13,35 +13,49 @@
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="FirstName">Ім'я</label>
             <input class="forminput" asp-for="FirstName" />
+            <span class="frominputerrorhandler" asp-validation-for="FirstName"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="MiddleName">По батькові</label>
             <input class="forminput" asp-for="MiddleName" />
+            <span class="frominputerrorhandler" asp-validation-for="MiddleName"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="LastName">Прізвище</label>
             <input class="forminput" asp-for="LastName" />
+            <span class="frominputerrorhandler" asp-validation-for="LastName"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="UserName">Логін</label>
             <input class="forminput" asp-for="UserName" />
+            <span class="frominputerrorhandler" asp-validation-for="UserName"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="Password">Пароль</label>
             <input class="forminput" asp-for="Password" />
+            <span class="frominputerrorhandler" asp-validation-for="Password"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="Email">Пошта</label>
             <input class="forminput" asp-for="Email" />
+            <span class="frominputerrorhandler" asp-validation-for="Email"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="PhoneNumber">Телефон</label>
             <input class="forminput" asp-for="PhoneNumber" />
+            <span class="frominputerrorhandler" asp-validation-for="PhoneNumber"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="Role">Роль</label>
             <select class="forminput" asp-for="Role" asp-items="@Html.GetEnumSelectList<Authorization.Role>()"></select>
+            <span class="frominputerrorhandler" asp-validation-for="Role"></span>
         </div>
         <input class="btn btn-success forminputbutton" type="submit" value="Створити" />
     </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

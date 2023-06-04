@@ -76,14 +76,14 @@
     function closeNav() {
         document.getElementById("sidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
-        document.getElementById("open").style.display = "1";
+        document.getElementById("open").style.opacity = "1";
     }
 
     function deleteDialog(id) {
         var result = confirm("Ви впевнені в тому, що зочете видалити запис?");
 
         if (result) {
-            window.location.href = `Place/Delete/${id}`;
+            window.location.href = `/Place/Delete/${id}`;
         }
     }
 </script>

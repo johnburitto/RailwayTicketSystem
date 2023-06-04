@@ -1,4 +1,6 @@
-﻿namespace Core.Dtos.Create
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Core.Dtos.Create
 {
     public class RouteCreateDto
     {

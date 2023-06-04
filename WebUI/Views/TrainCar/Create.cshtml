@@ -12,11 +12,19 @@
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="Number">Номер</label>
             <input class="forminput" asp-for="Number" />
+            <span class="frominputerrorhandler" asp-validation-for="Number"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="TrainId">Id потягу</label>
             <input class="forminput" asp-for="TrainId" />
+            <span class="frominputerrorhandler" asp-validation-for="TrainId"></span>
         </div>
         <input class="btn btn-success forminputbutton" type="submit" value="Створити" />
     </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
