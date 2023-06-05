@@ -2,37 +2,38 @@
     ViewData["Title"] = "Потяги";
 }
 @model RawDataModel<Train>
+@inject IViewLocalizer _localizer
 
 <div>
     <div class="tableheader">
         <div id="sidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a asp-controller="Route" asp-action="Index">Маршрути</a>
-            <a asp-controller="Train" asp-action="Index">Потяги</a>
-            <a asp-controller="TrainCar" asp-action="Index">Вагони</a>
-            <a asp-controller="Place" asp-action="Index">Місця</a>
-            <a asp-controller="Ticket" asp-action="Index">Квитки</a>
-            <a asp-controller="User" asp-action="Index">Користувачі</a>
-            <a asp-controller="AdminPanel" asp-action="Index">Адмін панель</a>
+            <a asp-controller="Route" asp-action="Index">@_localizer["Route"]</a>
+            <a asp-controller="Train" asp-action="Index">@_localizer["Train"]</a>
+            <a asp-controller="TrainCar" asp-action="Index">@_localizer["TrainCar"]</a>
+            <a asp-controller="Place" asp-action="Index">@_localizer["Place"]</a>
+            <a asp-controller="Ticket" asp-action="Index">@_localizer["Ticket"]</a>
+            <a asp-controller="User" asp-action="Index">@_localizer["User"]</a>
+            <a asp-controller="AdminPanel" asp-action="Index">@_localizer["AdminPanel"]</a>
         </div>
 
         <span id="open" class="openbtn" onclick="openNav()">&#9776;</span>
 
         <button style="margin-right: 10px"
-                class="btn btn-success btn-lg btn-block" onclick="@("window.location.href='" + Url.Action("Create", "Train") + "'")">Створити</button>
+                class="btn btn-success btn-lg btn-block" onclick="@("window.location.href='" + Url.Action("Create", "Train") + "'")">@_localizer["Create"]</button>
     </div>
 
     <table class="table" style="align-content: center; text-align: center; vertical-align: middle;">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Номер</th>
-                <th>Id маршруту</th>
-                <th>Змінено</th>
-                <th>Створно</th>
-                <th>Редаговано</th>
-                <th>Редагувати</th>
-                <th>Видалити</th>
+                <th>@_localizer["Id"]</th>
+                <th>@_localizer["Number"]</th>
+                <th>@_localizer["RouteId"]</th>
+                <th>@_localizer["ActionUser"]</th>
+                <th>@_localizer["CreatedAt"]</th>
+                <th>@_localizer["UpdatedAt"]</th>
+                <th>@_localizer["Update"]</th>
+                <th>@_localizer["Delete"]</th>
             </tr>
         </thead>
         <tbody>
@@ -43,16 +44,16 @@
                     <td>@el.Number</td>
                     <td>@el.RouteId</td>
                     <td>@el.ActionUser</td>
-                    <td>@el.ActionUser</td>
+                    <td>@el.CreatedAt</td>
                     <td>@el.UpdatedAt</td>
                     <td>
                         <button class="btn btn-warning"
                                 onclick="@("window.location.href='" + Url.Action("Update", "Train") + $"/{el.Id}'")">
-                            Редагувати
+                                @_localizer["Update"]
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-danger" onclick="deleteDialog(@el.Id)"> Видалити</button>
+                        <button class="btn btn-danger" onclick="deleteDialog(@el.Id)">@_localizer["Delete"]</button>
                     </td>
                 </tr>
             }

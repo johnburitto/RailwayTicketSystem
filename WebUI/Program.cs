@@ -4,14 +4,22 @@ using Infrastructure.Data;
 using Infrastructure.Services.Impls;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Globalization;
 using System.Reflection;
+using WebUI.Constraints;
+using WebUI.Providers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add localization
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization();
 
 // Add FluentValidations
 builder.Services.AddFluentValidationAutoValidation()
@@ -71,6 +79,12 @@ builder.Services.AddAuthentication(options =>
         options.SaveTokens = true;
     });
 
+// Configure route options
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.ConstraintMap.Add("culture", typeof(LanguageRouteConstraint));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -81,6 +95,27 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Configure localization
+var supportedCultures = new[]
+            {
+                new CultureInfo("uk"),
+                new CultureInfo("en")
+            };
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+    RequestCultureProviders = new[]
+    {
+        new RouteDataRequestCultureProvider
+        {
+            IndexOfCulture = 1,
+            IndexOfUICulture = 1
+        }
+    }
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -90,6 +125,11 @@ app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "LocalizedDefault",
+    pattern: "{culture:culture}/{controller=Home}/{action=Index}/{id?}");
+
 
 app.MapControllerRoute(
     name: "default",

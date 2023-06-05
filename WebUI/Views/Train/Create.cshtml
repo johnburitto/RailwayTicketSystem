@@ -2,24 +2,25 @@
     ViewData["Title"] = "Створити потяг";
 }
 @model TrainCreateDto
+@inject IViewLocalizer _localizer
 
 <div class="formhandler">
     <div class="formheader">
-        <span>Форма створення потяга</span>
+        <span>@_localizer["FormName"]</span>
     </div>
     
     <form class="form" method="post" asp-controller="Train" asp-action="CreateAction">
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Number">Номер</label>
+            <label class="forminputlabel" asp-for="Number">@_localizer["Number"]</label>
             <input class="forminput" asp-for="Number" />
             <span class="frominputerrorhandler" asp-validation-for="Number"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="RouteId">Id маршруту</label>
+            <label class="forminputlabel" asp-for="RouteId">@_localizer["RouteId"]</label>
             <input class="forminput" asp-for="RouteId" />
             <span class="frominputerrorhandler" asp-validation-for="RouteId"></span>
         </div>
-        <input class="btn btn-success forminputbutton" type="submit" value="Створити" />
+        <input class="btn btn-success forminputbutton" type="submit" value="@_localizer["Button"]" />
     </form>
 </div>
 

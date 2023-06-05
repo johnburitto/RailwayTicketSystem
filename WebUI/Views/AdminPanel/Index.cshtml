@@ -1,17 +1,18 @@
 ﻿﻿@{
     ViewData["Title"] = "Адмін панель";
 }
+@inject IViewLocalizer _localizer
 
 <div>
     <div id="sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a asp-controller="Route" asp-action="Index">Маршрути</a>
-        <a asp-controller="Train" asp-action="Index">Потяги</a>
-        <a asp-controller="TrainCar" asp-action="Index">Вагони</a>
-        <a asp-controller="Place" asp-action="Index">Місця</a>
-        <a asp-controller="Ticket" asp-action="Index">Квитки</a>
-        <a asp-controller="User" asp-action="Index">Користувачі</a>
-        <a asp-controller="AdminPanel" asp-action="Index">Адмін панель</a>
+        <a asp-controller="Route" asp-action="Index">@_localizer["Route"]</a>
+        <a asp-controller="Train" asp-action="Index">@_localizer["Train"]</a>
+        <a asp-controller="TrainCar" asp-action="Index">@_localizer["TrainCar"]</a>
+        <a asp-controller="Place" asp-action="Index">@_localizer["Place"]</a>
+        <a asp-controller="Ticket" asp-action="Index">@_localizer["Ticket"]</a>
+        <a asp-controller="User" asp-action="Index">@_localizer["User"]</a>
+        <a asp-controller="AdminPanel" asp-action="Index">@_localizer["AdminPanel"]</a>
     </div>
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>

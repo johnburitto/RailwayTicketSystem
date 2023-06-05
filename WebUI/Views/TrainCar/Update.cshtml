@@ -2,28 +2,29 @@
     ViewData["Title"] = "Редагувати вагон";
 }
 @model TrainCarUpdateDto
+@inject IViewLocalizer _localizer
 
 <div class="formhandler">
     <div class="formheader">
-        <span>Форма редагування вагона з Id @Model.Id</span>
+        <span>@_localizer["FormName"] @Model.Id</span>
     </div>
 
     <form class="form" method="post" asp-controller="TrainCar" asp-action="UpdateAction">
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Id">Id</label>
+            <label class="forminputlabel" asp-for="Id">@_localizer["Id"]</label>
             <input class="forminput" asp-for="Id" value="@Model.Id" readonly />
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Number">Номер</label>
+            <label class="forminputlabel" asp-for="Number">@_localizer["Number"]</label>
             <input class="forminput" asp-for="Number" value="@Model.Number" />
             <span class="frominputerrorhandler" asp-validation-for="Number"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="TrainId">Id потягу</label>
+            <label class="forminputlabel" asp-for="TrainId">@_localizer["TrainId"]</label>
             <input class="forminput" asp-for="TrainId" value="@Model.TrainId" />
             <span class="frominputerrorhandler" asp-validation-for="TrainId"></span>
         </div>
-        <input class="btn btn-warning forminputbutton" type="submit" value="Редагувати" />
+        <input class="btn btn-warning forminputbutton" type="submit" value="@_localizer["Button"]" />
     </form>
 </div>
 

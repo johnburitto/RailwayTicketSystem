@@ -2,38 +2,39 @@
     ViewData["Title"] = "Редагувати місце";
 }
 @model PlaceUpdateDto
+@inject IViewLocalizer _localizer
 
 <div class="formhandler">
     <div class="formheader">
-        <span>Форма редагування місця з Id @Model.Id</span>
+        <span>@_localizer["FormName"] @Model.Id</span>
     </div>
 
     <form class="form" method="post" asp-controller="Place" asp-action="UpdateAction">
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Id">Id</label>
+            <label class="forminputlabel" asp-for="Id">@_localizer["Id"]</label>
             <input class="forminput" asp-for="Id" readonly />
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Price">Ціна</label>
+            <label class="forminputlabel" asp-for="Price">@_localizer["Price"]</label>
             <input class="forminput" asp-for="Price" />
             <span class="frominputerrorhandler" asp-validation-for="Price"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="PlaceType"> Тип</label>
+            <label class="forminputlabel" asp-for="PlaceType"> @_localizer["PlaceType"]</label>
             <select class="forminput" asp-for="@Model.PlaceType" asp-items="Html.GetEnumSelectList<PlaceType>()"></select>
             <span class="frominputerrorhandler" asp-validation-for="PlaceType"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" style="border-right: 2px solid black;" asp-for="IsAvaliable">Доступність</label>
+            <label class="forminputlabel" style="border-right: 2px solid black;" asp-for="IsAvaliable">@_localizer["IsAvaliable"]</label>
             <input class="forminput" asp-for="IsAvaliable" />
             <span class="frominputerrorhandler" asp-validation-for="IsAvaliable"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="TrainCarId">Id вагона</label>
+            <label class="forminputlabel" asp-for="TrainCarId">@_localizer["TrainCarId"]</label>
             <input class="forminput" asp-for="TrainCarId" />
             <span class="frominputerrorhandler" asp-validation-for="TrainCarId"></span>
         </div>
-        <input class="btn btn-warning forminputbutton" type="submit" value="Редагувати" />
+        <input class="btn btn-warning forminputbutton" type="submit" value="@_localizer["Button"]" />
     </form>
 </div>
 

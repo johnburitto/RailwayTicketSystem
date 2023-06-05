@@ -2,24 +2,25 @@
     ViewData["Title"] = "Створити квиток";
 }
 @model TicketCreateDto
+@inject IViewLocalizer _localizer
 
 <div class="formhandler">
     <div class="formheader">
-        <span>Форма створення квитка</span>
+        <span>@_localizer["FormName"]</span>
     </div>
 
     <form class="form" method="post" asp-controller="Ticket" asp-action="CreateAction">
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="BookDate">Час бронювання</label>
+            <label class="forminputlabel" asp-for="BookDate">@_localizer["BookDate"]</label>
             <input class="forminput" type="datetime-local" asp-for="BookDate" />
             <span class="frominputerrorhandler" asp-validation-for="BookDate"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="PlaceId">Id місця</label>
+            <label class="forminputlabel" asp-for="PlaceId">@_localizer["PlaceId"]</label>
             <input class="forminput" asp-for="PlaceId" />
             <span class="frominputerrorhandler" asp-validation-for="PlaceId"></span>
         </div>
-        <input class="btn btn-success forminputbutton" type="submit" value="Створити" />
+        <input class="btn btn-success forminputbutton" type="submit" value="@_localizer["Button"]" />
     </form>
 </div>
 

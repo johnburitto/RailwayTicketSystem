@@ -2,39 +2,40 @@
     ViewData["Title"] = "Редагувати маршрут";
 }
 @model RouteUpdateDto
+@inject IViewLocalizer _localizer
 
 <div class="formhandler">
     <div class="formheader">
-        <span>Редагувати маршруту з Id @Model.Id</span>
+        <span>@_localizer["FormName"] @Model.Id</span>
     </div>
 
     <form class="form" method="post" asp-controller="Route" asp-action="UpdateAction">
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Id">Id</label>
+            <label class="forminputlabel" asp-for="Id">@_localizer["Id"]</label>
             <input class="forminput" asp-for="Id" value="@Model.Id" readonly>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="DepartureTime">Час відправлення</label>
+            <label class="forminputlabel" asp-for="DepartureTime">@_localizer["DepartureTime"]</label>
             <input class="forminput" type="datetime-local" asp-for="DepartureTime" value="@Model.DepartureTime">
             <span class="frominputerrorhandler" asp-validation-for="DepartureTime"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="ArrivalTime">Час прибуття</label>
+            <label class="forminputlabel" asp-for="ArrivalTime">@_localizer["ArrivalTime"]</label>
             <input class="forminput" type="datetime-local" asp-for="ArrivalTime" Value="@Model.ArrivalTime">
             <span class="frominputerrorhandler" asp-validation-for="ArrivalTime"></span>
         </div >
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="FromCity">З міста</label>
+            <label class="forminputlabel" asp-for="FromCity">@_localizer["FromCity"]</label>
             <input class="forminput" asp-for="FromCity" value="@Model.FromCity">
             <span class="frominputerrorhandler" asp-validation-for="FromCity"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="ToCity">До міста</label>
+            <label class="forminputlabel" asp-for="ToCity">@_localizer["ToCity"]</label>
             <input class="forminput" asp-for="ToCity" value="@Model.ToCity">
             <span class="frominputerrorhandler" asp-validation-for="ToCity"></span>
         </div>
 
-        <input class="btn btn-warning forminputbutton" type="submit" value="Редагувати">
+        <input class="btn btn-warning forminputbutton" type="submit" value="@_localizer["Button"]">
     </form>
 </div>
 
