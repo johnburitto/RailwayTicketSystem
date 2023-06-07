@@ -117,3 +117,57 @@
     font-size: 25px;
     font-weight: 600;
 }
+
+.header {
+    width: 100%;
+    display: flex;
+    transition: 0.5s;
+}
+
+.languageSelect {
+    display: none;
+}
+
+.languageSelectButton {
+    width: 150px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#a {
+    list-style-type: none;
+    width: 150px;
+    margin: 0;
+    padding: 0;
+    margin-left: 8.5%;
+}
+
+#b {
+    margin-top: 0.25%;
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#a img, #languageSelectButton img {
+    width: 24px;
+}
+
+#a li {
+    list-style: none;
+    display: block;
+    align-items: center;
+}
+
+#languageSelectButton li {
+    list-style: none;
+    display: block;
+    align-items: center;
+}
+
+li img {
+    margin-right: 16%;
+}

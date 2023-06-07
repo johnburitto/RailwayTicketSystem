@@ -10,6 +10,23 @@
 </head>
 <body>
     <div id="main" class="main">
+        <div id="header" class="header">
+            <select id="languageSelect" class="languageSelect" onchange="changeLanguage()">
+                <option value="uk"
+                        data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/125px-Flag_of_Ukraine.svg.png">Українська</option>
+                <option value="en"
+                        data-thumbnail="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/120px-Flag_of_the_United_Kingdom.svg.png">Англійська</option>
+            </select>
+
+            <div>
+                <button id="languageSelectButton" class="languageSelectButton" value=""></button>
+                <div id="b">
+                    <ul id="a">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -18,6 +35,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/languageservice.js"></script>
+    <script>loadLanguageFromLocalStorage("language");</script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
