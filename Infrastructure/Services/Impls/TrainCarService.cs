@@ -62,7 +62,7 @@ namespace Infrastructure.Services.Impls
             var trainCar = await GetByIdAsync(dto.Id);
 
             _mapper.Map(dto, trainCar ?? throw new ArgumentNullException(nameof(trainCar)));
-            _context.Entry(trainCar).State = EntityState.Modified;
+            _context.Update(trainCar);
             await _context.SaveChangesAsync();
 
             return trainCar;

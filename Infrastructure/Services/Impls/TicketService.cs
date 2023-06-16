@@ -64,7 +64,7 @@ namespace Infrastructure.Services.Impls
             var ticket = await GetByIdAsync(dto.Id);
 
             _mapper.Map(dto, ticket ?? throw new ArgumentNullException(nameof(ticket)));
-            _context.Entry(ticket).State = EntityState.Modified;
+            _context.Update(ticket);
             await _context.SaveChangesAsync();
 
             return ticket;

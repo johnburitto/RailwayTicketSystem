@@ -24,6 +24,9 @@ namespace Security.Services.Interfaces
         Registered,
         AlreadyRegistered,
         NotRegistered,
-        InternalError
+        InternalError,
+        InternalErrorRoleCause,
+        InternalErrorPasswordCause,
+        BadRole
     }
 }

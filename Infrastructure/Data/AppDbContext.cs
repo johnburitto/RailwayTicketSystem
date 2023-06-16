@@ -6,12 +6,17 @@ namespace Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Train> Trains { get; set; }
-        public DbSet<TrainCar> TrainCars { get; set; }
-        public DbSet<Place> Places { get; set; }
-        public DbSet<Route> Routes { get; set; }
-        public DbSet<Ticket> Tickets { get; set; }
+        public virtual DbSet<Train> Trains { get; set; }
+        public virtual DbSet<TrainCar> TrainCars { get; set; }
+        public virtual DbSet<Place> Places { get; set; }
+        public virtual DbSet<Route> Routes { get; set; }
+        public virtual DbSet<Ticket> Tickets { get; set; }
 
+        public AppDbContext()
+        {
+
+        }
+        
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
         { 
             

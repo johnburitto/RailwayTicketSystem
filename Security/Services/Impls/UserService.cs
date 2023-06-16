@@ -70,6 +70,11 @@ namespace Security.Services.Impls
 
             if (result.Succeeded)
             {
+                if (!Enum.GetNames(typeof(Authorization.Role)).Contains(dto.Role.ToString()))
+                {
+                    return ResponseType.BadRole;
+                }
+
                 await _manager.AddToRoleAsync(user, dto.Role.ToString());
 
                 return ResponseType.Created;
@@ -106,13 +111,16 @@ namespace Security.Services.Impls
             
             if (result.Succeeded)
             {
+                if (!Enum.GetNames(typeof(Authorization.Role)).Contains(dto.Role.ToString()))
+                {
+                    return ResponseType.BadRole;
+                }
+
                 await _manager.AddToRoleAsync(expectedUser, dto.Role.ToString());
             }
             else
             {
-                Console.WriteLine("Role issue");
-
-                return ResponseType.InternalError;
+                return ResponseType.InternalErrorRoleCause;
             }
 
             result = await _manager.RemovePasswordAsync(expectedUser);
@@ -123,25 +131,10 @@ namespace Security.Services.Impls
             }
             else
             {
-                Console.WriteLine("Password issue");
-
-                return ResponseType.InternalError;
+                return ResponseType.InternalErrorPasswordCause;
             }
 
             return ResponseType.Updated;
-
-            //result = await _manager.UpdateAsync(expectedUser);
-
-            //if (result.Succeeded)
-            //{
-            //    return ResponseType.Updated;
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Update issue");
-
-            //    return ResponseType.InternalError;
-            //}
         }
 
         public async Task<ResponseType> LoginAsync(UserLoginDto dto)

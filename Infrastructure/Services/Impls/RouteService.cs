@@ -23,7 +23,7 @@ namespace Infrastructure.Services.Impls
         {
             var route = _mapper.Map<Route>(dto);
 
-            await _context.AddAsync(route);
+            await _context.Routes.AddAsync(route);
             await _context.SaveChangesAsync();
 
             return route;
@@ -62,7 +62,7 @@ namespace Infrastructure.Services.Impls
             var route = await GetByIdAsync(dto.Id);
 
             _mapper.Map(dto, route ?? throw new ArgumentNullException(nameof(route)));
-            _context.Entry(route).State = EntityState.Modified;
+            _context.Update(route);
             await _context.SaveChangesAsync();
 
             return route;
