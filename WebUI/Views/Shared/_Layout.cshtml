@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="~/WebUI.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div id="main" class="main">
-        <div id="header" class="header">
+    <header id="header" class="header">
+        <div>
             <select id="languageSelect" class="languageSelect" onchange="changeLanguage()">
                 <option value="uk"
                         data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/125px-Flag_of_Ukraine.svg.png">Українська</option>
@@ -26,7 +26,9 @@
                 </div>
             </div>
         </div>
-        
+    </header>
+
+    <div id="main" class="main">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

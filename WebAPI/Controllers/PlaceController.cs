@@ -2,6 +2,7 @@
 using Core.Dtos.Update;
 using Core.Entities;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -18,7 +19,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize("read")]
         [ProducesResponseType(typeof(List<Place>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<List<Place>>> GetAllAsync()
         {
@@ -26,7 +30,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}", Name = "GetPlaceById")]
+        [Authorize("read")]
         [ProducesResponseType(typeof(Place), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Place>> GetByIdAsync(int id)
@@ -37,7 +44,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize("write")]
         [ProducesResponseType(typeof(Place), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Place>> CreateAsync([FromBody] PlaceCreateDto dto)
         {
@@ -47,8 +57,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize("write")]
         [ProducesResponseType(typeof(Place), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Place>> UpdateAsync(int id, [FromBody] PlaceUpdateDto dto)
@@ -64,7 +77,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("id")]
+        [Authorize("write")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteAsync(int id)

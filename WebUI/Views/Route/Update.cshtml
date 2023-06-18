@@ -16,12 +16,12 @@
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="DepartureTime">@_localizer["DepartureTime"]</label>
-            <input class="forminput" type="datetime-local" asp-for="DepartureTime" value="@Model.DepartureTime">
+            <input class="forminput" type="datetime-local" asp-for="DepartureTime" value="@Model.DepartureTime.ToString("yyyy-MM-ddTHH:mm")">
             <span class="frominputerrorhandler" asp-validation-for="DepartureTime"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="ArrivalTime">@_localizer["ArrivalTime"]</label>
-            <input class="forminput" type="datetime-local" asp-for="ArrivalTime" Value="@Model.ArrivalTime">
+            <input class="forminput" type="datetime-local" asp-for="ArrivalTime" Value="@Model.ArrivalTime.ToString("yyyy-MM-ddTHH:mm")">
             <span class="frominputerrorhandler" asp-validation-for="ArrivalTime"></span>
         </div >
         <div class="forminputhandler">

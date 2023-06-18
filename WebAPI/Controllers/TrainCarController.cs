@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using Core.Dtos.Create;
+﻿using Core.Dtos.Create;
 using Core.Dtos.Update;
 using Core.Entities;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -19,7 +19,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize("read")]
         [ProducesResponseType(typeof(List<TrainCar>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<List<TrainCar>>> GetAllAsync()
         {
@@ -27,7 +30,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}", Name = "GetTrainCarById")]
+        [Authorize("read")]
         [ProducesResponseType(typeof(TrainCar), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TrainCar>> GetByIdAsync(int id)
@@ -38,7 +44,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize("write")]
         [ProducesResponseType(typeof(TrainCar), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TrainCar>> CreateAsync([FromBody] TrainCarCreateDto dto)
         {
@@ -48,8 +57,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize("write")]
         [ProducesResponseType(typeof(TrainCar), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TrainCar>> UpdateAsync(int id, [FromBody] TrainCarUpdateDto dto)
@@ -65,7 +77,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize("write")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteAsync(int id)

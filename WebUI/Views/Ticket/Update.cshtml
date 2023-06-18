@@ -16,7 +16,7 @@
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="BookDate">@_localizer["BookDate"]</label>
-            <input class="forminput" type="datetime-local" asp-for="BookDate" value="@Model.BookDate" />
+            <input class="forminput" type="datetime-local" asp-for="BookDate" value="@Model.BookDate.ToString("yyyy-MM-ddTHH:mm")" />
             <span class="frominputerrorhandler" asp-validation-for="BookDate"></span>
         </div>
         <div class="forminputhandler">

@@ -44,7 +44,10 @@ namespace Security.Configurations
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = {new Secret("SuperSecretPassword".Sha256())},
 
-                AllowedScopes = { "railwaytickets.read", "railwaytickets.write" }
+                AllowedScopes = {
+                    "railwaytickets.read", 
+                    "railwaytickets.write"
+                }
             },
             new Client
             {
