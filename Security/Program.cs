@@ -1,14 +1,23 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Security.Configurations;
+using Security.Constraints;
 using Security.Data;
 using Security.Entities;
+using Security.Providers;
 using Security.Services.Impls;
 using Security.Services.Interfaces;
 using Serilog;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add localization
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+// Add MVC
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization();
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -72,15 +81,45 @@ builder.Services.AddIdentityServer(options =>
     })
     .AddAspNetIdentity<User>();
 
-var app = builder.Build();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Auth/Login";
+});
 
-app.UseCors();
+// Configure route options
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.ConstraintMap.Add("culture", typeof(LanguageRouteConstraint));
+});
+
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Configure localization
+var supportedCultures = new[]
+            {
+                new CultureInfo("uk"),
+                new CultureInfo("en")
+            };
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+    RequestCultureProviders = new[]
+    {
+        new RouteDataRequestCultureProvider
+        {
+            IndexOfCulture = 1,
+            IndexOfUICulture = 1
+        }
+    }
+});
 
 app.UseIdentityServer();
 
@@ -92,8 +131,14 @@ app.UseCors();
 
 app.UseAuthorization();
 
-app.MapRazorPages().RequireAuthorization();
-
 app.MapControllers();
+
+app.MapControllerRoute(
+    name: "LocalizedDefault",
+    pattern: "{culture:culture}/{controller=Auth}/{action=Login}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

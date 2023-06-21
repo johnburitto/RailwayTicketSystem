@@ -12,12 +12,14 @@ namespace Security.Services.Impls
     public class UserService : IUserService
     {
         private readonly UserManager<User> _manager;
+        private readonly SignInManager<User> _signInManager;
         private readonly SecurityDbContext _context;
         private readonly IMapper _mapper;
 
-        public UserService(UserManager<User> manager, SecurityDbContext context, IMapper mapper)
+        public UserService(UserManager<User> manager, SignInManager<User> signInManager, SecurityDbContext context, IMapper mapper)
         {
             _manager = manager ?? throw new ArgumentNullException(nameof(manager));
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
@@ -143,7 +145,16 @@ namespace Security.Services.Impls
 
             if (expectedUser != null)
             {
-                return await _manager.CheckPasswordAsync(expectedUser, dto.Password) ? ResponseType.Logined : ResponseType.BadCredentials;
+                var result = await _manager.CheckPasswordAsync(expectedUser, dto.Password);
+
+                if (result)
+                {
+                    await _signInManager.SignInAsync(expectedUser, false);
+
+                    return ResponseType.Logined;
+                }
+
+                return ResponseType.BadCredentials;
             }
             else
             {

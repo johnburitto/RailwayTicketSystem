@@ -1,0 +1,24 @@
+﻿﻿@{
+    ViewData["Title"] = "Вхід";
+}
+@model UserLoginDto
+@inject IViewLocalizer _localizer
+
+<div class="formhandler">
+    <div class="formheader">
+        <span>@_localizer["FormName"]</span>
+    </div>
+
+    <form class="form" asp-controller="Auth" asp-action="LoginAction" method="post">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="UserName">@_localizer["Username"]</label>
+            <input class="forminput" asp-for="UserName"/>
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Password">@_localizer["Password"]</label>
+            <input class="forminput" type="password" asp-for="Password" />
+        </div>
+        <input class="btn btn-success forminputbutton" type="submit" value="@_localizer["Button"]" />
+    </form>
+</div>

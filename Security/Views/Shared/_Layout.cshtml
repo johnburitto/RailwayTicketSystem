@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebUI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebUI.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header id="header" class="header">
+        <div>
+            <select id="languageSelect" class="languageSelect" onchange="changeLanguage()">
+                <option value="uk"
+                        data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/125px-Flag_of_Ukraine.svg.png">Українська</option>
+                <option value="en"
+                        data-thumbnail="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/120px-Flag_of_the_United_Kingdom.svg.png">Англійська</option>
+            </select>
+
+            <div>
+                <button id="languageSelectButton" class="languageSelectButton" value=""></button>
+                <div id="b">
+                    <ul id="a">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="main" class="main">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/languageservice.js"></script>
+    <script>loadLanguageFromLocalStorage("language");</script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
