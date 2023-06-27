@@ -6,6 +6,6 @@ namespace Infrastructure.Services.Interfaces
 {
     public interface IPlaceService : IService<Place, PlaceCreateDto, PlaceUpdateDto>
     {
-
+        public Task DisablePlaceAsync(int id);
     }
 }

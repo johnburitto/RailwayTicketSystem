@@ -69,5 +69,15 @@ namespace Infrastructure.Services.Impls
 
             return place;
         }
+
+        public async Task DisablePlaceAsync(int id)
+        {
+            var place = await GetByIdAsync(id) ?? throw(new ArgumentNullException("Such palce doesn't exist"));
+
+            place.IsAvaliable = false;
+            _context.Update(place);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

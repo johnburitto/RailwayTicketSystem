@@ -31,6 +31,8 @@ namespace Security.Controllers
                 return result == ResponseType.Logined ? Redirect(dto.ReturnUrl) : Redirect("/Auth/Login");
             }
 
+            User.IsInRole("Admin")
+
             return Redirect("/Auth/Login");
         }
     }

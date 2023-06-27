@@ -3,6 +3,7 @@ using Core.Dtos.Create;
 using Core.Dtos.Update;
 using Core.Entities;
 using Infrastructure.Data;
+using Infrastructure.Dtos;
 using Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -66,6 +67,16 @@ namespace Infrastructure.Services.Impls
             await _context.SaveChangesAsync();
 
             return route;
+        }
+
+        public async Task<List<Route>> SearchRoutesAsync(SearchRoutesDto dto)
+        {
+            return await _context.Routes.Where(route => route.FromCity.Contains(dto.FromCity) && 
+                                                        route.ToCity.Contains(dto.ToCity) && 
+                                                        route.DepartureTime.Date.Equals(dto.DepartureDate.Date))
+                .Include(route => route.Trains)
+                .ThenInclude(train => train.TrainCars)
+                .ThenInclude(trainCar => trainCar.Places).ToListAsync();
         }
     }
 }

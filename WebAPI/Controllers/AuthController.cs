@@ -1,6 +1,7 @@
 ﻿using IdentityModel.Client;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Dtos;
 
 namespace WebAPI.Controllers
 {
@@ -27,55 +28,21 @@ namespace WebAPI.Controllers
             return Ok("Hello, you are authorized.");
         }
 
-        [HttpGet("token/full")]
-        [ProducesResponseType(typeof(TokenResponse), StatusCodes.Status200OK)]
+        [HttpPost("token")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<TokenResponse>> GetFullTokenAsync()
+        public async Task<ActionResult<string?>> GetTokenAsync([FromBody] GetTokenDto dto)
         {
             var tokenResponse = await _client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = _configuration["IdentityServerTokenEndpoint"],
-                ClientId = _configuration["ClientId"] ?? throw new ArgumentNullException(nameof(ClientCredentialsTokenRequest.ClientId)),
-                ClientSecret = _configuration["ClientSecret"],
-                Scope = _configuration["ScopeFull"]
+                ClientId = dto.ClientId,
+                ClientSecret = dto.ClientSecret,
+                Scope = dto.Scope
             });
 
-            return tokenResponse;
-        }
-
-        [HttpGet("token/read")]
-        [ProducesResponseType(typeof(TokenResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<TokenResponse>> GetReadTokenAsync()
-        {
-            var tokenResponse = await _client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
-            {
-                Address = _configuration["IdentityServerTokenEndpoint"],
-                ClientId = _configuration["ClientId"] ?? throw new ArgumentNullException(nameof(ClientCredentialsTokenRequest.ClientId)),
-                ClientSecret = _configuration["ClientSecret"],
-                Scope = _configuration["ScopeRead"]
-            });
-
-            return tokenResponse;
-        }
-
-        [HttpGet("token/write")]
-        [ProducesResponseType(typeof(TokenResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<TokenResponse>> GetWriteTokenAsync()
-        {
-            var tokenResponse = await _client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
-            {
-                Address = _configuration["IdentityServerTokenEndpoint"],
-                ClientId = _configuration["ClientId"] ?? throw new ArgumentNullException(nameof(ClientCredentialsTokenRequest.ClientId)),
-                ClientSecret = _configuration["ClientSecret"],
-                Scope = _configuration["ScopeWrite"]
-            });
-
-            return tokenResponse;
+            return tokenResponse.AccessToken;
         }
     }
 }

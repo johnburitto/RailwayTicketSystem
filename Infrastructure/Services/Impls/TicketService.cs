@@ -12,11 +12,13 @@ namespace Infrastructure.Services.Impls
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IPlaceService _placeService;
 
-        public TicketService(AppDbContext context, IMapper mapper)
+        public TicketService(AppDbContext context, IMapper mapper, IPlaceService placeService)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _placeService = placeService ?? throw new ArgumentNullException(nameof(placeService));
         }
 
         public async Task<Ticket> CreateAsync(TicketCreateDto dto)
@@ -25,6 +27,7 @@ namespace Infrastructure.Services.Impls
 
             await _context.Tickets.AddAsync(ticket);
             await _context.SaveChangesAsync();
+            await _placeService.DisablePlaceAsync(ticket.PlaceId);
 
             return ticket;
         }
