@@ -1,18 +1,20 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Security.Dto;
-using Security.Entities;
 using Security.Services.Interfaces;
+using System.Text;
+using System.Web;
 
 namespace Security.Controllers
 {
     public class AuthController : Controller
     {
         private readonly IUserService _service;
+        private readonly IConfiguration _conf;
 
-        public AuthController(IUserService service)
+        public AuthController(IUserService service, IConfiguration conf)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
+            _conf = conf ?? throw new ArgumentNullException(nameof(conf));
         }
 
         [HttpGet]
@@ -28,12 +30,11 @@ namespace Security.Controllers
             {
                 var result = await _service.LoginAsync(dto);
 
-                return result == ResponseType.Logined ? Redirect(dto.ReturnUrl) : Redirect("/Auth/Login");
+                return result == ResponseType.Logined ? Redirect(dto.ReturnUrl) 
+                    : Redirect($"/Auth/Login?ReturnUrl={HttpUtility.UrlEncode(Encoding.Default.GetBytes(dto.ReturnUrl))}");
             }
 
-            User.IsInRole("Admin")
-
-            return Redirect("/Auth/Login");
+            return Redirect($"/Auth/Login?ReturnUrl={HttpUtility.UrlEncode(Encoding.Default.GetBytes(dto.ReturnUrl))}");
         }
     }
 }
