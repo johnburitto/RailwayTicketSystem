@@ -33,8 +33,6 @@ function getUsers() {
         },
         success: function (result) {
             arr = JSON.parse(JSON.stringify(result));
-
-            console.log(arr);
         }
     });
 
@@ -55,8 +53,6 @@ function getUserById(id) {
         },
         success: function (result) {
             user = JSON.parse(JSON.stringify(result));
-
-            console.log(user);
         }
     });
 
@@ -77,8 +73,6 @@ function getUserRoles(id) {
         },
         success: function (result) {
             roles = JSON.parse(JSON.stringify(result));
-
-            console.log(roles);
         }
     });
 
@@ -86,6 +80,10 @@ function getUserRoles(id) {
 }
 
 function rendeUsers() {
+    let languageCode = window.location.pathname.split("/")[1];
+
+    console.log(window.location.pathname);
+
     let arr: Array<User> = getUsers();
     let table: string = 
     `<table class="table" style="align-content: center; text-align: center; vertical-align: middle;">
@@ -124,7 +122,7 @@ function rendeUsers() {
             </td>
             <td>
                 <button class="btn btn-warning"
-                        onclick="window.location.href='/User/Update/${user.id}'">
+                        onclick="window.location.href='/${languageCode}/User/Update/${user.id}'">
                      Редагувати
                 </button>
             </td>
@@ -147,9 +145,10 @@ function rendeUsers() {
 
 function deleteDialog(id) {
     var result = confirm("Ви впевнені в тому, що зочете видалити запис?");
+    let languageCode = window.location.pathname.split("/")[1];
 
     if (result) {
-        window.location.href = `https://localhost:7128/api/User/delete/${id}`;
+        window.location.href = `https://localhost:7128/${languageCode}/api/User/delete/${id}`;
     }
 }
 

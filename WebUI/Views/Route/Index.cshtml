@@ -84,9 +84,10 @@
 
     function deleteDialog(id) {
         var result = confirm("Ви впевнені в тому, що зочете видалити запис?");
+        let languageCode = window.location.pathname.split("/")[1];
 
         if (result) {
-            window.location.href = `/Route/Delete/${id}`;
+            window.location.href = `/${languageCode}/Place/Delete/${id}`;
         }
     }
 </script>

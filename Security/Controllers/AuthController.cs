@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Security.Dto;
 using Security.Services.Interfaces;
 using System.Text;
@@ -9,12 +10,10 @@ namespace Security.Controllers
     public class AuthController : Controller
     {
         private readonly IUserService _service;
-        private readonly IConfiguration _conf;
 
         public AuthController(IUserService service, IConfiguration conf)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
-            _conf = conf ?? throw new ArgumentNullException(nameof(conf));
         }
 
         [HttpGet]
@@ -26,15 +25,18 @@ namespace Security.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginAction(UserLoginDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
             if (ModelState.IsValid)
             {
                 var result = await _service.LoginAsync(dto);
 
                 return result == ResponseType.Logined ? Redirect(dto.ReturnUrl) 
-                    : Redirect($"/Auth/Login?ReturnUrl={HttpUtility.UrlEncode(Encoding.Default.GetBytes(dto.ReturnUrl))}");
+                    : Redirect($"/{culture}/Auth/Login?ReturnUrl={HttpUtility.UrlEncode(Encoding.Default.GetBytes(dto.ReturnUrl))}");
             }
 
-            return Redirect($"/Auth/Login?ReturnUrl={HttpUtility.UrlEncode(Encoding.Default.GetBytes(dto.ReturnUrl))}");
+            return Redirect($"/{culture}/Auth/Login?ReturnUrl={HttpUtility.UrlEncode(Encoding.Default.GetBytes(dto.ReturnUrl))}");
         }
     }
 }

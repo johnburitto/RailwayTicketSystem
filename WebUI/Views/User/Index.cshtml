@@ -1,9 +1,10 @@
-﻿﻿@{
+﻿@using System.Globalization
+@{
     ViewData["Title"] = "Користувачі";
 }
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/js/userService.js"></script>
+<script src="~/js/userservice.js"></script>
 
 <div>
     <div class="tableheader">
@@ -21,7 +22,9 @@
         <span id="open" class="openbtn" onclick="openNav()">&#9776;</span>
 
         <button style="margin-right: 10px"
-                class="btn btn-success btn-lg btn-block" onclick="@("window.location.href='/User/Create'")">Створити</button>
+                class="btn btn-success btn-lg btn-block" onclick="@($"window.location.href='/{CultureInfo.CurrentCulture}/User/Create'")">
+            Створити
+        </button>
     </div>
 
     <script type="text/javascript">rendeUsers();</script>
@@ -42,13 +45,5 @@
         document.getElementById("main").style.marginLeft = "0";
         document.getElementById("header").style.marginLeft = "0";
         document.getElementById("open").style.opacity = "1";
-    }
-
-    function deleteDialog(id) {
-        var result = confirm("Ви впевнені в тому, що зочете видалити запис?");
-
-        if (result) {
-            window.location.href = `https://localhost:7128/api/User/delete/${id}`;
-        }
     }
 </script>

@@ -83,7 +83,7 @@ builder.Services.AddIdentityServer(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Auth/Login";
+    options.LoginPath = "/uk/Auth/Login";
 });
 
 // Configure route options

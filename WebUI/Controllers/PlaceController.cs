@@ -3,6 +3,7 @@ using Core.Dtos.Create;
 using Core.Dtos.Update;
 using Core.Entities;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Models;
 
@@ -32,21 +33,26 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAction(PlaceCreateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
             if (ModelState.IsValid)
             {
                 await _service.CreateAsync(dto);
             }
 
-            return Redirect("/Place/Index");
+            return Redirect($"/{culture}/Place/Index");
         }
 
         public async Task<IActionResult> Update(int id)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
             var place = await _service.GetByIdAsync(id);
 
             if (place == null)
             {
-                return Redirect("/Place/Index");
+                return Redirect($"/{culture}/Place/Index");
             }
 
             return View(_mapper.Map<PlaceUpdateDto>(place));
@@ -54,26 +60,31 @@ namespace WebUI.Controllers
 
         public async Task<IActionResult> UpdateAction(PlaceUpdateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
             if (ModelState.IsValid)
             {
                 await _service.UpdateAsync(dto);
             }
 
-            return Redirect("/Place/Index");
+            return Redirect($"/{culture}/Place/Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
             var place = await _service.GetByIdAsync(id);
 
             if (place == null)
             {
-                return Redirect("/Place/Index");
+                return Redirect($"/{culture}/Place/Index");
             }
 
             await _service.DeleteAsync(place);
 
-            return Redirect("/Place/Index");
+            return Redirect($"/{culture}/Place/Index");
         }
     }
 }

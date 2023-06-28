@@ -3,6 +3,7 @@ using Core.Dtos.Create;
 using Core.Dtos.Update;
 using Core.Entities;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Models;
 
@@ -32,21 +33,26 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAction(TrainCreateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
             if (ModelState.IsValid)
             {
                 await _service.CreateAsync(dto);
             }
 
-            return Redirect("/Train/Index");
+            return Redirect($"/{culture}/Train/Index");
         }
 
         public async Task<IActionResult> Update(int id)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
             var train = await _service.GetByIdAsync(id);
 
             if (train == null)
             {
-                return Redirect("/Train/Index");
+                return Redirect($"/{culture}/Train/Index");
             }
 
             return View(_mapper.Map<TrainUpdateDto>(train));
@@ -55,26 +61,31 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateAction(TrainUpdateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
             if (ModelState.IsValid)
             {
                 await _service.UpdateAsync(dto);
             }
 
-            return Redirect("/Train/Index");
+            return Redirect($"/{culture}/Train/Index");
         } 
 
         public async Task<IActionResult> Delete(int id)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
             var train = await _service.GetByIdAsync(id);
 
             if (train == null)
             {
-                return Redirect("/Train/Index");
+                return Redirect($"/{culture}/Train/Index");
             }
 
             await _service.DeleteAsync(train);
 
-            return Redirect("/Train/Index");
+            return Redirect($"/{culture}/Train/Index");
         }
     }
 }

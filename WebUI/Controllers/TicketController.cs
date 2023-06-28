@@ -3,6 +3,7 @@ using Core.Dtos.Create;
 using Core.Dtos.Update;
 using Core.Entities;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Models;
 
@@ -31,21 +32,26 @@ namespace WebUI.Controllers
 
         public async Task<IActionResult> CreateAction(TicketCreateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
             if (ModelState.IsValid)
             {
                 await _service.CreateAsync(dto);
             }
 
-            return Redirect("/Ticket/Index");
+            return Redirect($"/{culture}/Ticket/Index");
         }
 
         public async Task<IActionResult> Update(int id)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
             var ticket = await _service.GetByIdAsync(id);
 
             if (ticket == null)
             {
-                return Redirect("/Ticket/Index");
+                return Redirect($"/{culture}/Ticket/Index");
             }
 
             return View(_mapper.Map<TicketUpdateDto>(ticket));
@@ -53,26 +59,31 @@ namespace WebUI.Controllers
 
         public async Task<IActionResult> UpdateAction(TicketUpdateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
             if (ModelState.IsValid)
             {
                 await _service.UpdateAsync(dto);
             }
 
-            return Redirect("/Ticket/Index");
+            return Redirect($"/{culture}/Ticket/Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
             var ticket = await _service.GetByIdAsync(id);
 
             if (ticket == null)
             {
-                return Redirect("/Ticket/Index");
+                return Redirect($"/{culture}/Ticket/Index");
             }
 
             await _service.DeleteAsync(ticket);
 
-            return Redirect("/Ticket/Index");
+            return Redirect($"/{culture}/Ticket/Index");
         }
     }
 }

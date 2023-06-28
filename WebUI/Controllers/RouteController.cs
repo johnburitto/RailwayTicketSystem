@@ -3,6 +3,7 @@ using Core.Dtos.Create;
 using Core.Dtos.Update;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Models;
 
@@ -33,21 +34,26 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAction(RouteCreateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
             if (ModelState.IsValid)
             {
                 await _service.CreateAsync(dto);
             }
 
-            return Redirect("/Route/Index");
+            return Redirect($"/{culture}/Route/Index");
         }
 
         public async Task<IActionResult> Update(int id)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
             var route = await _service.GetByIdAsync(id);
 
             if (route  == null)
             {
-                return Redirect("/Route/Index");
+                return Redirect($"/{culture}/Route/Index");
             }
 
             return View(_mapper.Map<RouteUpdateDto>(route));
@@ -56,26 +62,31 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateAction(RouteUpdateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
             if (ModelState.IsValid)
             {
                 await _service.UpdateAsync(dto);
             }
 
-            return Redirect("/Route/Index");
+            return Redirect($"/{culture}/Route/Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
             var route = await _service.GetByIdAsync(id);
 
             if (route == null)
             {
-                return Redirect("/Route/Index");
+                return Redirect($"/{culture}/Route/Index");
             }
 
             await _service.DeleteAsync(route);
 
-            return Redirect("/Route/Index");
+            return Redirect($"/{culture}/Route/Index");
         }
     }
 }
