@@ -55,12 +55,15 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = "cookie";
     options.DefaultChallengeScheme = "oidc";
 })
-    .AddCookie("cookie")
+    .AddCookie("cookie", options =>
+    {
+        options.Cookie.Name = "idsrv.cookie";
+    })
     .AddOpenIdConnect("oidc", options =>
     {
         options.ClientId = builder.Configuration["ClientId"];
         options.ClientSecret = builder.Configuration["ClientSecret"];
-        options.Authority = builder.Configuration["IdentityAuthorityUrl"];
+        options.Authority = builder.Configuration["SecurityAPIUrl"];
         options.Scope.Add("openid");
         options.Scope.Add("profile");
         options.Scope.Add("role");

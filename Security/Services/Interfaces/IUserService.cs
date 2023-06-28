@@ -11,6 +11,7 @@ namespace Security.Services.Interfaces
         public Task<ResponseType> CreateAsync(UserCreateDto dto);
         public Task<ResponseType> UpdateAsync(UserUpdateDto dto);
         public Task<ResponseType> LoginAsync(UserLoginDto dto);
+        public Task<ResponseType> LogoutAsync(HttpContext context);
         public Task<List<string>> GetUserRolesAsync(string id);
         public Task DeleteByIdAsync(string id);
     }
@@ -20,6 +21,7 @@ namespace Security.Services.Interfaces
         Created,
         Updated,
         Logined,
+        Logouted,
         BadCredentials,
         Registered,
         AlreadyRegistered,

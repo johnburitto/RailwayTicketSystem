@@ -1,11 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using System.Globalization
+@inject IViewLocalizer _localizer
+@inject IConfiguration _conf
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebUI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebUI.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -13,9 +17,9 @@
         <div>
             <select id="languageSelect" class="languageSelect" onchange="changeLanguage()">
                 <option value="uk"
-                        data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/125px-Flag_of_Ukraine.svg.png">Українська</option>
+                        data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/125px-Flag_of_Ukraine.svg.png">@_localizer["Ukrainian"]</option>
                 <option value="en"
-                        data-thumbnail="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/120px-Flag_of_the_United_Kingdom.svg.png">Англійська</option>
+                        data-thumbnail="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/120px-Flag_of_the_United_Kingdom.svg.png">@_localizer["English"]</option>
             </select>
 
             <div>
@@ -25,6 +29,21 @@
                     </ul>
                 </div>
             </div>
+        </div>
+        <div>
+            @if (User.IsInRole("Admin"))
+            {
+                <button class="btn btn-dark" onclick="@("window.location.href='" + Url.Action("Index", "AdminPanel") + "'")">@_localizer["AdminPanel"]</button>
+            }
+            else if (User.IsInRole("User"))
+            {
+                
+            }
+            else
+            {
+                <button class="btn btn-dark" onclick="@("window.location.href='" + Url.Action("LoginPoint", "Redirect") + "'")">@_localizer["Login"]</button>
+            }
+            <button class="btn btn-dark" onclick="@($"window.location.href='{_conf["SecurityAPIUrl"]}/{CultureInfo.CurrentCulture}/Auth/Logout'")">@_localizer["Logout"]</button>
         </div>
     </header>
 

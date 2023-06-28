@@ -119,9 +119,9 @@
 }
 
 .header {
-    width: 100%;
     display: flex;
     transition: 0.5s;
+    justify-content:space-between
 }
 
 .languageSelect {
@@ -137,7 +137,7 @@
 
 #a {
     list-style-type: none;
-    width: 150px;
+    width: 148px;
     margin: 0;
     padding: 0;
 }

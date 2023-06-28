@@ -83,7 +83,13 @@ builder.Services.AddIdentityServer(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
+    options.Cookie.Name = "idsrv.identity";
     options.LoginPath = "/uk/Auth/Login";
+});
+
+builder.Services.AddAntiforgery(options =>
+{
+    options.Cookie.Name = "idsrv.antiforgery";
 });
 
 // Configure route options

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IViewLocalizer _localizer
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,9 +15,9 @@
         <div>
             <select id="languageSelect" class="languageSelect" onchange="changeLanguage()">
                 <option value="uk"
-                        data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/125px-Flag_of_Ukraine.svg.png">Українська</option>
+                        data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/125px-Flag_of_Ukraine.svg.png">@_localizer["Ukrainian"]</option>
                 <option value="en"
-                        data-thumbnail="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/120px-Flag_of_the_United_Kingdom.svg.png">Англійська</option>
+                        data-thumbnail="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/120px-Flag_of_the_United_Kingdom.svg.png">@_localizer["English"]</option>
             </select>
 
             <div>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Security.Configurations;
@@ -159,6 +160,24 @@ namespace Security.Services.Impls
             else
             {
                 return ResponseType.NotRegistered;
+            }
+        }
+
+        public async Task<ResponseType> LogoutAsync(HttpContext context)
+        {
+            try
+            {
+                await _signInManager.SignOutAsync();
+                context.Response.Cookies.Delete("idsrv.cookieC1");
+                context.Response.Cookies.Delete("idsrv.cookie");
+                context.Response.Cookies.Delete("idsrv.cookieC2");
+                context.Response.Cookies.Delete("idsrv.antiforgery");
+
+                return ResponseType.Logouted;
+            }
+            catch (Exception)
+            {
+                return ResponseType.InternalError;
             }
         }
 

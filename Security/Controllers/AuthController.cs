@@ -10,10 +10,12 @@ namespace Security.Controllers
     public class AuthController : Controller
     {
         private readonly IUserService _service;
+        private readonly IConfiguration _conf;
 
         public AuthController(IUserService service, IConfiguration conf)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
+            _conf = conf ?? throw new ArgumentNullException(nameof(conf));
         }
 
         [HttpGet]
@@ -37,6 +39,16 @@ namespace Security.Controllers
             }
 
             return Redirect($"/{culture}/Auth/Login?ReturnUrl={HttpUtility.UrlEncode(Encoding.Default.GetBytes(dto.ReturnUrl))}");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout(string redirectUrl)
+        {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture;
+
+            return await _service.LogoutAsync(HttpContext) == ResponseType.Logouted ? Redirect($"{_conf["WebUIString"]}/{culture}/Home/Index") :
+                Redirect($"{_conf["WebUIString"]}{redirectUrl}");
         }
     }
 }

@@ -96,7 +96,7 @@
 
 #a {
     list-style-type: none;
-    width: 150px;
+    width: 148px;
     margin: 0;
     padding: 0;
 }
@@ -120,10 +120,10 @@
     align-items: center;
 }
 
-    #a li:first-child {
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-    }
+#a li:first-child {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
 
     #a li:last-child {
         border-bottom-left-radius: 3px;
@@ -136,9 +136,9 @@
     align-items: center;
 }
 
-    #a li:hover, #languageSelectButton li:hover {
-        background-color: #cfd1d0;
-    }
+#a li:hover, #languageSelectButton li:hover {
+    background-color: #cfd1d0;
+}
 
 #languageSelectButton:hover {
     background-color: #cfd1d0;
