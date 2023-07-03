@@ -138,11 +138,17 @@
   <data name="IsAvaliable" xml:space="preserve">
     <value>Is avaliable</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="Place" xml:space="preserve">
     <value>Places</value>
   </data>
   <data name="PlaceType" xml:space="preserve">
     <value>Place type</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
   </data>
   <data name="Price" xml:space="preserve">
     <value>Price</value>

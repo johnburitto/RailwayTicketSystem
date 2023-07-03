@@ -5,7 +5,7 @@ using Core.Entities;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using WebUI.Models;
+using WebUI.Paging;
 
 namespace WebUI.Controllers
 {
@@ -20,9 +20,9 @@ namespace WebUI.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] PagingParams pagingParams)
         {
-            return View(new RawDataModel<Train> { Data = await _service.GetAllRawAsync() });
+            return View(PagingListModel<Train>.Create(await _service.GetAllRawAsync(), pagingParams));
         }
 
         public IActionResult Create()

@@ -1,4 +1,4 @@
-﻿﻿@{
+﻿@{
     ViewData["Title"] = "Адмін панель";
 }
 @inject IViewLocalizer _localizer
@@ -6,11 +6,11 @@
 <div>
     <div id="sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a asp-controller="Route" asp-action="Index">@_localizer["Route"]</a>
-        <a asp-controller="Train" asp-action="Index">@_localizer["Train"]</a>
-        <a asp-controller="TrainCar" asp-action="Index">@_localizer["TrainCar"]</a>
-        <a asp-controller="Place" asp-action="Index">@_localizer["Place"]</a>
-        <a asp-controller="Ticket" asp-action="Index">@_localizer["Ticket"]</a>
+        <a href="/@(CultureInfo.CurrentCulture)/Route/Index?@(new PagingParams())">@_localizer["Route"]</a>
+        <a href="/@(CultureInfo.CurrentCulture)/Train/Index?@(new PagingParams())">@_localizer["Train"]</a>
+        <a href="/@(CultureInfo.CurrentCulture)/TrainCar/Index?@(new PagingParams())">@_localizer["TrainCar"]</a>
+        <a href="/@(CultureInfo.CurrentCulture)/Place/Index?@(new PagingParams())">@_localizer["Place"]</a>
+        <a href="/@(CultureInfo.CurrentCulture)/Ticket/Index?@(new PagingParams())">@_localizer["Ticket"]</a>
         <a asp-controller="User" asp-action="Index">@_localizer["User"]</a>
         <a asp-controller="AdminPanel" asp-action="Index">@_localizer["AdminPanel"]</a>
     </div>

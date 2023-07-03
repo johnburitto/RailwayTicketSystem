@@ -168,10 +168,10 @@ namespace Security.Services.Impls
             try
             {
                 await _signInManager.SignOutAsync();
-                context.Response.Cookies.Delete("idsrv.cookieC1");
-                context.Response.Cookies.Delete("idsrv.cookie");
-                context.Response.Cookies.Delete("idsrv.cookieC2");
-                context.Response.Cookies.Delete("idsrv.antiforgery");
+                context.Response.Cookies.Delete(Authorization.COOKIE);
+                context.Response.Cookies.Delete(Authorization.COOKIE_C1);
+                context.Response.Cookies.Delete(Authorization.COOKIE_C2);
+                context.Response.Cookies.Delete(Authorization.COOKIE_ANTIFORGERY);
 
                 return ResponseType.Logouted;
             }

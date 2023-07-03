@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Core.Dtos.Create;
 using Core.Dtos.Update;
+using Core.Entities;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using WebUI.Models;
+using WebUI.Paging;
 
 namespace WebUI.Controllers
 {
@@ -21,9 +22,9 @@ namespace WebUI.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] PagingParams pagingParams)
         {
-            return View(new RawDataModel<Core.Entities.Route> { Data = await _service.GetAllRawAsync() });
+            return View(PagingListModel<Core.Entities.Route>.Create(await _service.GetAllRawAsync(), pagingParams));
         }
 
         public IActionResult Create()

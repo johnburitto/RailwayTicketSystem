@@ -144,8 +144,14 @@
   <data name="Id" xml:space="preserve">
     <value>Id</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="Place" xml:space="preserve">
     <value>Places</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
   </data>
   <data name="Route" xml:space="preserve">
     <value>Routes</value>

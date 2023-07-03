@@ -1,5 +1,4 @@
-﻿@using System.Globalization
-@{
+﻿@{
     ViewData["Title"] = "Користувачі";
 }
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -10,11 +9,11 @@
     <div class="tableheader">
         <div id="sidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a asp-controller="Route" asp-action="Index">Маршрути</a>
-            <a asp-controller="Train" asp-action="Index">Потяги</a>
-            <a asp-controller="TrainCar" asp-action="Index">Вагони</a>
-            <a asp-controller="Place" asp-action="Index">Місця</a>
-            <a asp-controller="Ticket" asp-action="Index">Квитки</a>
+            <a href="/Route/Index?@(new PagingParams())">Маршрути</a>
+            <a href="/Train/Index?@(new PagingParams())">Потяги</a>
+            <a href="/TrainCar/Index?@(new PagingParams())">Вагони</a>
+            <a href="/Place/Index?@(new PagingParams())">Місця</a>
+            <a href="/Ticket/Index?@(new PagingParams())">Квитки</a>
             <a asp-controller="User" asp-action="Index">Користувачі</a>
             <a asp-controller="AdminPanel" asp-action="Index">Адмін панель</a>
         </div>
