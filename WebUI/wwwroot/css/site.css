@@ -39,7 +39,7 @@
 .openbtn {
     font-size: 30px;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 0.75%;
     transition: 0.5s;
 }
 
@@ -121,7 +121,8 @@
 .header {
     display: flex;
     transition: 0.5s;
-    justify-content:space-between
+    justify-content:space-between;
+    margin-top: 0.50%
 }
 
 .languageSelect {
@@ -215,4 +216,66 @@
 
 .next:focus {
     box-shadow: none;
+}
+
+table {
+    margin-top: 0.75%;
+}
+
+table, tr, td {
+    border-top: 1px inset #914110;
+    border-bottom: 1px inset #914110;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.adminpanelholder {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.adminpaneltext {
+    width: 100%;
+}
+
+.myFooter {
+    position: absolute;
+    bottom: 0;
+    width: -webkit-fill-available;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    background-color: #E1A140;
+    transition: 0.5s;
+}
+
+.adsholer {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.adsimg {
+   margin-top: 10px;
+   margin-right: 5px;
+   margin-bottom: 3px;
+   margin-left: 5px;
+   height: 30px;
+   width: 30px;
+}
+
+.companyfootertexthandler {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3px;
+}
+
+.companyfootertext {
+    text-align: center;
+    color: #914110;
+    font-size: 14px;
+    font-weight: 500;
 }

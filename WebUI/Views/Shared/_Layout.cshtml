@@ -12,9 +12,9 @@
     <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebUI.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body style="background-color: #F3E3E2">
     <header id="header" class="header">
-        <div>
+        <div style="margin-left: 0.75%">
             <select id="languageSelect" class="languageSelect" onchange="changeLanguage()">
                 <option value="uk"
                         data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/125px-Flag_of_Ukraine.svg.png">@_localizer["Ukrainian"]</option>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div style="margin-right: 0.75%">
             @if (User.IsInRole("Admin"))
             {
                 <button class="btn btn-dark" onclick="@("window.location.href='" + Url.Action("Index", "AdminPanel") + "'")">@_localizer["AdminPanel"]</button>
@@ -52,6 +52,20 @@
             @RenderBody()
         </main>
     </div>
+
+    <footer id="footer" class="myFooter">
+        <div class="adsholer">
+            <a target=”_blank” href="https://www.instagram.com/capitan_soap/">
+                <img class="adsimg" src="https://www.pngmart.com/files/21/Instagram-Logo-PNG-Transparent.png" />
+            </a>
+            <a target=”_blank” href="https://t.me/johnburitto">
+                <img class="adsimg" src="https://upload.wikimedia.org/wikipedia/commons/8/83/Telegram_2019_Logo.svg" />
+            </a>
+        </div>
+        <div class="companyfootertexthandler">
+            <span class="companyfootertext">RailwayTicketsSystem - @DateTime.Today.Year</span>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

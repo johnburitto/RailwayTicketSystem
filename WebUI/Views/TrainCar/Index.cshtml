@@ -21,11 +21,11 @@
 
         <span id="open" class="openbtn" onclick="openNav()">&#9776;</span>
 
-        <button style="margin-right: 10px" 
+        <button style="margin-right: 0.75%" 
                 class="btn btn-success btn-lg btn-block" onclick="@("window.location.href='" + Url.Action("Create", "TrainCar") + "'")">@_localizer["Create"]</button>
     </div>
 
-    <table class ="table" style="align-content: center; text-align: center; vertical-align: middle;">
+    <table class="table" style="align-content: center; text-align: center; vertical-align: middle;">
         <thead>
             <tr>
                 <th>@_localizer["Id"]</th>
@@ -61,7 +61,7 @@
             }
         </tbody>
     </table>
-    <div style="font-size: 0;">
+    <div style="font-size: 0; margin-left: 0.75%;">
         <button onclick="@($"window.location.href='/{CultureInfo.CurrentCulture}/TrainCar/Index?{Model.PreviousPage()}'")" class="btn btn-secondary previous @previousDisabled">@_localizer["Previous"]</button>
         <button onclick="@($"window.location.href='/{CultureInfo.CurrentCulture}/TrainCar/Index?{Model.NextPage()}'")" class="btn btn-secondary next @nextDisabled">@_localizer["Next"]</button>
     </div>
@@ -74,6 +74,7 @@
         document.getElementById("sidenav").style.left = "0";
         document.getElementById("main").style.marginLeft = "250px";
         document.getElementById("header").style.marginLeft = "250px";
+        document.getElementById("footer").style.marginLeft = "250px";
         document.getElementById("open").style.opacity = "0";
     }
 
@@ -81,6 +82,7 @@
         document.getElementById("sidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
         document.getElementById("header").style.marginLeft = "0";
+        document.getElementById("footer").style.marginLeft = "0";
         document.getElementById("open").style.opacity = "1";
     }
 

@@ -120,6 +120,9 @@
   <data name="AdminPanel" xml:space="preserve">
     <value>Адмін панель</value>
   </data>
+  <data name="MainText" xml:space="preserve">
+    <value>Адмін панель RailwyTicketSystem</value>
+  </data>
   <data name="Place" xml:space="preserve">
     <value>Місця</value>
   </data>
@@ -140,5 +143,8 @@
   </data>
   <data name="User" xml:space="preserve">
     <value>Користувачі</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Вітаємо</value>
   </data>
 </root>
