@@ -4,6 +4,7 @@ namespace Core.Dtos.Read
 {
     public class TicketReadDto
     {
+        public string UserId { get; set; }
         public DateTime BookDate { get; set; }
         public int PlaceId { get; set; }
         public Place Place { get; set; }

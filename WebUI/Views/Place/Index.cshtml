@@ -1,5 +1,5 @@
 ﻿﻿@{
-    ViewData["Title"] = "Місця";
+    ViewData["Title"] = @_localizer["Title"];
     var previousDisabled = Model.HasPrevoius ? "" : "disabled";
     var nextDisabled = Model.HasNext ? "" : "disabled";
 }
@@ -29,6 +29,7 @@
         <thead>
             <tr>
                 <th>@_localizer["Id"]</th>
+                <th>@_localizer["Number"]</th>
                 <th>@_localizer["Price"]</th>
                 <th>@_localizer["PlaceType"]</th>
                 <th>@_localizer["IsAvaliable"]</th>
@@ -45,6 +46,7 @@
             {
                 <tr>
                     <td>@el.Id</td>
+                    <td>@el.Number</td>
                     <td>@el.Price</td>
                     <td>@el.PlaceType.ToString()</td>
                     <td>@(el.IsAvaliable == true ? "Доступний" : "Недоступний")</td>

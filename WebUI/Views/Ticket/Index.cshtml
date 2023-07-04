@@ -1,5 +1,5 @@
 ﻿﻿@{
-    ViewData["Title"] = "Квитки";
+    ViewData["Title"] = @_localizer["Title"];
     var previousDisabled = Model.HasPrevoius ? "" : "disabled";
     var nextDisabled = Model.HasNext ? "" : "disabled";
 }
@@ -29,6 +29,7 @@
         <thead>
             <tr>
                 <th>@_localizer["Id"]</th>
+                <th>@_localizer["UserId"]</th>
                 <th>@_localizer["BookDate"]</th>
                 <th>@_localizer["PlaceId"]</th>
                 <th>@_localizer["ActionUser"]</th>
@@ -43,6 +44,7 @@
             {
                 <tr>
                     <td>@el.Id</td>
+                    <td>@el.UserId</td>
                     <td>@el.BookDate</td>
                     <td>@el.PlaceId</td>
                     <td>@el.ActionUser</td>

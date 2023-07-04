@@ -85,21 +85,7 @@ function rendeUsers() {
     console.log(window.location.pathname);
 
     let arr: Array<User> = getUsers();
-    let table: string = 
-    `<table class="table" style="align-content: center; text-align: center; vertical-align: middle;">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Ім'я</th>
-                <th>Логін</th>
-                <th>Пароль</th>
-                <th>Пошта</th>
-                <th>Номер телефона</th>
-                <th>Ролі</th>
-                <th>Редагувати</th>
-                <th>Видалити</th>
-            </tr>
-        </thead>`;
+    let table: string = '';
     let tableBody: string = '';
 
     arr.map((user) => {
@@ -110,7 +96,7 @@ function rendeUsers() {
             <td>${user.id}</td>
             <td>${user.firstName} ${user.middleName} ${user.lastName}</td>
             <td>${user.userName}</td>
-            <td>${user.passwordHash}</td>
+            <td style="max-width: 250px; word-wrap: break-word;">${user.passwordHash}</td>
             <td>${user.email}</td>
             <td>${user.phoneNumber}</td>
             <td>
@@ -123,11 +109,13 @@ function rendeUsers() {
             <td>
                 <button class="btn btn-warning"
                         onclick="window.location.href='/${languageCode}/User/Update/${user.id}'">
-                     Редагувати
+                     ${languageCode === 'uk' ? "Редагувати" : languageCode === 'en' ? "Update" : ""}
                 </button>
             </td>
             <td>
-                <button class="btn btn-danger" onclick="deleteDialog('${user.id}')">Видалити</button>
+                <button class="btn btn-danger" onclick="deleteDialog('${user.id}')">
+                    ${languageCode === 'uk' ? "Видалити" : languageCode === 'en' ? "Delete" : ""}
+                </button>
             </td>
         </tr>`
     });
@@ -136,9 +124,8 @@ function rendeUsers() {
         `
             <tbody>
                 ${tableBody}
-            </body>
-
-        </table>`;
+            </tbody>
+        `;
 
     return document.write(table);
 }

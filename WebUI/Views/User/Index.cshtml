@@ -1,6 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "Користувачі";
+    ViewData["Title"] = @_localizer["Title"];
 }
+@inject IViewLocalizer _localizer
+
+ &#xFEFF; 
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/userservice.js"></script>
@@ -9,24 +13,41 @@
     <div class="tableheader">
         <div id="sidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="/Route/Index?@(new PagingParams())">Маршрути</a>
-            <a href="/Train/Index?@(new PagingParams())">Потяги</a>
-            <a href="/TrainCar/Index?@(new PagingParams())">Вагони</a>
-            <a href="/Place/Index?@(new PagingParams())">Місця</a>
-            <a href="/Ticket/Index?@(new PagingParams())">Квитки</a>
-            <a asp-controller="User" asp-action="Index">Користувачі</a>
-            <a asp-controller="AdminPanel" asp-action="Index">Адмін панель</a>
+            <a href="/@(CultureInfo.CurrentCulture)/Route/Index?@(new PagingParams())">@_localizer["Route"]</a>
+            <a href="/@(CultureInfo.CurrentCulture)/Train/Index?@(new PagingParams())">@_localizer["Train"]</a>
+            <a href="/@(CultureInfo.CurrentCulture)/TrainCar/Index?@(new PagingParams())">@_localizer["TrainCar"]</a>
+            <a href="/@(CultureInfo.CurrentCulture)/Place/Index?@(new PagingParams())">@_localizer["Place"]</a>
+            <a href="/@(CultureInfo.CurrentCulture)/Ticket/Index?@(new PagingParams())">@_localizer["Ticket"]</a>
+            <a asp-controller="User" asp-action="Index">@_localizer["User"]</a>
+            <a asp-controller="AdminPanel" asp-action="Index">@_localizer["AdminPanel"]</a>
         </div>
 
         <span id="open" class="openbtn" onclick="openNav()">&#9776;</span>
 
         <button style="margin-right: 10px"
                 class="btn btn-success btn-lg btn-block" onclick="@($"window.location.href='/{CultureInfo.CurrentCulture}/User/Create'")">
-            Створити
+            @_localizer["Create"]
         </button>
     </div>
 
-    <script type="text/javascript">rendeUsers();</script>
+    <table class="table" style="align-content: center; text-align: center; vertical-align: middle;">
+        <thead>
+            <tr>
+                <th>@_localizer["Id"]</th>
+                <th>@_localizer["Name"]</th>
+                <th>@_localizer["Username"]</th>
+                <th>@_localizer["Password"]</th>
+                <th>@_localizer["Email"]</th>
+                <th>@_localizer["PhoneNumber"]</th>
+                <th>@_localizer["Roles"]</th>
+                <th>@_localizer["Update"]</th>
+                <th>@_localizer["Delete"]</th>
+            </tr>
+        </thead>
+
+        <script type="text/javascript">rendeUsers();</script>
+
+    </table>
 </div>
 
 <script>

@@ -15,6 +15,10 @@ namespace Infrastructure.Configurations
             builder.Property(place => place.Price)
                    .IsRequired();
 
+            builder.Property(place => place.Number)
+                   .HasMaxLength(10)
+                   .IsRequired();
+
             builder.Property(place => place.PlaceType)
                    .IsRequired();
 

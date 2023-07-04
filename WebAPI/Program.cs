@@ -2,7 +2,6 @@ using IdentityModel;
 using Infrastructure.Data;
 using Infrastructure.Services.Impls;
 using Infrastructure.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

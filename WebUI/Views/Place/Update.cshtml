@@ -1,5 +1,5 @@
 ﻿﻿@{
-    ViewData["Title"] = "Редагувати місце";
+    ViewData["Title"] = @_localizer["Title"];
 }
 @model PlaceUpdateDto
 @inject IViewLocalizer _localizer
@@ -15,13 +15,18 @@
             <input class="forminput" asp-for="Id" readonly />
         </div>
         <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Number">@_localizer["Number"]</label>
+            <input class="forminput" asp-for="Number" />
+            <span class="frominputerrorhandler" asp-validation-for="Number"></span>
+        </div>
+        <div class="forminputhandler">
             <label class="forminputlabel" asp-for="Price">@_localizer["Price"]</label>
-            <input class="forminput" asp-for="Price" />
+            <input class="forminput" type="number" step="0.01" asp-for="Price" />
             <span class="frominputerrorhandler" asp-validation-for="Price"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="PlaceType"> @_localizer["PlaceType"]</label>
-            <select class="forminput" asp-for="@Model.PlaceType" asp-items="Html.GetEnumSelectList<PlaceType>()"></select>
+            <select class="forminput" asp-for="PlaceType" asp-items="Html.GetEnumSelectList<PlaceType>()"></select>
             <span class="frominputerrorhandler" asp-validation-for="PlaceType"></span>
         </div>
         <div class="forminputhandler">

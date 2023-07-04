@@ -5,6 +5,7 @@ namespace Core.Dtos.Read
     public class PlaceReadDto
     {
         public float Price { get; set; }
+        public string Number { get; set; }
         public PlaceType PlaceType { get; set; }
         public bool IsAvaliable { get; set; }
         public int TrainCarId { get; set; }

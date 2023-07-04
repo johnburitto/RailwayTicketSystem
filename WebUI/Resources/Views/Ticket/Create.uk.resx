@@ -129,4 +129,10 @@
   <data name="PlaceId" xml:space="preserve">
     <value>Id місця</value>
   </data>
+  <data name="Title" xml:space="preserve">
+    <value>Створити квиток</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>Id користувача</value>
+  </data>
 </root>

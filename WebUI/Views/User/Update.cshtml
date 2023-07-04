@@ -1,7 +1,8 @@
 ﻿﻿@{
-    ViewData["Title"] = "Редагувати місце";
+    ViewData["Title"] = @_localizer["Title"];
 }
 @model UserUpdateDto
+@inject IViewLocalizer _localizer
 @inject IConfiguration _conf
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -10,55 +11,55 @@
 
 <div class="formhandler">
     <div class="formheader">
-        <span>Форма редаугвання користувача з Id @Model.Id</span>
+        <span>@_localizer["FormName"] @Model.Id</span>
     </div>
 
     <form class="form" method="post" action="@(_conf["SecurityAPIUrl"] + "/api/User/update")">
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Id">Id</label>
+            <label class="forminputlabel" asp-for="Id">@_localizer["Id"]</label>
             <input class="forminput" asp-for="Id" readonly/>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="FirstName">Ім'я</label>
+            <label class="forminputlabel" asp-for="FirstName">@_localizer["FirstName"]</label>
             <input class="forminput" asp-for="FirstName" />
             <span class="frominputerrorhandler" asp-validation-for="FirstName"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="MiddleName">По батькові</label>
+            <label class="forminputlabel" asp-for="MiddleName">@_localizer["MiddleName"]</label>
             <input class="forminput" asp-for="MiddleName" />
             <span class="frominputerrorhandler" asp-validation-for="MiddleName"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="LastName">Прізвище</label>
+            <label class="forminputlabel" asp-for="LastName">@_localizer["LastName"]</label>
             <input class="forminput" asp-for="LastName" />
             <span class="frominputerrorhandler" asp-validation-for="LastName"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="UserName">Логін</label>
+            <label class="forminputlabel" asp-for="UserName">@_localizer["Username"]</label>
             <input class="forminput" asp-for="UserName" />
             <span class="frominputerrorhandler" asp-validation-for="UserName"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Password">Пароль</label>
+            <label class="forminputlabel" asp-for="Password">@_localizer["Password"]</label>
             <input class="forminput" asp-for="Password" />
             <span class="frominputerrorhandler" asp-validation-for="Password"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Email">Пошта</label>
+            <label class="forminputlabel" asp-for="Email">@_localizer["Email"]</label>
             <input class="forminput" asp-for="Email" />
             <span class="frominputerrorhandler" asp-validation-for="Email"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="PhoneNumber">Телефон</label>
+            <label class="forminputlabel" asp-for="PhoneNumber">@_localizer["PhoneNumber"]</label>
             <input class="forminput" asp-for="PhoneNumber" />
             <span class="frominputerrorhandler" asp-validation-for="PhoneNumber"></span>
         </div>
         <div class="forminputhandler">
-            <label class="forminputlabel" asp-for="Role">Роль</label>
+            <label class="forminputlabel" asp-for="Role">@_localizer["Role"]</label>
             <select class="forminput" asp-for="Role" asp-items="@Html.GetEnumSelectList<Authorization.Role>()"></select>
             <span class="frominputerrorhandler" asp-validation-for="Role"></span>
         </div>
-        <input class="btn btn-warning forminputbutton" type="submit" value="Редагувати" />
+        <input class="btn btn-warning forminputbutton" type="submit" value="@_localizer["Button"]" />
     </form>
 
     <script>fillUpdateForm('@Model.Id');</script>

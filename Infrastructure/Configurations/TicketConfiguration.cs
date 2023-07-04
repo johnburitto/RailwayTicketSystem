@@ -12,6 +12,10 @@ namespace Infrastructure.Configurations
                    .UseIdentityColumn()
                    .IsRequired();
 
+            builder.Property(ticket => ticket.UserId)
+                   .HasMaxLength(50)
+                   .IsRequired();
+
             builder.Property(ticket => ticket.BookDate)
                    .IsRequired();
 

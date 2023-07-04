@@ -121,7 +121,7 @@
     <value>Змінено</value>
   </data>
   <data name="AdminPanel" xml:space="preserve">
-    <value>Адмін панель</value>
+    <value>Панель адміністратора</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Створити</value>
@@ -132,32 +132,35 @@
   <data name="Delete" xml:space="preserve">
     <value>Видалити</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Пошта</value>
+  </data>
   <data name="Id" xml:space="preserve">
     <value>Id</value>
   </data>
-  <data name="Next" xml:space="preserve">
-    <value>Наступна</value>
+  <data name="Name" xml:space="preserve">
+    <value>Ім'я</value>
   </data>
-  <data name="Number" xml:space="preserve">
-    <value>Номер</value>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Номер телефону</value>
   </data>
   <data name="Place" xml:space="preserve">
     <value>Місця</value>
   </data>
-  <data name="Previous" xml:space="preserve">
-    <value>Попередня</value>
+  <data name="Roles" xml:space="preserve">
+    <value>Ролі</value>
   </data>
   <data name="Route" xml:space="preserve">
     <value>Маршрути</value>
-  </data>
-  <data name="RouteId" xml:space="preserve">
-    <value>Id маршруту</value>
   </data>
   <data name="Ticket" xml:space="preserve">
     <value>Квитки</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Потяги</value>
+    <value>Користувачі</value>
   </data>
   <data name="Train" xml:space="preserve">
     <value>Потяги</value>
@@ -173,5 +176,8 @@
   </data>
   <data name="User" xml:space="preserve">
     <value>Користувачі</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Логін</value>
   </data>
 </root>

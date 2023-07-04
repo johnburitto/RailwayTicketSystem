@@ -25,6 +25,13 @@ namespace Security.Services.Impls
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        public UserService(UserManager<User> manager, SecurityDbContext context, IMapper mapper)
+        {
+            _manager = manager ?? throw new ArgumentNullException(nameof(manager));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
+
         public async Task<List<User>> GetAllAsync()
         {
             return await _manager.Users.ToListAsync();

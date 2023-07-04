@@ -14,6 +14,12 @@ namespace Infrastructure.Services.Impls
         private readonly IMapper _mapper;
         private readonly IPlaceService _placeService;
 
+        public TicketService(AppDbContext context, IMapper mapper)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
+
         public TicketService(AppDbContext context, IMapper mapper, IPlaceService placeService)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));

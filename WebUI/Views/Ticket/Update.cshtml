@@ -1,5 +1,5 @@
 ﻿﻿@{
-    ViewData["Title"] = "Редагувати квиток";
+    ViewData["Title"] = @_localizer["Title"];
 }
 @model TicketUpdateDto
 @inject IViewLocalizer _localizer
@@ -13,6 +13,11 @@
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="Id">@_localizer["Id"]</label>
             <input class="forminput" asp-for="Id" value="@Model.Id" readonly />
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="UserId">@_localizer["UserId"]</label>
+            <input class="forminput" asp-for="UserId" value="@Model.UserId" />
+            <span class="frominputerrorhandler" asp-validation-for="UserId"></span>
         </div>
         <div class="forminputhandler">
             <label class="forminputlabel" asp-for="BookDate">@_localizer["BookDate"]</label>
