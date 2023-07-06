@@ -42,7 +42,17 @@ builder.Services.AddCors(options =>
 });
 
 // Add ASP Identity
-builder.Services.AddIdentity<User, IdentityRole>()
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password = new PasswordOptions
+    {
+        RequireDigit = true,
+        RequiredLength = 6,
+        RequireLowercase = true,
+        RequireUppercase = false,
+        RequireNonAlphanumeric = false
+    };
+})
     .AddEntityFrameworkStores<SecurityDbContext>()
     .AddDefaultTokenProviders();
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Security.Dto;
 using Security.Entities;
@@ -63,32 +64,41 @@ namespace Security.Controllers
         [HttpGet("delete/{id}")]
         public async Task<IActionResult> DeleteByIdAsync(string id)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture.ToString().Substring(0, 2);
+
             await _service.DeleteByIdAsync(id);
 
-            return Redirect($"{_conf["WebUIString"]}/User/Index");
+            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Index");
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> CreateAsync([FromForm] UserCreateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture.ToString().Substring(0, 2);
+
             if ((await _service.CreateAsync(dto)) == ResponseType.InternalError)
             {
-                return Redirect($"{_conf["WebUIString"]}/User/Create");
+                return Redirect($"{_conf["WebUIString"]}/{culture}/User/Create");
             }
             
 
-            return Redirect($"{_conf["WebUIString"]}/User/Index");
+            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Index");
         }
 
         [HttpPost("update")]
         public async Task<IActionResult> UpdateAsync([FromForm] UserUpdateDto dto)
         {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture.ToString().Substring(0, 2);
+
             if ((await _service.UpdateAsync(dto)) == ResponseType.InternalError)
             {
-                return Redirect($"{_conf["WebUIString"]}/User/Update/{dto.Id}");
+                return Redirect($"{_conf["WebUIString"]}/{culture}/User/Update/{dto.Id}");
             }
 
-            return Redirect($"{_conf["WebUIString"]}/User/Index");
+            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Index");
         }
     }
 }

@@ -19,6 +19,11 @@
     userName: string;
 }
 
+var roles: { [role: string]: string } = {
+    "User": "0",
+    "Admin": "1"
+}
+
 function getUsers() {
     let arr: Array<User>;
 
@@ -135,14 +140,16 @@ function deleteDialog(id) {
     let languageCode = window.location.pathname.split("/")[1];
 
     if (result) {
-        window.location.href = `https://localhost:7128/${languageCode}/api/User/delete/${id}`;
+        window.location.href = `https://localhost:7128/api/User/delete/${id}`;
     }
 }
 
 function fillUpdateForm(id) {
     let user: User = getUserById(id);
+    let userRoles: string[] = getUserRoles(user.id);
 
-    console.log("Hello");
+    console.log(userRoles[0]);
+    console.log(roles[userRoles[0]]);
 
     (document.getElementById("FirstName") as HTMLInputElement).value = user.firstName;
     (document.getElementById("MiddleName") as HTMLInputElement).value = user.middleName;
@@ -150,4 +157,5 @@ function fillUpdateForm(id) {
     (document.getElementById("UserName") as HTMLInputElement).value = user.userName;
     (document.getElementById("Email") as HTMLInputElement).value = user.email;
     (document.getElementById("PhoneNumber") as HTMLInputElement).value = user.phoneNumber;
+    (document.getElementById("Role") as HTMLSelectElement).value = roles[userRoles[0]];
 } 

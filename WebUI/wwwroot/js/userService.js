@@ -1,3 +1,7 @@
+var roles = {
+    "User": "0",
+    "Admin": "1"
+};
 function getUsers() {
     var arr;
     $.ajax({
@@ -70,17 +74,20 @@ function deleteDialog(id) {
     var result = confirm("Ви впевнені в тому, що зочете видалити запис?");
     var languageCode = window.location.pathname.split("/")[1];
     if (result) {
-        window.location.href = "https://localhost:7128/".concat(languageCode, "/api/User/delete/").concat(id);
+        window.location.href = "https://localhost:7128/api/User/delete/".concat(id);
     }
 }
 function fillUpdateForm(id) {
     var user = getUserById(id);
-    console.log("Hello");
+    var userRoles = getUserRoles(user.id);
+    console.log(userRoles[0]);
+    console.log(roles[userRoles[0]]);
     document.getElementById("FirstName").value = user.firstName;
     document.getElementById("MiddleName").value = user.middleName;
     document.getElementById("LastName").value = user.lastName;
     document.getElementById("UserName").value = user.userName;
     document.getElementById("Email").value = user.email;
     document.getElementById("PhoneNumber").value = user.phoneNumber;
+    document.getElementById("Role").value = roles[userRoles[0]];
 }
 //# sourceMappingURL=userService.js.map
