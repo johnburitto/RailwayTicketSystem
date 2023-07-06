@@ -279,3 +279,11 @@ table, tr, td {
     font-size: 14px;
     font-weight: 500;
 }
+
+.personalinfohandler {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+

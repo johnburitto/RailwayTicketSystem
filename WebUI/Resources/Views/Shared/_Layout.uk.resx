@@ -129,6 +129,9 @@
   <data name="Logout" xml:space="preserve">
     <value>Вийти</value>
   </data>
+  <data name="PersonalCabinet" xml:space="preserve">
+    <value>Особистий кабінет</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Зареєструватися</value>
   </data>

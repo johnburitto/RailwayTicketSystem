@@ -1,11 +1,11 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "noImplicitAny": false,
-    "noEmitOnError": true,
-    "removeComments": false,
-    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "ES6",
     "target": "es5",
+    "allowJs": true,
+    "moduleResolution": "node",
     "outDir": "wwwroot/js"
   },
   "include": [

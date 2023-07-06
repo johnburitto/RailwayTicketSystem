@@ -13,7 +13,7 @@ namespace WebUI.Controllers
             var culture = requestCulture?.RequestCulture.Culture;
 
             return User.IsInRole("Admin") ? Redirect($"/{culture}/AdminPanel/Index") :
-                User.IsInRole("User") ? Redirect($"/{culture}/Main/Index") : Redirect($"/{culture}/Home/Index");
+                User.IsInRole("User") ? Redirect($"/{culture}/Home/Index") : Redirect($"/{culture}/Home/Index");
         }
     }
 }

@@ -121,7 +121,7 @@
     <value>Admin panel</value>
   </data>
   <data name="MainText" xml:space="preserve">
-    <value>RailwyTicketSystem admin panel</value>
+    <value>RailwayTicketSystem admin panel</value>
   </data>
   <data name="Place" xml:space="preserve">
     <value>Places</value>

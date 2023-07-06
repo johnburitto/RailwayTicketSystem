@@ -44,7 +44,7 @@ function getUsers() {
     return arr;
 }
 
-function getUserById(id) {
+function getUserById(id: string) {
     let user: User;
 
     $.ajax({
@@ -64,7 +64,7 @@ function getUserById(id) {
     return user;
 }
 
-function getUserRoles(id) {
+function getUserRoles(id: string) {
     let roles: Array<string>
 
     $.ajax({
@@ -135,7 +135,7 @@ function rendeUsers() {
     return document.write(table);
 }
 
-function deleteDialog(id) {
+function deleteDialog(id: string) {
     var result = confirm("Ви впевнені в тому, що зочете видалити запис?");
     let languageCode = window.location.pathname.split("/")[1];
 
@@ -144,7 +144,7 @@ function deleteDialog(id) {
     }
 }
 
-function fillUpdateForm(id) {
+function fillUpdateForm(id: string) {
     let user: User = getUserById(id);
     let userRoles: string[] = getUserRoles(user.id);
 
@@ -159,3 +159,5 @@ function fillUpdateForm(id) {
     (document.getElementById("PhoneNumber") as HTMLInputElement).value = user.phoneNumber;
     (document.getElementById("Role") as HTMLSelectElement).value = roles[userRoles[0]];
 } 
+
+export default getUserById;

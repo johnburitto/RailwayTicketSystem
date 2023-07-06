@@ -38,6 +38,7 @@
             }
             else if (User.IsInRole("User"))
             {
+                <button class="btn btn-dark" onclick="@($"window.location.href='" + Url.Action("Index", "PersonalCabinet") + "'")">@_localizer["PersonalCabinet"]</button>
                 <button class="btn btn-dark" onclick="@($"window.location.href='{_conf["SecurityAPIUrl"]}/{CultureInfo.CurrentCulture}/Auth/Logout'")">@_localizer["Logout"]</button>
             }
             else
