@@ -1,0 +1,57 @@
+﻿﻿@{
+    ViewData["Title"] = @_localizer["Title"];
+}
+@model UserRegistrationDto
+@inject IViewLocalizer _localizer
+@inject IConfiguration _conf
+
+<div class="formhandler">
+    <div class="formheader">
+        <span>@_localizer["FormName"]</span>
+    </div>
+
+    <form class="form" method="post" action="@(_conf["SecurityAPIUrl"] + "/api/User/register-ui")">
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="FirstName">@_localizer["FirstName"]</label>
+            <input class="forminput" asp-for="FirstName" />
+            <span class="frominputerrorhandler" asp-validation-for="FirstName"></span>
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="MiddleName">@_localizer["MiddleName"]</label>
+            <input class="forminput" asp-for="MiddleName" />
+            <span class="frominputerrorhandler" asp-validation-for="MiddleName"></span>
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="LastName">@_localizer["LastName"]</label>
+            <input class="forminput" asp-for="LastName" />
+            <span class="frominputerrorhandler" asp-validation-for="LastName"></span>
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="UserName">@_localizer["Username"]</label>
+            <input class="forminput" asp-for="UserName" />
+            <span class="frominputerrorhandler" asp-validation-for="UserName"></span>
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Password">@_localizer["Password"]</label>
+            <input class="forminput" asp-for="Password" />
+            <span class="frominputerrorhandler" asp-validation-for="Password"></span>
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="Email">@_localizer["Email"]</label>
+            <input class="forminput" asp-for="Email" />
+            <span class="frominputerrorhandler" asp-validation-for="Email"></span>
+        </div>
+        <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="PhoneNumber">@_localizer["PhoneNumber"]</label>
+            <input class="forminput" asp-for="PhoneNumber" />
+            <span class="frominputerrorhandler" asp-validation-for="PhoneNumber"></span>
+        </div>
+        <input class="btn btn-success forminputbutton" type="submit" value="@_localizer["Button"]" />
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

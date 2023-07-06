@@ -19,5 +19,10 @@ namespace WebUI.Controllers
         {
             return View(new UserUpdateDto { Id = id });
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
     }
 }

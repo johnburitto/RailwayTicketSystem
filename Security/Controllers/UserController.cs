@@ -78,13 +78,17 @@ namespace Security.Controllers
             var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
             var culture = requestCulture?.RequestCulture.Culture.ToString().Substring(0, 2);
 
-            if ((await _service.CreateAsync(dto)) == ResponseType.InternalError)
+            if (ModelState.IsValid)
             {
-                return Redirect($"{_conf["WebUIString"]}/{culture}/User/Create");
-            }
-            
+                if ((await _service.CreateAsync(dto)) == ResponseType.InternalError)
+                {
+                    return Redirect($"{_conf["WebUIString"]}/{culture}/User/Create");
+                }
 
-            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Index");
+                return Redirect($"{_conf["WebUIString"]}/{culture}/User/Index");
+            }
+
+            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Create");
         }
 
         [HttpPost("update")]
@@ -93,12 +97,36 @@ namespace Security.Controllers
             var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
             var culture = requestCulture?.RequestCulture.Culture.ToString().Substring(0, 2);
 
-            if ((await _service.UpdateAsync(dto)) == ResponseType.InternalError)
+            if (ModelState.IsValid)
             {
-                return Redirect($"{_conf["WebUIString"]}/{culture}/User/Update/{dto.Id}");
+                if ((await _service.UpdateAsync(dto)) == ResponseType.InternalError)
+                {
+                    return Redirect($"{_conf["WebUIString"]}/{culture}/User/Update/{dto.Id}");
+                }
+
+                return Redirect($"{_conf["WebUIString"]}/{culture}/User/Index");
             }
 
-            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Index");
+            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Update/{dto.Id}");
+        }
+
+        [HttpPost("register-ui")]
+        public async Task<IActionResult> RegisterUIAsync([FromForm] UserRegistrationDto dto)
+        {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = requestCulture?.RequestCulture.Culture.ToString().Substring(0, 2);
+
+            if (ModelState.IsValid)
+            {
+                if ((await _service.RegisterAsync(dto)) == ResponseType.InternalError)
+                {
+                    return Redirect($"{_conf["WebUIString"]}/{culture}/User/Register");
+                }
+
+                return Redirect($"{_conf["WebUIString"]}/{culture}/Redirect/LoginPoint");
+            }
+
+            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Register");
         }
     }
 }
