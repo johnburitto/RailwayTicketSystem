@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Security.Dto;
 using Security.Entities;
 using Security.Services.Interfaces;
+using System.Security.Claims;
 
 namespace Security.Controllers
 {
@@ -104,7 +105,8 @@ namespace Security.Controllers
                     return Redirect($"{_conf["WebUIString"]}/{culture}/User/Update/{dto.Id}");
                 }
 
-                return Redirect($"{_conf["WebUIString"]}/{culture}/User/Index");
+                return User.IsInRole("Admin") ? Redirect($"{_conf["WebUIString"]}/{culture}/User/Index") :
+                    Redirect($"{_conf["WebUIString"]}/{culture}/PersonalCabinet/Index/{User.FindFirstValue(ClaimTypes.NameIdentifier)}");
             }
 
             return Redirect($"{_conf["WebUIString"]}/{culture}/User/Update/{dto.Id}");

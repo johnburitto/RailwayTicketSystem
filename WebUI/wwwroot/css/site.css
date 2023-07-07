@@ -284,6 +284,18 @@ table, tr, td {
     display: flex;
     flex-wrap: wrap;
     width: 50%;
+    margin-top: 0.75%;
 }
 
+.personalinfoheader {
+    width: 100%;
+    color: #532200;
+    font-weight: 900;
+    font-size: 42px;
+}
 
+.personalinfodata {
+    color: #E1A140;
+    font-weight: 600;
+    font-size: 28px;
+}

@@ -159,5 +159,3 @@ function fillUpdateForm(id: string) {
     (document.getElementById("PhoneNumber") as HTMLInputElement).value = user.phoneNumber;
     (document.getElementById("Role") as HTMLSelectElement).value = roles[userRoles[0]];
 } 
-
-export default getUserById;

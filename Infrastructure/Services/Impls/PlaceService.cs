@@ -78,6 +78,5 @@ namespace Infrastructure.Services.Impls
             _context.Update(place);
             await _context.SaveChangesAsync();
         }
-
     }
 }

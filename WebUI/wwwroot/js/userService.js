@@ -90,4 +90,3 @@ function fillUpdateForm(id) {
     document.getElementById("PhoneNumber").value = user.phoneNumber;
     document.getElementById("Role").value = roles[userRoles[0]];
 }
-export default getUserById;

@@ -5,9 +5,10 @@
 }
 @inject IViewLocalizer _localizer
 
-@*<script>var exports = {};</script>*@
-<script type="module" src="~/js/personalcabinetservice.js"></script>
-<script type="module" src="~/js/personalcabinetservice.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/personalcabinetservice.js"></script>
+<script src="~/js/personalcabinetservice.min.js"></script>
 
 <div>
     <div>
@@ -17,31 +18,37 @@
 
         <span id="open" class="openbtn" onclick="openNav()">&#9776;</span>
     </div>
-    <div class="personalinfohandler" style="width: -webkit-fill-available; ">
+    <div class="personalinfohandler" style="width: -webkit-fill-available; margin-left: 0.75%;">
         <div class="personalinfohandler">
-            <span>@_localizer["FirstName"]</span>
-            <span id="FirstName"></span>
+            <span class="personalinfoheader">@_localizer["FirstName"]</span>
+            <span class="personalinfodata" id="FirstName"></span>
         </div>
         <div class="personalinfohandler">
-            <span>@_localizer["MiddleName"]</span>
-            <span id="MiddleName"></span>
+            <span class="personalinfoheader">@_localizer["MiddleName"]</span>
+            <span class="personalinfodata" id="MiddleName"></span>
         </div>
         <div class="personalinfohandler">
-            <span>@_localizer["LastName"]</span>
-            <span id="LastName"></span>
+            <span class="personalinfoheader">@_localizer["LastName"]</span>
+            <span class="personalinfodata" id="LastName"></span>
         </div>
         <div class="personalinfohandler">
-            <span>@_localizer["Username"]</span>
-            <span id="UserName"></span>
+            <span class="personalinfoheader">@_localizer["Username"]</span>
+            <span class="personalinfodata" id="UserName"></span>
         </div>
         <div class="personalinfohandler">
-            <span>@_localizer["Email"]</span>
-            <span id="Email"></span>
+            <span class="personalinfoheader">@_localizer["Email"]</span>
+            <span class="personalinfodata" id="Email"></span>
         </div>
         <div class="personalinfohandler">
-            <span>@_localizer["PhoneNumber"]</span>
-            <span id="PhoneNumber"></span>
+            <span class="personalinfoheader">@_localizer["PhoneNumber"]</span>
+            <span class="personalinfodata" id="PhoneNumber"></span>
         </div>
+    </div>
+    <div style="margin-left: 0.75%; margin-top: 0.75%">
+        <button class="btn btn-warning"
+                onclick="window.location.href='/@(CultureInfo.CurrentCulture)/User/Update/@userId'">
+            @_localizer["Button"]
+        </button>
     </div>
 
     <script type="text/javascript">generateUserPersonalCabinetInfo('@userId');</script>
