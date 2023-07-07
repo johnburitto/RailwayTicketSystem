@@ -1,14 +1,15 @@
-﻿using AutoMapper;
-using Core.Dtos.Create;
+﻿using Core.Dtos.Create;
 using Core.Dtos.Update;
 using Core.Entities;
 using Infrastructure.Dtos;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
+    [EnableCors("CORSPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class RouteController : ControllerBase
@@ -100,13 +101,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("search")]
-        [Authorize("read")]
         [ProducesResponseType(typeof(List<Core.Entities.Route>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<List<Core.Entities.Route>>> SearchRoutesAsync([FromBody] SearchRoutesDto dto)
         {
+            Console.WriteLine($"\n\n\n\n\n\n\n\n\n{dto.FromCity}\n\n\n\n\n\n\n\n\n");
+            Console.WriteLine($"\n\n\n\n\n\n\n\n\n{dto.ToCity}\n\n\n\n\n\n\n\n\n");
+            Console.WriteLine($"\n\n\n\n\n\n\n\n\n{dto.DepartureDate}\n\n\n\n\n\n\n\n\n");
+
             return Ok(await _service.SearchRoutesAsync(dto));
         }
     }

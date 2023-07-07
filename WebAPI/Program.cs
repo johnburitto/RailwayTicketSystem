@@ -32,6 +32,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQLConnection"));
 });
 
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "CORSPolicy", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 // Dependencies
 builder.Services.AddScoped<ITrainService, TrainService>();
 builder.Services.AddScoped<IRouteService, RouteService>();
@@ -116,6 +127,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();

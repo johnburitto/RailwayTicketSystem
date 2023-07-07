@@ -1,8 +1,31 @@
-﻿﻿@{
+﻿@using Infrastructure.Dtos
+@{
     ViewData["Title"] = @_localizer["Title"];
 }
 @inject IViewLocalizer _localizer
+@model SearchRoutesDto
+
+<script>
+    function getForm() {
+        return document.getElementById("searchform");
+    }
+</script>
+<script src="~/js/searchservice.js?v=1.5"></script>
 
 <div>
-
+    <div class="searholder">
+        <form id="searchform" class="searchform" action="javascript:displaySearched(getForm());">
+            <div class="search">
+                <label class="searchlabel" asp-for="FromCity">@_localizer["FromCity"]</label>
+                <input class="searchinput" asp-for="FromCity" />
+                <label class="searchlabel" asp-for="ToCity">@_localizer["ToCity"]</label>
+                <input class="searchinput" asp-for="ToCity" />
+                <input class="searchinput" type="date" asp-for="DepartureDate" />
+            </div>
+            <input class="btn btn-success searchbutton" type="submit" value="@_localizer["Button"]" />
+        </form>
+    </div>
+    <div id="resultholder" class="resultholder">
+        *Place holder*
+    </div>
 </div>
