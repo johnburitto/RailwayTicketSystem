@@ -40,6 +40,7 @@ namespace Infrastructure.Services.Impls
 
         public async Task DeleteAsync(Ticket entity)
         {
+            await _placeService.EnablePlaceAsync(entity.PlaceId);
             _context.Tickets.Remove(entity);
             await _context.SaveChangesAsync();
         }
