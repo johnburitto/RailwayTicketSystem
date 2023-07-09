@@ -30,6 +30,7 @@
             <tr>
                 <th>@_localizer["Id"]</th>
                 <th>@_localizer["Number"]</th>
+                <th>@_localizer["TrainCarType"]</th>
                 <th>@_localizer["TrainId"]</th>
                 <th>@_localizer["ActionUser"]</th>
                 <th>@_localizer["CreatedAt"]</th>
@@ -44,6 +45,7 @@
                 <tr>
                     <td>@el.Id</td>
                     <td>@el.Number</td>
+                    <td>@el.TrainCarType</td>
                     <td>@el.TrainId</td>
                     <td>@el.ActionUser</td>
                     <td>@el.CreatedAt</td>
@@ -91,7 +93,7 @@
         let languageCode = window.location.pathname.split("/")[1];
 
         if (result) {
-            window.location.href = `/${languageCode}/Place/Delete/${id}`;
+            window.location.href = `/${languageCode}/TrainCar/Delete/${id}`;
         }
     }
 </script>

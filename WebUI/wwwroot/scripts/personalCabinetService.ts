@@ -19,7 +19,7 @@
     userName: string;
 }
 
-function getUserById(id: string) {
+function getUserByIdForPersonalCabinet(id: string) {
     let user: User;
 
     $.ajax({
@@ -40,7 +40,7 @@ function getUserById(id: string) {
 }
 
 function generateUserPersonalCabinetInfo(id: string) {
-    var user = getUserById(id);
+    var user = getUserByIdForPersonalCabinet(id);
 
     document.getElementById("FirstName").textContent = user.firstName;
     document.getElementById("MiddleName").textContent = user.middleName;

@@ -1,4 +1,4 @@
-function getUserById(id) {
+function getUserByIdForPersonalCabinet(id) {
     var user;
     $.ajax({
         type: "GET",
@@ -16,7 +16,7 @@ function getUserById(id) {
     return user;
 }
 function generateUserPersonalCabinetInfo(id) {
-    var user = getUserById(id);
+    var user = getUserByIdForPersonalCabinet(id);
     document.getElementById("FirstName").textContent = user.firstName;
     document.getElementById("MiddleName").textContent = user.middleName;
     document.getElementById("LastName").textContent = user.lastName;
@@ -24,3 +24,4 @@ function generateUserPersonalCabinetInfo(id) {
     document.getElementById("Email").textContent = user.email;
     document.getElementById("PhoneNumber").textContent = user.phoneNumber;
 }
+//# sourceMappingURL=personalCabinetService.js.map

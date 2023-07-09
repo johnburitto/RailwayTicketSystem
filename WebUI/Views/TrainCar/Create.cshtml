@@ -16,6 +16,11 @@
             <span class="frominputerrorhandler" asp-validation-for="Number"></span>
         </div>
         <div class="forminputhandler">
+            <label class="forminputlabel" asp-for="TrainCarType">@_localizer["TrainCarType"]</label>
+            <select class="forminput" asp-for="TrainCarType" asp-items="Html.GetEnumSelectList<TrainCarType>()"></select>
+            <span class="frominputerrorhandler" asp-validation-for="TrainCarType"></span>
+        </div>
+        <div class="forminputhandler">
             <label class="forminputlabel" asp-for="TrainId">@_localizer["TrainId"]</label>
             <input class="forminput" asp-for="TrainId" />
             <span class="frominputerrorhandler" asp-validation-for="TrainId"></span>

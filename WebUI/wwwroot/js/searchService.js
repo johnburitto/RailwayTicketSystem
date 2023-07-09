@@ -59,3 +59,4 @@ function displaySearched(form) {
     list += "</ul>";
     document.getElementById("resultholder").innerHTML = list;
 }
+//# sourceMappingURL=searchService.js.map

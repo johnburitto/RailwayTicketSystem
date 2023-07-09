@@ -162,6 +162,9 @@
   <data name="TrainCar" xml:space="preserve">
     <value>Train cars</value>
   </data>
+  <data name="TrainCarType" xml:space="preserve">
+    <value>Train car type</value>
+  </data>
   <data name="TrainId" xml:space="preserve">
     <value>Train id</value>
   </data>

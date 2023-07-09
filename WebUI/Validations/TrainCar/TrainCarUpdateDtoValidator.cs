@@ -14,6 +14,9 @@ namespace WebUI.Validations.TrainCar
                 .WithMessage("Номер вагона повинен містити не менше 1 символу")
                 .MaximumLength(10)
                 .WithMessage("Номер вагона повинен містити не більше 10 символів");
+            RuleFor(place => place.TrainCarType)
+                .NotNull()
+                .IsInEnum();
             RuleFor(trainCar => trainCar.TrainId)
                 .NotNull()
                 .NotEmpty()

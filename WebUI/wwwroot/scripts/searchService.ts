@@ -30,6 +30,7 @@ interface Train {
 interface TrainCar {
     id: number;
     number: string;
+    trainCarType: number;
     trainId: number;
     places: Array<Place>;
 }

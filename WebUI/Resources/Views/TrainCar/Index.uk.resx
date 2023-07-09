@@ -162,6 +162,9 @@
   <data name="TrainCar" xml:space="preserve">
     <value>Вагони</value>
   </data>
+  <data name="TrainCarType" xml:space="preserve">
+    <value>Тип вагона</value>
+  </data>
   <data name="TrainId" xml:space="preserve">
     <value>Id потяга</value>
   </data>
