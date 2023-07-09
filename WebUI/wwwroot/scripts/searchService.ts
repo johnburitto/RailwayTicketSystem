@@ -1,4 +1,10 @@
-﻿interface SearchDto {
+﻿interface GetTokenDto {
+    clientId: string;
+    clientSecret: string;
+    scope: string;
+}
+
+interface SearchDto {
     fromCity: string;
     toCity: string;
     departureDate: Date;
@@ -45,8 +51,33 @@ function convertFormToDto(form: HTMLFormElement): SearchDto {
     };
 }
 
+function getToken(dto: GetTokenDto) {
+    let token: string;
+
+    $.ajax({
+        type: "POST",
+        async: false,
+        url: "https://localhost:7250/api/Auth/token",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(dto),
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (result) {
+            token = result;
+        }
+    });
+
+    return token;
+}
+
 function searchRoutes(dto: SearchDto) {
     let arr: Array<Route>;
+    let token: string = getToken({
+        clientId: `m2m.client`,
+        clientSecret: `SuperSecretPassword`,
+        scope: `railwaytickets.read`
+    });
 
     $.ajax({
         type: "POST",
@@ -55,6 +86,9 @@ function searchRoutes(dto: SearchDto) {
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(dto),
         dataType: 'json',
+        headers: {
+            "Authorization": "Bearer " + token
+        },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
@@ -72,7 +106,7 @@ function displaySearched(form: HTMLFormElement) {
     let dto: SearchDto = convertFormToDto(form);
     var data: Array<Route> = searchRoutes(dto);
     var list: string = `
-        <ul>
+        <ul style="list-style-type: none; padding: 0; margin: 0;">
     `
     data.map((route) => {
         list += `<li>${route.fromCity} - ${route.toCity} | ${route.travelTime}</li>`

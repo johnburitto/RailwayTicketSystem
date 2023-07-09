@@ -1,10 +1,12 @@
 ﻿using IdentityModel.Client;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Dtos;
 
 namespace WebAPI.Controllers
 {
+    [EnableCors("CORSPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
