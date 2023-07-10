@@ -13,7 +13,7 @@
 
     public enum TrainCarType
     {
-        Compartment,
+        Compratment,
         Public,
     }
 }

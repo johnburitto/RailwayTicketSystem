@@ -3,10 +3,12 @@ using Core.Dtos.Update;
 using Core.Entities;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
+    [EnableCors("CORSPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class PlaceController : ControllerBase
@@ -95,6 +97,28 @@ namespace WebAPI.Controllers
             await _service.DeleteAsync(palce);
 
             return Ok();
+        }
+
+        [HttpGet("{trainCarId}/{placeType}/count")]
+        [Authorize("read")]
+        [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<int>> GetNumberOfPlacesInTrainCarByPlaceTypeAsync(int trainCarId, PlaceType placeType)
+        {
+            return await _service.GetNumberOfPlacesInTrainCarByPlaceTypeAsync(trainCarId, placeType);
+        }
+
+        [HttpGet("{trainCarId}/places")]
+        [Authorize("read")]
+        [ProducesResponseType(typeof(List<Place>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<Place>>> GetPlacesOfTrainCarAsync(int trainCarId)
+        {
+            return await _service.GetPlacesOfTrainCarAsync(trainCarId);
         }
     }
 }

@@ -38,6 +38,18 @@ namespace Infrastructure.Services.Impls
             return ticket;
         }
 
+        public async Task<List<Ticket>> CreateAsync(List<TicketCreateDto> dtos)
+        {
+            var tickets = new List<Ticket>();
+
+            foreach (var el in dtos)
+            {
+                tickets.Add(await CreateAsync(el));
+            }
+
+            return tickets;
+        }
+
         public async Task DeleteAsync(Ticket entity)
         {
             await _placeService.EnablePlaceAsync(entity.PlaceId);

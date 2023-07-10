@@ -8,5 +8,7 @@ namespace Infrastructure.Services.Interfaces
     {
         public Task EnablePlaceAsync(int id);
         public Task DisablePlaceAsync(int id);
+        public Task<int> GetNumberOfPlacesInTrainCarByPlaceTypeAsync(int trainCarId, PlaceType placetype);
+        public Task<List<Place>> GetPlacesOfTrainCarAsync(int trainCarId);
     }
 }

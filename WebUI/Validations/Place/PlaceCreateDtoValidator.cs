@@ -9,8 +9,8 @@ namespace WebUI.Validations.Place
         {
             RuleFor(place => place.Number)
                 .NotNull()
-                .MaximumLength(10)
-                .WithMessage("Номер місця не може перевищувати довжину в 10 символів");
+                .GreaterThan(0)
+                .WithMessage("Номер місця не може бути від'ємним або дорівнювати 0");
             RuleFor(place => place.Price)
                 .NotNull()
                 .GreaterThanOrEqualTo(0)

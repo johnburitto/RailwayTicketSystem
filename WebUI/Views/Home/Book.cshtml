@@ -1,0 +1,48 @@
+﻿@using Core.Dtos.Read;
+@using System.Security.Claims;
+@{
+    ViewData["Title"] = @_localizer["Title"];
+    var userId = @User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+@inject IViewLocalizer _localizer
+@model TrainReadDto
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/bookingservice.js?v=1.9"></script>
+
+<div class="bookholder">
+    <div>
+        <fieldset class="traincarsholder">
+            @foreach (var el in Model.TrainCars)
+            {
+                <div style="display: flex; align-items: center;">
+                    <input type="radio" id="@el.Number" name="traincar" value="@el.Number" onchange="generateTrainCarOverview(@el.Id, `@el.TrainCarType`, `@userId`)" />
+                    <label for="@el.Number">@el.Number</label>
+                </div>
+            }
+        </fieldset>
+    </div>
+    <div id="placesholder" class="placesholder">
+        
+    </div>
+    <div id="bookinginfo" class="bookinginfo">
+        <ul style="list-style-type: none;margin: 0;padding: 0; width: 20%;">
+            <li style="display: flex; justify-content: space-between; color: #914110; font-size: 20px;">
+                <span style="font-weight: 500">@_localizer["TotalNumber"]: </span><span id="totalnumber"></span>
+            </li>
+            <li style="display: flex; justify-content: space-between; color: #914110; font-size: 20px;">
+                <span style="font-weight: 500">@_localizer["TotalCost"]: </span><span id="totalcost"></span>
+            </li>
+            <li style="display: flex; justify-content: space-between; margin-top: 3%;">
+                <button class="btn btn-warning" onclick="bookTickets()">@_localizer["ButtonBook"]</button>
+                <button class="btn btn-danger" onclick="clearBookedList()">@_localizer["ButtonClear"]</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    $("#placesholder").toggle();
+    $("#bookinginfo").toggle();
+</script>

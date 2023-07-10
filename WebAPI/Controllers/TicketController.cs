@@ -3,10 +3,12 @@ using Core.Dtos.Update;
 using Core.Entities;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
+    [EnableCors("CORSPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class TicketController : ControllerBase
@@ -54,6 +56,17 @@ namespace WebAPI.Controllers
             var ticket = await _service.CreateAsync(dto);
 
             return CreatedAtRoute("GetTicketById", new { ticket.Id }, ticket);
+        }
+
+        [HttpPost("range")]
+        [Authorize("write")]
+        [ProducesResponseType(typeof(List<Ticket>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<Ticket>>> CreateRangeAsync([FromBody] List<TicketCreateDto> dto)
+        {
+            return Ok(await _service.CreateAsync(dto));
         }
 
         [HttpPut("{id}")]

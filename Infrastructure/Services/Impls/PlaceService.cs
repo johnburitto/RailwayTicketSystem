@@ -87,5 +87,17 @@ namespace Infrastructure.Services.Impls
             _context.Update(place);
             await _context.SaveChangesAsync();
         }
+
+        public Task<int> GetNumberOfPlacesInTrainCarByPlaceTypeAsync(int trainCarId, PlaceType placetype)
+        {
+            return Task.FromResult(_context.Places.Where(place => place.TrainCarId == trainCarId && 
+                                                                  place.PlaceType == placetype &&
+                                                                  place.IsAvaliable).Count());
+        }
+
+        public async Task<List<Place>> GetPlacesOfTrainCarAsync(int trainCarId)
+        {
+            return await _context.Places.Where(place => place.TrainCarId == trainCarId).ToListAsync();
+        }
     }
 }
