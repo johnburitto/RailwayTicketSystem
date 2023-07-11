@@ -1,9 +1,11 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using HealthChecks.UI.Client;
 using Infrastructure.Data;
 using Infrastructure.Services.Impls;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Globalization;
@@ -81,6 +83,9 @@ builder.Services.AddAuthentication(options =>
         options.SaveTokens = true;
     });
 
+// Add HealthChecks
+builder.Services.AddHealthChecks();
+
 // Configure route options
 builder.Services.Configure<RouteOptions>(options =>
 {
@@ -127,6 +132,13 @@ app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Map HealthChecks
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+
 
 app.MapControllerRoute(
     name: "LocalizedDefault",

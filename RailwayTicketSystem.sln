@@ -20,9 +20,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security", "Security\Securi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailwayTicketSystemTests", "RailwayTicketSystemTests\RailwayTicketSystemTests.csproj", "{6BD17F51-DA27-47A8-B546-AF3337C52B4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{14E0BAB9-571C-4B5B-AB00-24C0EE198DBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{14E0BAB9-571C-4B5B-AB00-24C0EE198DBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{362FD671-38DA-4810-9CE9-A5346092562B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions", "Extensions\Extensions.csproj", "{362FD671-38DA-4810-9CE9-A5346092562B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthChecks", "HealthChecks\HealthChecks.csproj", "{5BF466AE-6EDD-4D8D-8B24-A9DF12BE698A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +64,10 @@ Global
 		{362FD671-38DA-4810-9CE9-A5346092562B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{362FD671-38DA-4810-9CE9-A5346092562B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{362FD671-38DA-4810-9CE9-A5346092562B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF466AE-6EDD-4D8D-8B24-A9DF12BE698A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF466AE-6EDD-4D8D-8B24-A9DF12BE698A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF466AE-6EDD-4D8D-8B24-A9DF12BE698A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF466AE-6EDD-4D8D-8B24-A9DF12BE698A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,6 +12,8 @@ using System.Net;
 using WebAPI.Controllers;
 using Shared.Email;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -101,6 +103,9 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("write", policy => policy.RequireClaim(JwtClaimTypes.Scope, "railwaytickets.write"));
 });
 
+// Add HealthChecks
+builder.Services.AddHealthChecks();
+
 // Configure Swagger for Bearer token
 builder.Services.AddSwaggerGen(configurations =>
 {
@@ -147,6 +152,12 @@ app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Map HealthChecks
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.MapControllers();
 

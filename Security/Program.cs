@@ -1,3 +1,5 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Security.Configurations;
@@ -102,6 +104,9 @@ builder.Services.AddAntiforgery(options =>
     options.Cookie.Name = "idsrv.antiforgery";
 });
 
+// Add HealthChecks
+builder.Services.AddHealthChecks();
+
 // Configure route options
 builder.Services.Configure<RouteOptions>(options =>
 {
@@ -148,6 +153,12 @@ app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Map HealthChecks
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.MapControllerRoute(
     name: "LocalizedDefault",
