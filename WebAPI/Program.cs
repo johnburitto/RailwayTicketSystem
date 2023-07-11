@@ -36,7 +36,7 @@ builder.Services.AddSwaggerGen();
 var smtpClient = new SmtpClient("smtp.gmail.com")
 {
     Port = 587,
-    Credentials = new NetworkCredential("borsuk.andrii@chnu.edu.ua", "10utezez"),
+    Credentials = new NetworkCredential("borsuk.andrii@chnu.edu.ua", "***********"),
     EnableSsl = true,
 };
 
