@@ -18,7 +18,7 @@ var trainCarTypes: { [trainCarType: string]: number } = {
     "Public": 64
 }
 
-var bookedPlacesButtons: Array<string> = [];
+var bookedPlacesButtons: Array<Array<string>> = [];
 var bookedTickets: Array<TicketCreateDto> = [];
 var totalcost: number = 0;
 
@@ -110,28 +110,35 @@ function generateTrainCarOverview(trainCarId: number, trainCarType: number, user
     if (!$("#bookinginfo").is(":visible")) {
         $("#bookinginfo").toggle();
     }
+    if (bookedPlacesButtons[trainCarId] === undefined) {
+        bookedPlacesButtons[trainCarId] = [];
+    }
 
     document.getElementById("placesholder").innerHTML = ``;
+
+    console.log(bookedPlacesButtons[trainCarId]);
 
     for (let i = 1; i <= numberOfPlaces; i++) {
         var place = places.filter(place => place.number === i)[0];
 
         if (i <= numberOfPlacesHalf) {
             document.getElementById("placesholder").innerHTML += `
-                <button id="${i}" class="btn btn-primary ${place === undefined || !place.isAvaliable ? "disabled" : ""}" 
-                                    style="width: ${buttonWidth}%; margin-right: ${buttonMargin}%; margin-bottom: ${buttonMargin}%;"
+                <button id="${i}" class="btn btn-primary ${place === undefined || !place.isAvaliable || bookedPlacesButtons[trainCarId].indexOf(i.toString()) !== -1 ? "disabled" : ""}" 
+                                    style="width: ${buttonWidth}%; margin-right: ${buttonMargin}%; margin-bottom: ${buttonMargin}%;
+                                                  ${place === undefined || !place.isAvaliable ? "background-color: gray; border-color: gray;" : ""}"
                                         onclick="addTicketToBookedList('${userId}', ${place === undefined || !place.isAvaliable ? 0 : place.id}, 
-                                                                                   ${place === undefined || !place.isAvaliable ? 0 : place.price}, '${i}')">
+                                                                                   ${place === undefined || !place.isAvaliable ? 0 : place.price}, '${i}', ${trainCarId})">
                     ${i}
                 </button>
             `;
         }
         else {
             document.getElementById("placesholder").innerHTML += `
-                <button id="${i}" class="btn btn-primary ${place === undefined || !place.isAvaliable ? "disabled" : ""}" 
-                                    style="width: ${buttonWidth}%; margin-right: ${buttonMargin}%; margin-top: ${buttonMargin}%;"
+                <button id="${i}" class="btn btn-primary ${place === undefined || !place.isAvaliable || bookedPlacesButtons[trainCarId].indexOf(i.toString()) !== -1 ? "disabled" : ""}" 
+                                    style="width: ${buttonWidth}%; margin-right: ${buttonMargin}%; margin-top: ${buttonMargin}%;
+                                                  ${place === undefined || !place.isAvaliable ? "background-color: gray; border-color: gray;" : ""}"
                                         onclick="addTicketToBookedList('${userId}', ${place === undefined || !place.isAvaliable ? 0 : place.id}, 
-                                                                                   ${place === undefined || !place.isAvaliable ? 0 : place.price}, '${i}')">
+                                                                                   ${place === undefined || !place.isAvaliable ? 0 : place.price}, '${i}', ${trainCarId})">
                     ${i}
                 </button>
             `;
@@ -143,7 +150,7 @@ function generateTrainCarOverview(trainCarId: number, trainCarType: number, user
     }
 }
 
-function addTicketToBookedList(userId: string, placeId: number, placeCost: number, buttonId: string) {
+function addTicketToBookedList(userId: string, placeId: number, placeCost: number, buttonId: string, trainCarId: number) {
     if (bookedTickets.filter(dto => dto.placeId === placeId)[0] === undefined) {
         bookedTickets.push({
             userId: userId,
@@ -153,9 +160,11 @@ function addTicketToBookedList(userId: string, placeId: number, placeCost: numbe
 
         totalcost += placeCost;
 
-        bookedPlacesButtons.push(buttonId);
+        if (bookedPlacesButtons[trainCarId].filter(place => place === buttonId)[0] === undefined) {
+            bookedPlacesButtons[trainCarId].push(buttonId);
+        }
+
         document.getElementById(buttonId).classList.add("disabled");
-        document.getElementById(buttonId).style.backgroundColor = "gray";
     }
 
     document.getElementById("totalnumber").innerHTML = bookedTickets.length.toString();
@@ -163,11 +172,16 @@ function addTicketToBookedList(userId: string, placeId: number, placeCost: numbe
 }
 
 function clearBookedList() {
-    bookedPlacesButtons.map((buttonId) => {
-        document.getElementById(buttonId).classList.remove("disabled");
-        document.getElementById(buttonId).style.backgroundColor = "#0d6efd";
+    bookedPlacesButtons.map((trainCarButtons) => {
+        trainCarButtons.map((buttonId) => {
+            document.getElementById(buttonId).classList.remove("disabled");
+            document.getElementById(buttonId).style.backgroundColor = "#0d6efd";
+            document.getElementById(buttonId).style.borderColor = "#0d6efd";
+        });
     });
-    bookedPlacesButtons = [];
+    bookedPlacesButtons.forEach(function (part, index) {
+        this[index] = [];
+    }, bookedPlacesButtons);
     bookedTickets = [];
     totalcost = 0;
 

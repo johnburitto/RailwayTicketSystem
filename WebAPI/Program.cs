@@ -7,7 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Net.Mail;
+using System.Net;
 using WebAPI.Controllers;
+using Shared.Email;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +29,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add email sender
+var smtpClient = new SmtpClient("smtp.gmail.com")
+{
+    Port = 587,
+    Credentials = new NetworkCredential("borsuk.andrii@chnu.edu.ua", "10utezez"),
+    EnableSsl = true,
+};
+
+builder.Services.AddSingleton(smtpClient);
+builder.Services.AddTransient<SmtpEmailSender>();
 
 // Connect to DB
 builder.Services.AddDbContext<AppDbContext>(options =>

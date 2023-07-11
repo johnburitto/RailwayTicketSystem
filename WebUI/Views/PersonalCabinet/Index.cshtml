@@ -14,6 +14,7 @@
     <div>
         <div id="sidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/@(CultureInfo.CurrentCulture)/PersonalCabinet/UserTickets?id=@userId& @(new PagingParams())">@_localizer["Tickets"]</a>
         </div>
 
         <span id="open" class="openbtn" onclick="openNav()">&#9776;</span>
@@ -24,20 +25,20 @@
             <span class="personalinfodata" id="FirstName"></span>
         </div>
         <div class="personalinfohandler">
-            <span class="personalinfoheader">@_localizer["MiddleName"]</span>
-            <span class="personalinfodata" id="MiddleName"></span>
-        </div>
-        <div class="personalinfohandler">
-            <span class="personalinfoheader">@_localizer["LastName"]</span>
-            <span class="personalinfodata" id="LastName"></span>
-        </div>
-        <div class="personalinfohandler">
             <span class="personalinfoheader">@_localizer["Username"]</span>
             <span class="personalinfodata" id="UserName"></span>
         </div>
         <div class="personalinfohandler">
+            <span class="personalinfoheader">@_localizer["MiddleName"]</span>
+            <span class="personalinfodata" id="MiddleName"></span>
+        </div>
+        <div class="personalinfohandler">
             <span class="personalinfoheader">@_localizer["Email"]</span>
             <span class="personalinfodata" id="Email"></span>
+        </div>
+        <div class="personalinfohandler">
+            <span class="personalinfoheader">@_localizer["LastName"]</span>
+            <span class="personalinfodata" id="LastName"></span>
         </div>
         <div class="personalinfohandler">
             <span class="personalinfoheader">@_localizer["PhoneNumber"]</span>
@@ -46,8 +47,12 @@
     </div>
     <div style="margin-left: 0.75%; margin-top: 0.75%">
         <button class="btn btn-warning"
-                onclick="window.location.href='/@(CultureInfo.CurrentCulture)/User/Update/@userId'">
+                onclick="window.location.href='/@(CultureInfo.CurrentCulture)/PersonalCabinet/Update/@userId'">
             @_localizer["Button"]
+        </button>
+        <button class="btn btn-warning"
+                onclick="window.location.href='/@(CultureInfo.CurrentCulture)/Home/Index'">
+            @_localizer["Return"]
         </button>
     </div>
 

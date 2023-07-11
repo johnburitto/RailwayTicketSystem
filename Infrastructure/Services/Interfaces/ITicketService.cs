@@ -7,5 +7,6 @@ namespace Infrastructure.Services.Interfaces
     public interface ITicketService : IService<Ticket, TicketCreateDto, TicketUpdateDto>
     {
         Task<List<Ticket>> CreateAsync(List<TicketCreateDto> dtos);
+        Task<List<Ticket>> GetUserTicketsAsync(string userId);
     }
 }

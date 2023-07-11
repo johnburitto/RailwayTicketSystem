@@ -9,7 +9,7 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/js/bookingservice.js?v=1.9"></script>
+<script src="~/js/bookingservice.js?v=2.3"></script>
 
 <div class="bookholder">
     <div>
@@ -29,10 +29,10 @@
     <div id="bookinginfo" class="bookinginfo">
         <ul style="list-style-type: none;margin: 0;padding: 0; width: 20%;">
             <li style="display: flex; justify-content: space-between; color: #914110; font-size: 20px;">
-                <span style="font-weight: 500">@_localizer["TotalNumber"]: </span><span id="totalnumber"></span>
+                <span style="font-weight: 500">@_localizer["TotalNumber"]: </span><span id="totalnumber">0</span>
             </li>
             <li style="display: flex; justify-content: space-between; color: #914110; font-size: 20px;">
-                <span style="font-weight: 500">@_localizer["TotalCost"]: </span><span id="totalcost"></span>
+                <span style="font-weight: 500">@_localizer["TotalCost"]: </span><span id="totalcost">0</span>
             </li>
             <li style="display: flex; justify-content: space-between; margin-top: 3%;">
                 <button class="btn btn-warning" onclick="bookTickets()">@_localizer["ButtonBook"]</button>

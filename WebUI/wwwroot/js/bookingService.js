@@ -84,14 +84,18 @@ function generateTrainCarOverview(trainCarId, trainCarType, userId) {
     if (!$("#bookinginfo").is(":visible")) {
         $("#bookinginfo").toggle();
     }
+    if (bookedPlacesButtons[trainCarId] === undefined) {
+        bookedPlacesButtons[trainCarId] = [];
+    }
     document.getElementById("placesholder").innerHTML = "";
+    console.log(bookedPlacesButtons[trainCarId]);
     var _loop_1 = function (i) {
         place = places.filter(function (place) { return place.number === i; })[0];
         if (i <= numberOfPlacesHalf) {
-            document.getElementById("placesholder").innerHTML += "\n                <button id=\"".concat(i, "\" class=\"btn btn-primary ").concat(place === undefined || !place.isAvaliable ? "disabled" : "", "\" \n                                    style=\"width: ").concat(buttonWidth, "%; margin-right: ").concat(buttonMargin, "%; margin-bottom: ").concat(buttonMargin, "%;\"\n                                        onclick=\"addTicketToBookedList('").concat(userId, "', ").concat(place === undefined || !place.isAvaliable ? 0 : place.id, ", \n                                                                                   ").concat(place === undefined || !place.isAvaliable ? 0 : place.price, ", '").concat(i, "')\">\n                    ").concat(i, "\n                </button>\n            ");
+            document.getElementById("placesholder").innerHTML += "\n                <button id=\"".concat(i, "\" class=\"btn btn-primary ").concat(place === undefined || !place.isAvaliable || bookedPlacesButtons[trainCarId].indexOf(i.toString()) !== -1 ? "disabled" : "", "\" \n                                    style=\"width: ").concat(buttonWidth, "%; margin-right: ").concat(buttonMargin, "%; margin-bottom: ").concat(buttonMargin, "%;\n                                                  ").concat(place === undefined || !place.isAvaliable ? "background-color: gray; border-color: gray;" : "", "\"\n                                        onclick=\"addTicketToBookedList('").concat(userId, "', ").concat(place === undefined || !place.isAvaliable ? 0 : place.id, ", \n                                                                                   ").concat(place === undefined || !place.isAvaliable ? 0 : place.price, ", '").concat(i, "', ").concat(trainCarId, ")\">\n                    ").concat(i, "\n                </button>\n            ");
         }
         else {
-            document.getElementById("placesholder").innerHTML += "\n                <button id=\"".concat(i, "\" class=\"btn btn-primary ").concat(place === undefined || !place.isAvaliable ? "disabled" : "", "\" \n                                    style=\"width: ").concat(buttonWidth, "%; margin-right: ").concat(buttonMargin, "%; margin-top: ").concat(buttonMargin, "%;\"\n                                        onclick=\"addTicketToBookedList('").concat(userId, "', ").concat(place === undefined || !place.isAvaliable ? 0 : place.id, ", \n                                                                                   ").concat(place === undefined || !place.isAvaliable ? 0 : place.price, ", '").concat(i, "')\">\n                    ").concat(i, "\n                </button>\n            ");
+            document.getElementById("placesholder").innerHTML += "\n                <button id=\"".concat(i, "\" class=\"btn btn-primary ").concat(place === undefined || !place.isAvaliable || bookedPlacesButtons[trainCarId].indexOf(i.toString()) !== -1 ? "disabled" : "", "\" \n                                    style=\"width: ").concat(buttonWidth, "%; margin-right: ").concat(buttonMargin, "%; margin-top: ").concat(buttonMargin, "%;\n                                                  ").concat(place === undefined || !place.isAvaliable ? "background-color: gray; border-color: gray;" : "", "\"\n                                        onclick=\"addTicketToBookedList('").concat(userId, "', ").concat(place === undefined || !place.isAvaliable ? 0 : place.id, ", \n                                                                                   ").concat(place === undefined || !place.isAvaliable ? 0 : place.price, ", '").concat(i, "', ").concat(trainCarId, ")\">\n                    ").concat(i, "\n                </button>\n            ");
         }
         if (i === numberOfPlacesHalf) {
             document.getElementById("placesholder").innerHTML += "<div style=\"width: 100%; margin-top: 3%; margin-bottom: 3%;\"></div>";
@@ -102,7 +106,7 @@ function generateTrainCarOverview(trainCarId, trainCarType, userId) {
         _loop_1(i);
     }
 }
-function addTicketToBookedList(userId, placeId, placeCost, buttonId) {
+function addTicketToBookedList(userId, placeId, placeCost, buttonId, trainCarId) {
     if (bookedTickets.filter(function (dto) { return dto.placeId === placeId; })[0] === undefined) {
         bookedTickets.push({
             userId: userId,
@@ -110,19 +114,25 @@ function addTicketToBookedList(userId, placeId, placeCost, buttonId) {
             placeId: placeId
         });
         totalcost += placeCost;
-        bookedPlacesButtons.push(buttonId);
+        if (bookedPlacesButtons[trainCarId].filter(function (place) { return place === buttonId; })[0] === undefined) {
+            bookedPlacesButtons[trainCarId].push(buttonId);
+        }
         document.getElementById(buttonId).classList.add("disabled");
-        document.getElementById(buttonId).style.backgroundColor = "gray";
     }
     document.getElementById("totalnumber").innerHTML = bookedTickets.length.toString();
     document.getElementById("totalcost").innerHTML = totalcost.toString();
 }
 function clearBookedList() {
-    bookedPlacesButtons.map(function (buttonId) {
-        document.getElementById(buttonId).classList.remove("disabled");
-        document.getElementById(buttonId).style.backgroundColor = "#0d6efd";
+    bookedPlacesButtons.map(function (trainCarButtons) {
+        trainCarButtons.map(function (buttonId) {
+            document.getElementById(buttonId).classList.remove("disabled");
+            document.getElementById(buttonId).style.backgroundColor = "#0d6efd";
+            document.getElementById(buttonId).style.borderColor = "#0d6efd";
+        });
     });
-    bookedPlacesButtons = [];
+    bookedPlacesButtons.forEach(function (part, index) {
+        this[index] = [];
+    }, bookedPlacesButtons);
     bookedTickets = [];
     totalcost = 0;
     document.getElementById("totalnumber").innerHTML = bookedTickets.length.toString();

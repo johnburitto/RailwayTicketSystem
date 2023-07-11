@@ -127,13 +127,13 @@
     <value>First name</value>
   </data>
   <data name="FormName" xml:space="preserve">
-    <value>Update train with Id</value>
+    <value>Update user with Id</value>
   </data>
   <data name="Id" xml:space="preserve">
     <value>Id</value>
   </data>
   <data name="LastName" xml:space="preserve">
-    <value> Last name</value>
+    <value>Last name</value>
   </data>
   <data name="MiddleName" xml:space="preserve">
     <value>Middle name</value>

@@ -18,7 +18,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security", "Security\Security.csproj", "{AEF2C689-8214-4EFD-8C05-028A7AA4C19F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailwayTicketSystemTests", "RailwayTicketSystemTests\RailwayTicketSystemTests.csproj", "{6BD17F51-DA27-47A8-B546-AF3337C52B4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailwayTicketSystemTests", "RailwayTicketSystemTests\RailwayTicketSystemTests.csproj", "{6BD17F51-DA27-47A8-B546-AF3337C52B4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{14E0BAB9-571C-4B5B-AB00-24C0EE198DBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{362FD671-38DA-4810-9CE9-A5346092562B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,14 @@ Global
 		{6BD17F51-DA27-47A8-B546-AF3337C52B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BD17F51-DA27-47A8-B546-AF3337C52B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BD17F51-DA27-47A8-B546-AF3337C52B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14E0BAB9-571C-4B5B-AB00-24C0EE198DBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14E0BAB9-571C-4B5B-AB00-24C0EE198DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14E0BAB9-571C-4B5B-AB00-24C0EE198DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14E0BAB9-571C-4B5B-AB00-24C0EE198DBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{362FD671-38DA-4810-9CE9-A5346092562B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{362FD671-38DA-4810-9CE9-A5346092562B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{362FD671-38DA-4810-9CE9-A5346092562B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{362FD671-38DA-4810-9CE9-A5346092562B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

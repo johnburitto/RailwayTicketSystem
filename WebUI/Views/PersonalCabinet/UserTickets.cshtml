@@ -1,0 +1,81 @@
+﻿@using System.Security.Claims;
+@{
+    ViewData["Title"] = @_localizer["Title"];
+    var previousDisabled = Model.HasPrevoius ? "" : "disabled";
+    var nextDisabled = Model.HasNext ? "" : "disabled";
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+@model PagingListModel<Ticket>
+@inject IViewLocalizer _localizer
+@inject IConfiguration _conf
+
+<script src="~/js/userservice.js?v=2.3"></script>
+<script>
+    function sendEmail(id) {
+        let email = getUserById('@userId').email;
+        let languageCode = window.location.pathname.split("/")[1];
+
+        window.location.href = `@_conf["WebAPIUrl"]/api/Ticket/send/${email}/${id}/@userId/${languageCode}`;
+    }
+</script>
+
+<div>
+    <table class="table" style="align-content: center; text-align: center; vertical-align: middle;">
+        <thead>
+            <tr>
+                <th>@_localizer["BookDate"]</th>
+                <th>@_localizer["PlaceNumber"]</th>
+                <th>@_localizer["Route"]</th>
+                <th>@_localizer["TrainCar"]</th>
+                <th>@_localizer["Train"]</th>
+                <th>@_localizer["Price"]</th>
+                <th>@_localizer["SendToEmail"]</th>
+                <th>@_localizer["QR"]</th>
+                <th>@_localizer["Return"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Model)
+            {
+                <tr>
+                    <td>@el.BookDate</td>
+                    <td>@el.Place.Number</td>
+                    <td>
+                        <ul style="list-style-type: none; padding: 0; margin: 0;">
+                            <li>@el.Place.TrainCar.Train.Route.FromCity - @el.Place.TrainCar.Train.Route.ToCity</li>
+                            <li>@el.Place.TrainCar.Train.Route.DepartureTime - @el.Place.TrainCar.Train.Route.ArrivalTime</li>
+                            <li>@el.Place.TrainCar.Train.Route.TravelTime</li>
+                        </ul>
+                    </td>
+                    <td>@el.Place.TrainCar.Number</td>
+                    <td>@el.Place.TrainCar.Train.Number</td>
+                    <td>@el.Place.Price</td>
+                    <td>
+                        <button class="btn btn-warning" onclick="sendEmail(@el.Id)">@_localizer["SendToEmail"]</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning" onclick="window.location.href='@_conf["WebAPIUrl"]/api/Ticket/qr/dowload/@el.Id'">@_localizer["QR"]</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" onclick="deleteDialog(@el.Id)">@_localizer["Return"]</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div style="font-size: 0; margin-left: 0.75%;">
+        <button onclick="@($"window.location.href='/{CultureInfo.CurrentCulture}/Ticket/Index?{Model.PreviousPage()}'")" class="btn btn-secondary previous @previousDisabled">@_localizer["Previous"]</button>
+        <button onclick="@($"window.location.href='/{CultureInfo.CurrentCulture}/Ticket/Index?{Model.NextPage()}'")" class="btn btn-secondary next @nextDisabled">@_localizer["Next"]</button>
+    </div>
+</div>
+
+<script>
+    function deleteDialog(id) {
+        var result = confirm("Ви впевнені в тому, що зочете видалити запис?");
+        let languageCode = window.location.pathname.split("/")[1];
+
+        if (result) {
+            window.location.href = `/${languageCode}/PersonalCabinet/Return/${id}`;
+        }
+    }
+</script>

@@ -4,7 +4,15 @@ using Core.Entities;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Extensions;
+using WebAPI.Paging;
+using System.Text;
+using Shared.QR;
+using Shared.Email;
 
 namespace WebAPI.Controllers
 {
@@ -14,10 +22,14 @@ namespace WebAPI.Controllers
     public class TicketController : ControllerBase
     {
         private readonly ITicketService _service;
+        private readonly SmtpEmailSender _emailSender;
+        private readonly IConfiguration _conf;
 
-        public TicketController(ITicketService service)
+        public TicketController(ITicketService service, SmtpEmailSender emailSender, IConfiguration conf)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
+            _emailSender = emailSender ?? throw new ArgumentNullException(nameof(emailSender));
+            _conf = conf ?? throw new ArgumentNullException(nameof(conf));
         }
 
         [HttpGet]
@@ -108,6 +120,36 @@ namespace WebAPI.Controllers
             await _service.DeleteAsync(ticket);
 
             return Ok();
+        }
+
+        [HttpGet("user/{userId}")]
+        [Authorize("read")]
+        [ProducesResponseType(typeof(List<Ticket>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<Ticket>>> GetUserTicketsAsync(string userId)
+        {
+            return Ok(await _service.GetUserTicketsAsync(userId));
+        }
+
+        [HttpGet("send/{email}/{id}/{userId}/{culture}")]
+        public async Task<IActionResult> SendTicketAsync(string email, int id, string userId, string culture)
+        {
+            var ticket = await _service.GetByIdAsync(id);
+
+            await _emailSender.SendEmailWithAttachedImageAsync("johnburitto@gmail.com", "Квиток", ticket.ToHTMLForm(), QRCodeGenerator.Generate(ticket));
+
+            return Redirect($"{_conf["WebUIString"]}/{culture}/PersonalCabinet/UserTickets?id={userId}&{new PagingParams()}");
+        }
+
+        [HttpGet("qr/dowload/{id}")]
+        public async Task<IActionResult> DownloadTicketAsync(int id)
+        {
+            var ticket = await _service.GetByIdAsync(id);
+            byte[] fileBytes = QRCodeGenerator.Generate(ticket);
+
+            return File(fileBytes, "application/force-download", "qr.png");
         }
     }
 }

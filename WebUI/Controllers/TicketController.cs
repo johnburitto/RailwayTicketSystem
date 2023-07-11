@@ -5,7 +5,6 @@ using Core.Entities;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using WebUI.Models;
 using WebUI.Paging;
 
 namespace WebUI.Controllers

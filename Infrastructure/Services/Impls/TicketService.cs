@@ -91,5 +91,15 @@ namespace Infrastructure.Services.Impls
 
             return ticket;
         }
+
+        public async Task<List<Ticket>> GetUserTicketsAsync(string userId)
+        {
+            return await _context.Tickets
+                .Where(ticket => ticket.UserId == userId)
+                .Include(ticket => ticket.Place)
+                .ThenInclude(place => place.TrainCar)
+                .ThenInclude(trainCar => trainCar.Train)
+                .ThenInclude(train => train.Route).ToListAsync();
+        }
     }
 }
