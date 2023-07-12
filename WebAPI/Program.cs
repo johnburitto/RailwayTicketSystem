@@ -11,16 +11,29 @@ using System.Net.Mail;
 using System.Net;
 using WebAPI.Controllers;
 using Shared.Email;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using System.Reflection;
+using Serilog.Exceptions;
+using Serilog.Sinks.Elasticsearch;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Serilog configuration
 Log.Logger = new LoggerConfiguration()
-  .ReadFrom.Configuration(builder.Configuration)
-  .CreateBootstrapLogger();
+    .Enrich.FromLogContext()
+    .Enrich.WithExceptionDetails()
+    .ReadFrom.Configuration(builder.Configuration)
+    .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(builder.Configuration["ElasticConfiguration:Uri"] ?? throw new ArgumentNullException("ElasticConfiguration:Uri")))
+    {
+        IndexFormat = $"railwayticketssystem-{Assembly.GetExecutingAssembly().GetName().Name?.ToLower().Replace(".", "-")}-{builder.Environment.EnvironmentName?.ToLower().Replace(".", "-")}-logs-{DateTime.UtcNow:yyyy-MM}",
+        AutoRegisterTemplate = true,
+        NumberOfShards = 2,
+        NumberOfReplicas = 1
+    })
+    .Enrich.WithProperty("Environment", builder.Environment.EnvironmentName ?? throw new ArgumentNullException(nameof(builder.Environment.EnvironmentName)))
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
 
 // Add Serilog
 builder.Host.UseSerilog();
