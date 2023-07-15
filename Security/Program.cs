@@ -7,6 +7,7 @@ using Security.Constraints;
 using Security.Data;
 using Security.Entities;
 using Security.Providers;
+using Security.Seeders;
 using Security.Services.Impls;
 using Security.Services.Interfaces;
 using Serilog;
@@ -105,17 +106,14 @@ builder.Services.AddIdentityServer(options =>
         options.ConfigureDbContext = db => db.UseSqlServer(builder.Configuration.GetConnectionString("MSSQLConnection"),
             assembly => assembly.MigrationsAssembly(typeof(Config).Assembly.GetName().Name));
     })
-    .AddAspNetIdentity<User>();
+    .AddAspNetIdentity<User>()
+    .AddDeveloperSigningCredential();
 
 builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.Cookie.Name = "idsrv.identity";
+{;
     options.LoginPath = "/uk/Auth/Login";
-});
 
-builder.Services.AddAntiforgery(options =>
-{
-    options.Cookie.Name = "idsrv.antiforgery";
+    options.Cookie.SameSite = SameSiteMode.None;
 });
 
 // Add HealthChecks
@@ -129,11 +127,8 @@ builder.Services.Configure<RouteOptions>(options =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // Configure localization
 var supportedCultures = new[]

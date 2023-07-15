@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -777,8 +779,16 @@ namespace RailwayTicketSystemTests.Security
                 new Mock<IdentityErrorDescriber>().Object,
                 new Mock<IServiceProvider>().Object,
                 new Mock<ILogger<UserManager<User>>>().Object);
+            var signInManager = new Mock<SignInManager<User>>(
+                userManager.Object,
+                new Mock<IHttpContextAccessor>().Object,
+                new Mock<IUserClaimsPrincipalFactory<User>>().Object,
+                null,
+                null,
+                null,
+                null);
             var mapper = new Mapper(new MapperConfiguration(configuration => configuration.AddProfile(new UserProfile())));
-            var underTest = new UserService(userManager.Object, context.Object, mapper);
+            var underTest = new UserService(userManager.Object, signInManager.Object, context.Object, mapper);
             #endregion
             var dto = new UserLoginDto
             {

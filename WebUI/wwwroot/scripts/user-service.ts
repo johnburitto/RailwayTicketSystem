@@ -30,7 +30,7 @@ function getUsers() {
     $.ajax({
         type: "GET",
         async: false,
-        url: "https://localhost:7128/api/User",
+        url: "http://192.168.0.107:7128/api/User",
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -50,7 +50,7 @@ function getUserById(id: string) {
     $.ajax({
         type: "GET",
         async: false,
-        url: `https://localhost:7128/api/User/${id}`,
+        url: `http://192.168.0.107:7128/api/User/${id}`,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -70,7 +70,7 @@ function getUserRoles(id: string) {
     $.ajax({
         type: "GET",
         async: false,
-        url: `https://localhost:7128/api/User/roles/${id}`,
+        url: `http://192.168.0.107:7128/api/User/roles/${id}`,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -140,7 +140,7 @@ function deleteDialog(id: string) {
     let languageCode = window.location.pathname.split("/")[1];
 
     if (result) {
-        window.location.href = `https://localhost:7128/api/User/delete/${id}`;
+        window.location.href = `http://192.168.0.107:7128/api/User/delete/${id}`;
     }
 }
 

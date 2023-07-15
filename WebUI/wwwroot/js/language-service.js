@@ -50,4 +50,4 @@ function generateButtonHtml() {
     }
     return "";
 }
-//# sourceMappingURL=languageService.js.map
+//# sourceMappingURL=language-service.js.map

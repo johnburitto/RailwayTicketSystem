@@ -5,8 +5,10 @@ using Infrastructure.Data;
 using Infrastructure.Services.Impls;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
@@ -72,7 +74,8 @@ builder.Services.AddAuthentication(options =>
 })
     .AddCookie("cookie", options =>
     {
-        options.Cookie.Name = "idsrv.cookie";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SameSite = SameSiteMode.None;
     })
     .AddOpenIdConnect("oidc", options =>
     {
@@ -84,6 +87,8 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("role");
         options.Scope.Add(builder.Configuration["ReadScope"] ?? throw new ArgumentNullException(nameof(builder.Configuration)));
         options.Scope.Add(builder.Configuration["WriteScope"] ?? throw new ArgumentNullException(nameof(builder.Configuration)));
+        
+        options.RequireHttpsMetadata = false;
 
         options.GetClaimsFromUserInfoEndpoint = true;
         options.ClaimActions.MapJsonKey("role", "role", "role");
@@ -95,6 +100,8 @@ builder.Services.AddAuthentication(options =>
         options.ResponseMode = "query";
         options.SaveTokens = true;
     });
+
+IdentityModelEventSource.ShowPII = true;
 
 // Add HealthChecks
 builder.Services.AddHealthChecks();

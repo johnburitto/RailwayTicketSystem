@@ -253,21 +253,32 @@ namespace RailwayTicketSystemTests.Infrastructure
             #region Setup
             var context = new Mock<AppDbContext>();
             var mapper = new Mapper(new MapperConfiguration(confiration => confiration.AddProfile(new TicketProfile())));
-            var underTest = new TicketService(context.Object, mapper);
+            var placeService = new PlaceService(context.Object, mapper);
+            var underTest = new TicketService(context.Object, mapper, placeService);
             #endregion
             var dto = new TicketCreateDto
             {
                 BookDate = DateTime.Now,
                 PlaceId = 1
             };
+            var place = new Place
+            {
+                Id = 1,
+                Number = 1,
+                Price = 100,
+                PlaceType = PlaceType.Public,
+                IsAvaliable = false
+            };
+
             context.Setup(x => x.Tickets).ReturnsDbSet(new List<Ticket> { });
+            context.Setup(x => x.Places).ReturnsDbSet(new[] { place }.AsQueryable());
 
             // When 
             var result = await underTest.CreateAsync(dto);
 
             // Then
             context.Verify(x => x.Tickets.AddAsync(It.IsAny<Ticket>(), It.IsAny<CancellationToken>()), Times.Once());
-            context.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once());
+            context.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
         }
 
         [Fact]
@@ -311,7 +322,8 @@ namespace RailwayTicketSystemTests.Infrastructure
             #region Setup
             var context = new Mock<AppDbContext>();
             var mapper = new Mapper(new MapperConfiguration(confiration => confiration.AddProfile(new TicketProfile())));
-            var underTest = new TicketService(context.Object, mapper);
+            var placeService = new PlaceService(context.Object, mapper);
+            var underTest = new TicketService(context.Object, mapper, placeService);
             #endregion
             var ticket = new Ticket
             {
@@ -320,8 +332,17 @@ namespace RailwayTicketSystemTests.Infrastructure
                 PlaceId = 1,
                 Place = new Place { }
             };
+            var place = new Place
+            {
+                Id = 1,
+                Number = 1,
+                Price = 100,
+                PlaceType = PlaceType.Public,
+                IsAvaliable = false
+            };
 
             context.Setup(x => x.Tickets).ReturnsDbSet(new[] { ticket }.AsQueryable());
+            context.Setup(x => x.Places).ReturnsDbSet(new[] { place }.AsQueryable());
             context.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(1));
 
             // When
@@ -329,7 +350,7 @@ namespace RailwayTicketSystemTests.Infrastructure
 
             //Then
             context.Verify(x => x.Tickets.Remove(ticket), Times.Once());
-            context.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once());
+            context.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
         }
     }
 }

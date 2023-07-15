@@ -26,11 +26,82 @@ services:
             - ELASTICSEARCH_URL=http://localhost:9200
         networks:
             - elastic
+
+    sql-server-db:
+        image: mcr.microsoft.com/mssql/server
+        container_name: sql-server-db
+        environment:
+            - MSSQL_SA_PASSWORD=Strong2@PWD12
+            - ACCEPT_EULA=Y
+        ports:
+            - "5434:1433"
+        volumes:
+            - sqlvolume:/var/opt/mssql
+        networks:
+            - railwayticketssystem
     
-  
+    healthchecks:
+        image: healthchecks:latest
+        container_name: healthchecks
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Release
+            - ASPNETCORE_HTTP_PORT=https://+:7119
+            - ASPNETCORE_URLS=http://+:5067
+        ports:
+            - "7119:5067"
+    
+    security:
+        image: security:latest
+        container_name: security
+        ports:
+            - "8000:80"
+            - "7128:443"
+        environment:
+            - ASPNETCORE_URLS=https://+;http://+
+            - ASPNETCORE_HTTPS_PORT=7128
+            - ASPNETCORE_ENVIRONMENT=Development
+        depends_on:
+            - sql-server-db
+        volumes:
+            - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets/
+            - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+        networks:
+            - railwayticketssystem
+    
+    webapi:
+        image: webapi:latest
+        container_name: webapi
+        ports:
+            - "8001:80"
+        environment:
+            - ASPNETCORE_URLS=http://+
+            - ASPNETCORE_ENVIRONMENT=Development
+        depends_on:
+            - sql-server-db
+        volumes:
+            - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets/
+            - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+        networks:
+            - railwayticketssystem
+    
+    #webui:
+    #    image: webui:latest
+    #    container_name: webui
+    #    environment:
+    #        - ASPNETCORE_ENVIRONMENT=Release
+    #        - ASPNETCORE_HTTP_PORT=https://+:7299
+    #        - ASPNETCORE_URLS=http://+:5107
+    #    depends_on:
+    #        - sql-server-db
+    #    ports:
+    #        - "7299:5107"
+
 networks:
     elastic:
+        driver: bridge
+    railwayticketssystem:
         driver: bridge
 
 volumes:
     elasticsearch-data:
+    sqlvolume:

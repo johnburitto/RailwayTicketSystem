@@ -31,10 +31,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("token")]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TokenResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<string?>> GetTokenAsync([FromBody] GetTokenDto dto)
+        public async Task<ActionResult<TokenResponse>> GetTokenAsync([FromBody] GetTokenDto dto)
         {
             var tokenResponse = await _client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
                 Scope = dto.Scope
             });
 
-            return tokenResponse.AccessToken;
+            return tokenResponse;
         }
     }
 }

@@ -8,7 +8,6 @@
     <title>@ViewData["Title"] - WebUI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebUI.styles.css" asp-append-version="true" />
 </head>
 <body style="background-color: #F3E3E2">
     <header id="header" class="header">
@@ -52,8 +51,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/languageservice.js"></script>
+    <script src="~/js/language-service.js"></script>
     <script>loadLanguageFromLocalStorage("language");</script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -1,31 +1,9 @@
-﻿interface User {
-    accessFailedCount: number;
-    concurrencyStamp: string;
-    email: string;
-    emailConfirmed: boolean;
-    firstName: string;
-    id: string;
-    lastName: string;
-    lockoutEnabled: boolean;
-    lockoutEnd: boolean;
-    middleName: string;
-    normalizedEmail: string;
-    normalizedUserName: string;
-    passwordHash: string;
-    phoneNumber: string;
-    phoneNumberConfirmed: boolean;
-    securityStamp: string;
-    twoFactorEnabled: boolean;
-    userName: string;
-}
-
-function getUserByIdForPersonalCabinet(id: string) {
-    let user: User;
-
+function getUserByIdForPersonalCabinet(id) {
+    var user;
     $.ajax({
         type: "GET",
         async: false,
-        url: `https://localhost:7128/api/User/${id}`,
+        url: "http://192.168.0.107:7128/api/User/".concat(id),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -35,13 +13,10 @@ function getUserByIdForPersonalCabinet(id: string) {
             user = JSON.parse(JSON.stringify(result));
         }
     });
-
     return user;
 }
-
-function generateUserPersonalCabinetInfo(id: string) {
+function generateUserPersonalCabinetInfo(id) {
     var user = getUserByIdForPersonalCabinet(id);
-
     document.getElementById("FirstName").textContent = user.firstName;
     document.getElementById("MiddleName").textContent = user.middleName;
     document.getElementById("LastName").textContent = user.lastName;
@@ -49,3 +24,4 @@ function generateUserPersonalCabinetInfo(id: string) {
     document.getElementById("Email").textContent = user.email;
     document.getElementById("PhoneNumber").textContent = user.phoneNumber;
 }
+//# sourceMappingURL=personal-cabinet-service.js.map

@@ -17,7 +17,7 @@ function getToken(dto) {
     $.ajax({
         type: "POST",
         async: false,
-        url: "https://localhost:7250/api/Auth/token",
+        url: "http://192.168.0.107:7250/api/Auth/token",
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(dto),
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -39,7 +39,7 @@ function searchRoutes(dto) {
     $.ajax({
         type: "POST",
         async: false,
-        url: "https://localhost:7250/api/Route/search",
+        url: "http://192.168.0.107:7250/api/Route/search",
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(dto),
         dataType: 'json',
@@ -65,7 +65,7 @@ function getNumberOfPlaces(trainCarId, placeType) {
     $.ajax({
         type: "GET",
         async: false,
-        url: "https://localhost:7250/api/Place/".concat(trainCarId, "/").concat(placeType, "/count"),
+        url: "http://192.168.0.107:7250/api/Place/".concat(trainCarId, "/").concat(placeType, "/count"),
         contentType: 'application/json; charset=utf-8',
         headers: {
             "Authorization": "Bearer " + token
@@ -109,4 +109,4 @@ function displaySearched(form) {
     list += "</ul>";
     document.getElementById("resultholder").innerHTML = list;
 }
-//# sourceMappingURL=searchService.js.map
+//# sourceMappingURL=search-service.js.map

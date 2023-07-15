@@ -66,7 +66,7 @@ function getToken(dto: GetTokenDto) {
     $.ajax({
         type: "POST",
         async: false,
-        url: "https://localhost:7250/api/Auth/token",
+        url: "http://192.168.0.107:7250/api/Auth/token",
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(dto),
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -91,7 +91,7 @@ function searchRoutes(dto: SearchDto) {
     $.ajax({
         type: "POST",
         async: false,
-        url: "https://localhost:7250/api/Route/search",
+        url: "http://192.168.0.107:7250/api/Route/search",
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(dto),
         dataType: 'json',
@@ -120,7 +120,7 @@ function getNumberOfPlaces(trainCarId: number, placeType: number) {
     $.ajax({
         type: "GET",
         async: false,
-        url: `https://localhost:7250/api/Place/${trainCarId}/${placeType}/count`,
+        url: `http://192.168.0.107:7250/api/Place/${trainCarId}/${placeType}/count`,
         contentType: 'application/json; charset=utf-8',
         headers: {
             "Authorization": "Bearer " + token
