@@ -16,6 +16,10 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using System.Reflection;
 using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
+using Org.BouncyCastle.Pkix;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,8 +84,19 @@ builder.Services.AddScoped<ITrainCarService, TrainCarService>();
 builder.Services.AddScoped<IPlaceService, PlaceService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 
-// HttpClients
-builder.Services.AddHttpClient<AuthController>();
+//// HttpClients
+//builder.Services.AddHttpClient<AuthController>();
+
+//
+builder.Services.AddTransient<HttpClient>(fact =>
+{
+    var handler = new HttpClientHandler();
+    handler.ServerCertificateCustomValidationCallback = CertValidator;
+
+    var client = new HttpClient(handler);
+
+    return client;
+});
 
 // AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -108,6 +123,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true
         };
     });
+
+IdentityModelEventSource.ShowPII = true;
 
 // Add Policies
 builder.Services.AddAuthorization(options =>
@@ -172,3 +189,9 @@ app.MapHealthChecks("/health", new HealthCheckOptions
 app.MapControllers();
 
 app.Run();
+
+
+static bool CertValidator(HttpRequestMessage request, X509Certificate2 certificate, X509Chain chain, SslPolicyErrors errors)
+{
+    return true;
+}

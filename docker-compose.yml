@@ -13,7 +13,7 @@ services:
             - discovery.type=single-node
         mem_limit: 1073741824
         networks:
-            - elastic
+            - rts
 
     kibana:
         container_name: kibana
@@ -25,7 +25,7 @@ services:
         environment:
             - ELASTICSEARCH_URL=http://localhost:9200
         networks:
-            - elastic
+            - rts
 
     sql-server-db:
         image: mcr.microsoft.com/mssql/server
@@ -38,7 +38,7 @@ services:
         volumes:
             - sqlvolume:/var/opt/mssql
         networks:
-            - railwayticketssystem
+            - rts
     
     healthchecks:
         image: healthchecks:latest
@@ -64,25 +64,27 @@ services:
             - sql-server-db
         volumes:
             - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets/
-            - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+            - ${USERPROFILE}\.aspnet\https\Security:/root/.aspnet/https/
         networks:
-            - railwayticketssystem
+            - rts
     
     webapi:
         image: webapi:latest
         container_name: webapi
         ports:
             - "8001:80"
+            - "7250:443"
         environment:
-            - ASPNETCORE_URLS=http://+
+            - ASPNETCORE_URLS=https://+;http://+
+            - ASPNETCORE_HTTPS_PORT=7250
             - ASPNETCORE_ENVIRONMENT=Development
         depends_on:
             - sql-server-db
         volumes:
             - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets/
-            - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+            - ${USERPROFILE}\.aspnet\https\WebAPI:/root/.aspnet/https/
         networks:
-            - railwayticketssystem
+            - rts
     
     #webui:
     #    image: webui:latest
@@ -97,10 +99,9 @@ services:
     #        - "7299:5107"
 
 networks:
-    elastic:
+    rts:
         driver: bridge
-    railwayticketssystem:
-        driver: bridge
+        external: true
 
 volumes:
     elasticsearch-data:

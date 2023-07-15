@@ -41,8 +41,6 @@ namespace WebUI.Controllers
                 await _service.CreateAsync(dto);
             }
 
-            Console.WriteLine($"\n\n\n\n\n\n\n\n\n\n{culture}\n\n\n\n\n\n\n\n\n\n");
-
             return Redirect($"/{culture}/Place/Index");
         }
 
