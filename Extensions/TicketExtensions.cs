@@ -8,6 +8,7 @@ namespace Extensions
         {
             return $"<div>" +
                    $"   <ul style=\"list-style-type: none; padding: 0; margin: 0;\">" +
+                   $"       <li><span>Id Користувача: </span>{ticket?.UserId}</li>" +
                    $"       <li><span>Час бронювання: </span>{ticket?.BookDate}</li>" +
                    $"       <li><span>Ціна: </span>{ticket?.Place.Price}</li>" +
                    $"       <li><span>Місце: </span>{ticket?.Place.Number}</li>" +

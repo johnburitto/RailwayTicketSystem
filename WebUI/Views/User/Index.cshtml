@@ -7,7 +7,7 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/js/user-service.js?v=1.3"></script>
+<script src="~/js/user-service.js?v=2.5"></script>
 
 <div>
     <div class="tableheader">
@@ -19,8 +19,8 @@
             <a href="/@(CultureInfo.CurrentCulture)/Place/Index?@(new PagingParams())">@_localizer["Place"]</a>
             <a href="/@(CultureInfo.CurrentCulture)/Ticket/Index?@(new PagingParams())">@_localizer["Ticket"]</a>
             <a asp-controller="User" asp-action="Index">@_localizer["User"]</a>
-            <a href="http://192.168.0.107:7128/swagger" target="_blank">Security Swagger</a>
-            <a href="http://192.168.0.107:7250/swagger" target="_blank">WebAPI Swagger</a>
+            <a href="https://localhost:8080/swagger" target="_blank">Security Swagger</a>
+            <a href="https://localhost:8081/swagger" target="_blank">WebAPI Swagger</a>
             <a asp-controller="AdminPanel" asp-action="Index">@_localizer["AdminPanel"]</a>
         </div>
 

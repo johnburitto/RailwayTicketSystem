@@ -34,7 +34,7 @@ namespace Security.Controllers
             {
                 var result = await _service.LoginAsync(dto);
 
-                return result == ResponseType.Logined ? Redirect(dto.ReturnUrl) 
+                return result == ResponseType.Logined ? Redirect($"{dto.ReturnUrl}") 
                     : Redirect($"/{culture}/Auth/Login?ReturnUrl={HttpUtility.UrlEncode(Encoding.Default.GetBytes(dto.ReturnUrl))}");
             }
 

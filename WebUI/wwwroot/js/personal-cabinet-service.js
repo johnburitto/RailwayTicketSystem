@@ -3,7 +3,7 @@ function getUserByIdForPersonalCabinet(id) {
     $.ajax({
         type: "GET",
         async: false,
-        url: "http://192.168.0.107:7128/api/User/".concat(id),
+        url: "https://localhost:8080/api/User/".concat(id),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {

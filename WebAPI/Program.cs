@@ -116,7 +116,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidIssuer = builder.Configuration["IdentityServerAuthorityUrl"],
+            ValidateIssuer = false,
             ValidAudience = builder.Configuration["Audiende"],
             ValidTypes = new List<string> { "at+jwt" },
             ValidateLifetime = true,

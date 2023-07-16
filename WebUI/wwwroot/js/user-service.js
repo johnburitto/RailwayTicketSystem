@@ -7,7 +7,7 @@ function getUsers() {
     $.ajax({
         type: "GET",
         async: false,
-        url: "http://192.168.0.107:7128/api/User",
+        url: "https://localhost:8080/api/User",
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -24,7 +24,7 @@ function getUserById(id) {
     $.ajax({
         type: "GET",
         async: false,
-        url: "http://192.168.0.107:7128/api/User/".concat(id),
+        url: "https://localhost:8080/api/User/".concat(id),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -41,7 +41,7 @@ function getUserRoles(id) {
     $.ajax({
         type: "GET",
         async: false,
-        url: "http://192.168.0.107:7128/api/User/roles/".concat(id),
+        url: "https://localhost:8080/api/User/roles/".concat(id),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -74,7 +74,7 @@ function deleteDialog(id) {
     var result = confirm("Ви впевнені в тому, що зочете видалити запис?");
     var languageCode = window.location.pathname.split("/")[1];
     if (result) {
-        window.location.href = "http://192.168.0.107:7128/api/User/delete/".concat(id);
+        window.location.href = "https://localhost:8080/api/User/delete/".concat(id);
     }
 }
 function fillUpdateForm(id) {

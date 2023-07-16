@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Security.Dto;
 using Security.Entities;
 using Security.Services.Interfaces;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace Security.Controllers
@@ -95,40 +96,34 @@ namespace Security.Controllers
         [HttpPost("update")]
         public async Task<IActionResult> UpdateAsync([FromForm] UserUpdateDto dto)
         {
-            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
-            var culture = requestCulture?.RequestCulture.Culture.ToString().Substring(0, 2);
-
             if (ModelState.IsValid)
             {
                 if ((await _service.UpdateAsync(dto)) == ResponseType.InternalError)
                 {
-                    return Redirect($"{_conf["WebUIString"]}/{culture}/User/Update/{dto.Id}");
+                    return Redirect($"{_conf["WebUIString"]}/uk/User/Update/{dto.Id}");
                 }
 
-                return User.IsInRole("Admin") ? Redirect($"{_conf["WebUIString"]}/{culture}/User/Index") :
-                    Redirect($"{_conf["WebUIString"]}/{culture}/PersonalCabinet/Index/{User.FindFirstValue(ClaimTypes.NameIdentifier)}");
+                return User.IsInRole("Admin") ? Redirect($"{_conf["WebUIString"]}/uk/User/Index") :
+                    Redirect($"{_conf["WebUIString"]}/uk/PersonalCabinet/Index/{User.FindFirstValue(ClaimTypes.NameIdentifier)}");
             }
 
-            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Update/{dto.Id}");
+            return Redirect($"{_conf["WebUIString"]}/uk/User/Update/{dto.Id}");
         }
 
         [HttpPost("register-ui")]
         public async Task<IActionResult> RegisterUIAsync([FromForm] UserRegistrationDto dto)
         {
-            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
-            var culture = requestCulture?.RequestCulture.Culture.ToString().Substring(0, 2);
-
             if (ModelState.IsValid)
             {
                 if ((await _service.RegisterAsync(dto)) == ResponseType.InternalError)
                 {
-                    return Redirect($"{_conf["WebUIString"]}/{culture}/User/Register");
+                    return Redirect($"{_conf["WebUIString"]}/uk/User/Index");
                 }
 
-                return Redirect($"{_conf["WebUIString"]}/{culture}/Redirect/LoginPoint");
+                return Redirect($"{_conf["WebUIString"]}/uk/User/Index");
             }
 
-            return Redirect($"{_conf["WebUIString"]}/{culture}/User/Register");
+            return Redirect($"{_conf["WebUIString"]}/uk/User/Index");
         }
     }
 }

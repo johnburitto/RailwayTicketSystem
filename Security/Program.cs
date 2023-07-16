@@ -106,14 +106,19 @@ builder.Services.AddIdentityServer(options =>
         options.ConfigureDbContext = db => db.UseSqlServer(builder.Configuration.GetConnectionString("MSSQLConnection"),
             assembly => assembly.MigrationsAssembly(typeof(Config).Assembly.GetName().Name));
     })
-    .AddAspNetIdentity<User>()
-    .AddDeveloperSigningCredential();
+    .AddAspNetIdentity<User>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {;
+    options.Cookie.Name = "idsrv";
     options.LoginPath = "/uk/Auth/Login";
 
     options.Cookie.SameSite = SameSiteMode.None;
+});
+
+builder.Services.AddAntiforgery(options =>
+{
+    options.Cookie.Name = "idsrv.antiforgery";
 });
 
 // Add HealthChecks

@@ -10,7 +10,7 @@ function getTokenBS(dto) {
     $.ajax({
         type: "POST",
         async: false,
-        url: "http://192.168.0.107:7250/api/Auth/token",
+        url: "https://localhost:8081/api/Auth/token",
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(dto),
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -32,7 +32,7 @@ function getPlaces(trainCarId) {
     $.ajax({
         type: "GET",
         async: false,
-        url: "http://192.168.0.107:7250/api/Place/".concat(trainCarId, "/places"),
+        url: "https://localhost:8081/api/Place/".concat(trainCarId, "/places"),
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         headers: {
@@ -57,7 +57,7 @@ function bookTickets() {
     $.ajax({
         type: "POST",
         async: false,
-        url: "http://192.168.0.107:7250/api/Ticket/range",
+        url: "https://localhost:8081/api/Ticket/range",
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(bookedTickets),
         dataType: "json",

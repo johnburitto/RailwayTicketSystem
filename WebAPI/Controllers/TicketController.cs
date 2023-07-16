@@ -138,7 +138,7 @@ namespace WebAPI.Controllers
         {
             var ticket = await _service.GetByIdAsync(id);
 
-            await _emailSender.SendEmailWithAttachedImageAsync("johnburitto@gmail.com", "Квиток", ticket.ToHTMLForm(), QRCodeGenerator.Generate(ticket));
+            await _emailSender.SendEmailAsync(email, "Квиток", ticket.ToHTMLForm());
 
             return Redirect($"{_conf["WebUIString"]}/{culture}/PersonalCabinet/UserTickets?id={userId}&{new PagingParams()}");
         }

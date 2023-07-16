@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
@@ -63,6 +64,8 @@ builder.Services.AddScoped<ITrainCarService, TrainCarService>();
 builder.Services.AddScoped<IPlaceService, PlaceService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 
+builder.Services.AddHttpClient();
+
 // Add Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -74,6 +77,7 @@ builder.Services.AddAuthentication(options =>
 })
     .AddCookie("cookie", options =>
     {
+        options.Cookie.Name = "idsrv.cookie";
         options.Cookie.HttpOnly = true;
         options.Cookie.SameSite = SameSiteMode.None;
     })
@@ -87,7 +91,7 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("role");
         options.Scope.Add(builder.Configuration["ReadScope"] ?? throw new ArgumentNullException(nameof(builder.Configuration)));
         options.Scope.Add(builder.Configuration["WriteScope"] ?? throw new ArgumentNullException(nameof(builder.Configuration)));
-        
+
         options.RequireHttpsMetadata = false;
 
         options.GetClaimsFromUserInfoEndpoint = true;
