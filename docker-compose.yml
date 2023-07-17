@@ -40,15 +40,15 @@ services:
         networks:
             - rts
     
-    healthchecks:
-        image: healthchecks:latest
-        container_name: healthchecks
-        environment:
-            - ASPNETCORE_ENVIRONMENT=Release
-            - ASPNETCORE_HTTP_PORT=https://+:7119
-            - ASPNETCORE_URLS=http://+:5067
-        ports:
-            - "7119:5067"
+    #healthchecks:
+    #    image: healthchecks:latest
+    #    container_name: healthchecks
+    #    environment:
+    #        - ASPNETCORE_ENVIRONMENT=Release
+    #        - ASPNETCORE_HTTP_PORT=https://+:7119
+    #        - ASPNETCORE_URLS=http://+:5067
+    #    ports:
+    #        - "7119:5067"
     
     security:
         image: security:latest
